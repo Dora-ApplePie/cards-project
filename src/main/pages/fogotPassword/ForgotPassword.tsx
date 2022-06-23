@@ -3,7 +3,7 @@ import react from 'React';
 
 const ForgotPassword = () => {
     return (
-        <h1>ForgotPassword</h1>
+        <h1>Forgot password</h1>
     )
 }
 
