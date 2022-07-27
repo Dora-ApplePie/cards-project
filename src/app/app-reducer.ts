@@ -13,7 +13,7 @@ export type InitialStateType = {
 
 const initialState: InitialStateType = {
     initialized: false,
-    status: 'loading',
+    status: 'loading' as RequestStatusType,
     error: null,
 };
 
@@ -23,13 +23,13 @@ export const appReducer = (
 ): InitialStateType => {
     switch (action.type) {
         case 'APP/INITIALIZED':
-            return { ...state, initialized: action.value };
+            return {...state, initialized: action.value};
 
         case 'APP/GET-STATUS':
-            return { ...state, status: action.status };
+            return {...state, status: action.status};
 
         case 'APP/SET-ERROR':
-            return { ...state, error: action.error };
+            return {...state, error: action.error};
 
         default: {
             return state;
@@ -46,13 +46,13 @@ export type AppActionType =
 
 //actions
 export const initializedAC = (value: boolean) =>
-    ({ type: 'APP/INITIALIZED', value } as const);
+    ({type: 'APP/INITIALIZED', value} as const);
 
 export const getStatusAC = (status: RequestStatusType) =>
-    ({ type: 'APP/GET-STATUS', status } as const);
+    ({type: 'APP/GET-STATUS', status} as const);
 
 export const setAppErrorAC = (error: string | null) =>
-    ({ type: 'APP/SET-ERROR', error } as const);
+    ({type: 'APP/SET-ERROR', error} as const);
 
 //thunk
 export const initializeAppTC = (): AppThunk => (dispatch: Dispatch) => {
@@ -64,7 +64,7 @@ export const initializeAppTC = (): AppThunk => (dispatch: Dispatch) => {
         })
         .catch(error => {
             dispatch(isLoginAC(false));
-            dispatch(setAppErrorAC(error.response.data.error));
+            console.log(error.response.data.error);
         })
         .finally(() => {
             dispatch(initializedAC(true));

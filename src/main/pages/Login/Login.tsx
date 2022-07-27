@@ -18,7 +18,7 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-const Login = React.memo(() => {
+const Login = () => {
 
     const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector(state => state.login.isLogin)
@@ -103,6 +103,6 @@ const Login = React.memo(() => {
             </Grid>
         </Grid>
     )
-});
+};
 
 export default Login

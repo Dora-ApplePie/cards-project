@@ -6,16 +6,16 @@ import {useAppDispatch, useAppSelector} from "./hooks";
 import {initializeAppTC} from "./app-reducer";
 import {ErrorSnackbar} from "../main/common/ErrorSnackbar/ErrorSnackbar";
 
-function App() {
+const App = () => {
 
     const dispatch = useAppDispatch();
     const isInitialized = useAppSelector((state) => state.app.initialized)
 
     useEffect(() => {
         dispatch(initializeAppTC())
-    },[dispatch])
+    }, [dispatch])
 
-    if(!isInitialized) {
+    if (!isInitialized) {
         return <div
             style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
             <CircularProgress/>
