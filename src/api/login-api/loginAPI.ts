@@ -20,7 +20,7 @@ export const instance = axios.create({
     withCredentials: true,
 })
 
-export const authApi = {
+export const loginApi = {
     loginRequest(data: { email: string; password: string; rememberMe: boolean }) {
         return instance.post<ProfileType>('auth/login', data);
     },
