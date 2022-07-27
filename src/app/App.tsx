@@ -4,6 +4,7 @@ import Main from "../main/Main";
 import {CircularProgress, LinearProgress} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "./hooks";
 import {initializeAppTC} from "./app-reducer";
+import {ErrorSnackbar} from "../main/common/ErrorSnackbar/ErrorSnackbar";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
 
     return (
         <div className="App">
+            <ErrorSnackbar/>
             <Main/>
         </div>
     );
