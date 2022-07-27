@@ -6,9 +6,11 @@ import {ProfileActionType, profileReducer} from "../main/pages/Profile/profileRe
 import {ForgotPasswordActionType, forgotPasswordReducer} from "../main/pages/fogotPassword/forgotPasswordReducer";
 import {ActionsForSetPasswordType, setPasswordReducer} from "../main/pages/setPassword/setPasswordReducer";
 import {RegisterActionType, registrationReducer} from "../main/pages/Registration/registrationReducer";
+import {appReducer} from "./app-reducer";
 
 
 const reducers = combineReducers({
+    app: appReducer,
     login: loginReducer,
     registration: registrationReducer,
     profile: profileReducer,
