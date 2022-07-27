@@ -22,9 +22,8 @@ export const PATH = {
 
 function Pages() {
     return (
-        <div>
             <Routes>
-                <Route path={'/'} element={<Navigate to={PATH.REGISTRATION}/>}/>
+                <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
 
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
@@ -37,7 +36,6 @@ function Pages() {
                 <Route path={'/*'} element={<Page404/>}/>
 
             </Routes>
-        </div>
     )
 }
 
