@@ -47,6 +47,7 @@ export const isLoginAC = (value: boolean) =>
 export const requestLoginTC = (data: { email: string; password: string; rememberMe: boolean }): AppThunk =>
     (dispatch: Dispatch) => {
         dispatch(getStatusAC('loading'));
+
         loginApi.loginRequest(data)
             .then(res => {
                 dispatch(signInAC(res.data));
