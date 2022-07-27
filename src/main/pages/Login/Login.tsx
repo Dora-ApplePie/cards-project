@@ -1,4 +1,3 @@
-import react from 'React';
 import React from 'react'
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
@@ -8,6 +7,9 @@ import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
+import {requestLoginTC} from "./loginReducer";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {Navigate} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
@@ -15,10 +17,10 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-const Login = () => {
+const Login = React.memo( () => {
 
-    // const dispatch = useAppDispatch();
-    // const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const dispatch = useAppDispatch();
+    const isLoggedIn = useAppSelector(state => state.login.isLogin)
 
     const formik = useFormik({
         initialValues: {
@@ -27,6 +29,7 @@ const Login = () => {
             rememberMe: false
         },
         onSubmit: values => {
+            dispatch(requestLoginTC(values))
             formik.resetForm();
         },
         validate: (values) => {
@@ -45,9 +48,9 @@ const Login = () => {
         },
     })
 
-    // if (isLoggedIn) {
-    //     return <Navigate to={'/profile'}/>
-    // }
+    if (isLoggedIn) {
+        return <Navigate to={'/profile'}/>
+    }
 
     return (
         <Grid container justifyContent={'center'}>
@@ -59,6 +62,7 @@ const Login = () => {
                             <TextField label="Email"
                                        margin="normal"
                                        color="secondary"
+                                       placeholder={"nya-admin@nya.nya"}
                                        {...formik.getFieldProps('email')}
                             />
                             {formik.touched.email && formik.errors.email &&
@@ -68,6 +72,7 @@ const Login = () => {
                                        label="Password"
                                        color="secondary"
                                        margin="normal"
+                                       placeholder={"1qazxcvBG"}
                                        {...formik.getFieldProps('password')}
                             />
                             {formik.touched.email && formik.errors.password &&
@@ -88,6 +93,6 @@ const Login = () => {
             </Grid>
         </Grid>
     )
-}
+});
 
 export default Login
