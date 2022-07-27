@@ -1,5 +1,6 @@
-import { ProfileType} from "../../../api/login-api/loginAPI";
-
+import {authApi, ProfileType} from "../../../api/login-api/loginAPI";
+import {Dispatch} from "redux";
+import {AppThunk} from "../../../app/store";
 
 const initialState: InitialStateType = {
     profile: {
@@ -40,6 +41,20 @@ export const signInAC = (data: ProfileType) => ({type: 'LOGIN/SIGN_IN', data} as
 export const isLoginAC = (value: boolean) =>
     ({type: 'LOGIN/IS-LOGIN', payload: {value}} as const);
 
+//thunk
+export const requestLoginTC = (data: { email: string; password: string; rememberMe: boolean }): AppThunk =>
+    (dispatch: Dispatch) => {
+        authApi.loginRequest(data)
+            .then(res => {
+                dispatch(isLoginAC(true));
+                dispatch(signInAC(res.data));
+                // dispatch(authMeAC(res.data));
+            })
+            .catch(error => {
+
+                // dispatch(setAppErrorAC(error.response.data.error));
+            });
+    };
 
 //types
 type InitialAuthStateType = SignInActionType | LoginActionType
