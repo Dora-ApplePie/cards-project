@@ -1,3 +1,8 @@
+import {AppThunk} from "./store";
+import {Dispatch} from "redux";
+import {authApi} from "../api/auth-api/authAPI";
+import {isLoginAC, signInAC} from "../main/pages/Login/loginReducer";
+
 export type RequestStatusType = 'loading' | 'succeeded';
 
 export type InitialStateType = {
@@ -48,3 +53,21 @@ export const getStatusAC = (status: RequestStatusType) =>
 
 export const setAppErrorAC = (error: string | null) =>
     ({ type: 'APP/SET-ERROR', error } as const);
+
+//thunk
+export const initializeAppTC = (): AppThunk => (dispatch: Dispatch) => {
+    authApi
+        .me()
+        .then((res) => {
+            dispatch(signInAC(res.data));
+            dispatch(isLoginAC(true));
+        })
+        .catch(error => {
+            dispatch(isLoginAC(false));
+            dispatch(setAppErrorAC(error.response.data.error));
+        })
+        .finally(() => {
+            dispatch(initializedAC(true));
+            dispatch(getStatusAC('succeeded'));
+        });
+};

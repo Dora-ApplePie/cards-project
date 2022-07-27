@@ -1,6 +1,8 @@
-import {authApi, ProfileType} from "../../../api/login-api/loginAPI";
+import {loginApi, ProfileType} from "../../../api/login-api/loginAPI";
 import {Dispatch} from "redux";
 import {AppThunk} from "../../../app/store";
+import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
+import {AxiosError} from "axios";
 
 const initialState: InitialStateType = {
     profile: {
@@ -27,7 +29,7 @@ export type InitialStateType = {
 export const loginReducer = (state: InitialStateType = initialState, action: InitialAuthStateType): InitialStateType => {
     switch (action.type) {
         case 'LOGIN/SIGN_IN':
-            return {...state, profile: action.data};
+            return {...state, ...action.data};
         case 'LOGIN/IS-LOGIN':
             return {...state, isLogin: action.payload.value};
         default: {
@@ -44,16 +46,19 @@ export const isLoginAC = (value: boolean) =>
 //thunk
 export const requestLoginTC = (data: { email: string; password: string; rememberMe: boolean }): AppThunk =>
     (dispatch: Dispatch) => {
-        authApi.loginRequest(data)
+        dispatch(getStatusAC('loading'));
+        loginApi.loginRequest(data)
             .then(res => {
-                dispatch(isLoginAC(true));
                 dispatch(signInAC(res.data));
-                // dispatch(authMeAC(res.data));
+                dispatch(isLoginAC(true));
             })
-            .catch(error => {
-
-                // dispatch(setAppErrorAC(error.response.data.error));
-            });
+            .catch((e: AxiosError<{ error: string }>) => {
+                const error = (e.response && e.response.data) ? e.response.data.error : e.message;
+                dispatch(setAppErrorAC(error));
+            })
+            .finally(() => {
+                dispatch(getStatusAC('succeeded'));
+            })
     };
 
 //types
