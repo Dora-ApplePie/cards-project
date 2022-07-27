@@ -9,7 +9,8 @@ import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {requestLoginTC} from "./loginReducer";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
+import {PATH} from "../../Routes/Routes";
 
 type FormikErrorType = {
     email?: string
@@ -17,10 +18,17 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-const Login = React.memo( () => {
+const Login = React.memo(() => {
 
     const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector(state => state.login.isLogin)
+    const status = useAppSelector(state => state.app.status)
+
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        if (status === 'loading') {
+            e.preventDefault();
+        }
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -42,14 +50,14 @@ const Login = React.memo( () => {
             if (!values.password) {
                 errors.password = 'Password is required';
             } else if (values.password.length < 7) {
-                errors.password = 'Must be 7 characters or more';
+                errors.password = 'Must be 8 characters or more';
             }
             return errors;
         },
     })
 
     if (isLoggedIn) {
-        return <Navigate to={'/profile'}/>
+        return <Navigate to={PATH.PROFILE}/>
     }
 
     return (
@@ -58,11 +66,10 @@ const Login = React.memo( () => {
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
                         <FormGroup>
-                                <h2 style={{textAlign: "center"}}>Sign In</h2>
+                            <h2 style={{textAlign: "center"}}>Sign In</h2>
                             <TextField label="Email"
                                        margin="normal"
                                        color="secondary"
-                                       placeholder={"nya-admin@nya.nya"}
                                        {...formik.getFieldProps('email')}
                             />
                             {formik.touched.email && formik.errors.email &&
@@ -72,7 +79,6 @@ const Login = React.memo( () => {
                                        label="Password"
                                        color="secondary"
                                        margin="normal"
-                                       placeholder={"1qazxcvBG"}
                                        {...formik.getFieldProps('password')}
                             />
                             {formik.touched.email && formik.errors.password &&
@@ -81,12 +87,16 @@ const Login = React.memo( () => {
                             <FormControlLabel label={'Remember me'} control={
                                 <Checkbox
                                     color="secondary"
+                                    disabled={status === 'loading'}
                                     checked={formik.values.rememberMe}
                                     {...formik.getFieldProps('rememberMe')}/>
                             }/>
                             <Button color="secondary" type={'submit'} variant={'contained'}>
                                 Login
                             </Button>
+                            <NavLink to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>
+                            <div>Don't have an account?</div>
+                            <NavLink to={PATH.REGISTRATION} onClick={handleClick}>Sign Up</NavLink>
                         </FormGroup>
                     </FormControl>
                 </form>
