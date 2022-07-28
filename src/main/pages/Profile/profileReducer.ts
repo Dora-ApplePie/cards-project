@@ -1,8 +1,8 @@
 import {Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
-import {profileAPI} from "../../../api/auth-api/authAPI";
 import {AppStoreType} from "../../../app/store";
-import { setIsLoggedInAC } from '../Login/loginReducer';
+import {authApi, profileAPI} from "../../../api/auth-api/authAPI";
+import {isLoginAC, signInAC} from "../Login/loginReducer";
 
 
 
@@ -53,10 +53,10 @@ export const setUserProfileNameAC = (name: string | null) => ({type: SET_NEW_USE
 
 //thunks
 export const authMeTC = (): any => (dispatch: Dispatch) => {
-    return profileAPI.authMe()
+    return authApi.me()
         .then(res => {
             if (res.status === 200) {
-                dispatch(setIsLoggedInAC(true))
+                dispatch(isLoginAC(true))
                 dispatch(setUserProfileAC(res.data))
             }
         })
@@ -84,6 +84,21 @@ export const uploadUserProfileTC: any = () => (dispatch: Dispatch, getState: any
 }
 
 
+export const logOutTC:any = () => (dispatch: Dispatch) => {
+
+    profileAPI.logOut()
+        .then(() => {
+            dispatch(isLoginAC(false))
+        })
+        .catch(err => {
+
+        })
+        .finally(() => {
+        })
+}
+
+
+
 export type ProfileType = {
     _id: string | null
     email: string | null
@@ -107,4 +122,3 @@ export type ProfileInitialStateType = {
 
 export type ProfileActionsType = ReturnType<typeof setUserProfileAC> | ReturnType<typeof setUserProfileNameAC>
 
-type AuthMeThunkType = ThunkAction<Promise<void>, AppStoreType, Dispatch<ProfileActionsType>, ProfileActionsType>
