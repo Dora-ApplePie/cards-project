@@ -1,0 +1,67 @@
+.wrap {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.profileBox {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    border: 2px solid silver;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+
+}
+
+.name {
+    font-weight: 300;
+    font-size: 25px;
+    margin: 0 0 20px;
+}
+
+.packs {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.userName {
+    color: black;
+}
+
+.packLink {
+    text-decoration: none;
+    color: lightskyblue;
+}
+
+.avatarBox {
+    position: relative;
+}
+
+.avatar {
+    width: 160px;
+    border-radius: 10px;
+}
+
+.editIcon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+/*.editMode {*/
+/*    text-decoration: none;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    height: 30px !important;*/
+/*    width: 85px !important;*/
+/*    margin-left: auto;*/
+/*    cursor: pointer;*/
+/*}*/
