@@ -70,6 +70,7 @@ const Login = () => {
                             <TextField label="Email"
                                        margin="normal"
                                        color="secondary"
+                                       disabled={status === 'loading'}
                                        {...formik.getFieldProps('email')}
                             />
                             {formik.touched.email && formik.errors.email &&
@@ -79,6 +80,7 @@ const Login = () => {
                                        label="Password"
                                        color="secondary"
                                        margin="normal"
+                                       disabled={status === 'loading'}
                                        {...formik.getFieldProps('password')}
                             />
                             {formik.touched.email && formik.errors.password &&
@@ -91,11 +93,11 @@ const Login = () => {
                                     checked={formik.values.rememberMe}
                                     {...formik.getFieldProps('rememberMe')}/>
                             }/>
-                            <Button color="secondary" type={'submit'} variant={'contained'}>
+                            <Button disabled={status === 'loading'} color="secondary" type={'submit'} variant={'contained'}>
                                 Login
                             </Button>
                             <NavLink to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>
-                            <div>Don't have an account?</div>
+                            <div style={{color: "grey"}}>Don't have an account?</div>
                             <NavLink to={PATH.REGISTRATION} onClick={handleClick}>Sign Up</NavLink>
                         </FormGroup>
                     </FormControl>

@@ -16,7 +16,7 @@ export const PATH = {
     PROFILE: '/profile',
     PAGE404: '/page404',
     FORGOT_PASSWORD: '/forgot-password',
-    SET_PASSWORD: '/set-password',
+    SET_PASSWORD: '/set-password/:token',
     SUPER_COMPONENTS: '/super-components',
 }
 
