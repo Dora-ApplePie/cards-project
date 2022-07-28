@@ -41,7 +41,7 @@ export const forgotPassTC = (email: string): AppThunk => dispatch => {
         email: email,
         from: 'dasha-golenko@mail.ru',
         message: `<div style="background-color: lime; padding: 15px">Password recovery link: 
-                  <a href='http://localhost:3000/#/set-password/$token$'> link</a>
+                  <a href='https://Dora-ApplePie.github.io/friday-project/#/set-password/$token$'> link</a>
                   </div>`,
     }
 
