@@ -40,8 +40,8 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
         <div className={s.profileBox}>
             {status === 'loading' &&  <CircularProgress/>}
             <span>
-                <Button onClick={logOutHandler}>Log Out</Button>
-                <Button onClick={activateEditMode} disabled={editMode}> Edit </Button>
+                <Button color="secondary" onClick={logOutHandler}>Log Out</Button>
+                <Button color="secondary" onClick={activateEditMode} disabled={editMode}> Edit </Button>
             </span>
 
             <div>
@@ -59,7 +59,7 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
                                        onChange={onChangeNameHandler}
                                        onBlur={activateViewMode}
                                        autoFocus/>
-                            <Button onClick={activateViewMode}> Save </Button>
+                            <Button color="secondary" onClick={activateViewMode}> Save </Button>
                           </>
                         : <span>Hello, {profile.name}</span>
                     }
