@@ -49,8 +49,8 @@ const Login = () => {
             }
             if (!values.password) {
                 errors.password = 'Password is required';
-            } else if (values.password.length < 7) {
-                errors.password = 'Must be 8 characters or more';
+            } else if (values.password.length <=8) {
+                errors.password = 'Password should be more than 8 symbols';
             }
             return errors;
         },
@@ -70,6 +70,7 @@ const Login = () => {
                             <TextField label="Email"
                                        margin="normal"
                                        color="secondary"
+                                       disabled={status === 'loading'}
                                        {...formik.getFieldProps('email')}
                             />
                             {formik.touched.email && formik.errors.email &&
@@ -79,6 +80,7 @@ const Login = () => {
                                        label="Password"
                                        color="secondary"
                                        margin="normal"
+                                       disabled={status === 'loading'}
                                        {...formik.getFieldProps('password')}
                             />
                             {formik.touched.email && formik.errors.password &&
@@ -91,11 +93,11 @@ const Login = () => {
                                     checked={formik.values.rememberMe}
                                     {...formik.getFieldProps('rememberMe')}/>
                             }/>
-                            <Button color="secondary" type={'submit'} variant={'contained'}>
+                            <Button disabled={status === 'loading'} color="secondary" type={'submit'} variant={'contained'}>
                                 Login
                             </Button>
                             <NavLink to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>
-                            <div>Don't have an account?</div>
+                            <div style={{color: "grey"}}>Don't have an account?</div>
                             <NavLink to={PATH.REGISTRATION} onClick={handleClick}>Sign Up</NavLink>
                         </FormGroup>
                     </FormControl>
