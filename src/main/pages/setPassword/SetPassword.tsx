@@ -15,7 +15,6 @@ type SetPasswordErrorType = {
     password?: string
 }
 
-
 const SetPassword = () => {
     const dispatch = useAppDispatch();
 
