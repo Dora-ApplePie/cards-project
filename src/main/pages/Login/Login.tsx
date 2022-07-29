@@ -49,7 +49,7 @@ const Login = () => {
             }
             if (!values.password) {
                 errors.password = 'Password is required';
-            } else if (values.password.length <=8) {
+            } else if (values.password.length <=7) {
                 errors.password = 'Password should be more than 8 symbols';
             }
             return errors;
