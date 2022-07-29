@@ -1,5 +1,5 @@
-import {AnyAction, combineReducers, createStore} from "redux";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
+import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {LoginActionType, loginReducer} from "../main/pages/Login/loginReducer";
 import {page404Reducer} from "../main/pages/Page_404/page404Reducer";
 import {ProfileActionType, profileReducer} from "../main/pages/Profile/profileReducer";
@@ -17,7 +17,7 @@ const reducers = combineReducers({
     setPassword: setPasswordReducer,
 })
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunk));
 
 export type CommonActionTypeForApp = LoginActionType |
     ForgotPasswordActionType | ActionsForSetPasswordType | ProfileActionType
