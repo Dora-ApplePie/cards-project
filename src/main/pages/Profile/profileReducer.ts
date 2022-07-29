@@ -3,7 +3,7 @@ import {authApi} from "../../../api/auth-api/authAPI";
 import { profileAPI } from '../../../api/profile-api/profileAPI';
 import {isLoginAC} from "../Login/loginReducer";
 import {AxiosError} from "axios";
-import {setAppErrorAC} from "../../../app/app-reducer";
+import {getStatusAC, RequestStatusType, setAppErrorAC} from "../../../app/app-reducer";
 
 export const profileReducer = (state: ProfileInitialStateType = initialState, action: ProfileActionsType): ProfileInitialStateType => {
     switch (action.type) {
@@ -30,6 +30,8 @@ export const setUserProfileNameAC = (name: string | null) => ({type: SET_NEW_USE
 
 //thunks
 export const authMeTC = (): any => (dispatch: Dispatch) => {
+    dispatch(getStatusAC('loading'))
+
     return authApi.me()
         .then(res => {
             if (res.status === 200) {
@@ -41,10 +43,14 @@ export const authMeTC = (): any => (dispatch: Dispatch) => {
             const error = (err.response && err.response.data) ? err.response.data.error : err.message;
             dispatch(setAppErrorAC(error));
         })
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'));
+
+        })
 }
 
 export const editNameTC: any = (name:string) => (dispatch: Dispatch) => {
-
+    dispatch(getStatusAC('loading'))
     return profileAPI.updateProfile(name)
         .then(() => {
             dispatch(setUserProfileNameAC(name))
@@ -55,6 +61,8 @@ export const editNameTC: any = (name:string) => (dispatch: Dispatch) => {
             dispatch(setAppErrorAC(error));
         })
         .finally(() => {
+            dispatch(getStatusAC('succeeded'));
+
         })
 }
 
@@ -93,7 +101,7 @@ export type ProfileInitialStateType = {
     profile: ProfileType
     myId: string | null
     error: string | null
-    status: string | null
+    status: RequestStatusType
 }
 const initialState: ProfileInitialStateType = {
     profile: {

@@ -4,15 +4,18 @@ import {ProfileType} from "./profileReducer";
 import React, {ChangeEvent, useState} from "react";
 import Button from "@mui/material/Button";
 import {TextField} from "@material-ui/core";
+import {RequestStatusType} from "../../../app/app-reducer";
+import {CircularProgress} from "@mui/material";
 
 
 type ProfilePropsType = {
     profile: ProfileType
     logOutHandler: () => void
     EditMode: (newName: string | null) => void
+    status: RequestStatusType
 }
 
-const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode}) => {
+const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, status}) => {
 
     let [editMode, setEditMode] = useState(false)
     let [name, setName] = useState(profile.name)
@@ -35,6 +38,7 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode})
 
     return (
         <div className={s.profileBox}>
+            {status === 'loading' &&  <CircularProgress/>}
             <span>
                 <Button onClick={logOutHandler}>Log Out</Button>
                 <Button onClick={activateEditMode} disabled={editMode}> Edit </Button>

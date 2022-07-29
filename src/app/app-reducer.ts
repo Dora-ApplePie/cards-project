@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {authApi} from "../api/auth-api/authAPI";
 import {isLoginAC, signInAC} from "../main/pages/Login/loginReducer";
 
-export type RequestStatusType = 'loading' | 'succeeded';
+export type RequestStatusType = 'loading' | 'succeeded'| 'idle';
 
 export type InitialStateType = {
     initialized: boolean;
