@@ -24,19 +24,8 @@
     margin: auto;
 }
 
-.packs {
-    font-size: 20px;
-    font-weight: 500;
-    padding: 10px
-}
-
 .userName {
     color: black;
-}
-
-.packLink {
-    text-decoration: none;
-    color: lightskyblue;
 }
 
 .avatarBox {
@@ -48,20 +37,5 @@
     border-radius: 10px;
 }
 
-.editIcon {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
 
 
-/*.editMode {*/
-/*    text-decoration: none;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    height: 30px !important;*/
-/*    width: 85px !important;*/
-/*    margin-left: auto;*/
-/*    cursor: pointer;*/
-/*}*/

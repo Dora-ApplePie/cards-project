@@ -1,32 +1,9 @@
 import {Dispatch} from 'redux';
-import {ThunkAction} from 'redux-thunk';
-import {AppStoreType} from "../../../app/store";
-import {authApi, profileAPI} from "../../../api/auth-api/authAPI";
-import {isLoginAC, signInAC} from "../Login/loginReducer";
-
-
-
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_NEW_USER_NAME = 'SET_NEW_USER_NAME'
-
-const initialState: ProfileInitialStateType = {
-    profile: {
-        _id: null,
-        email: null,
-        name: null,
-        avatar: null,
-        publicCardPacksCount: null,
-        created: null,
-        updated: null,
-        isAdmin: null,
-        verified: null,
-        rememberMe: null,
-        error: null
-    },
-    myId: null,
-    error: null,
-    status: 'idle'
-}
+import {authApi} from "../../../api/auth-api/authAPI";
+import { profileAPI } from '../../../api/profile-api/profileAPI';
+import {isLoginAC} from "../Login/loginReducer";
+import {AxiosError} from "axios";
+import {setAppErrorAC} from "../../../app/app-reducer";
 
 export const profileReducer = (state: ProfileInitialStateType = initialState, action: ProfileActionsType): ProfileInitialStateType => {
     switch (action.type) {
@@ -60,29 +37,26 @@ export const authMeTC = (): any => (dispatch: Dispatch) => {
                 dispatch(setUserProfileAC(res.data))
             }
         })
-        .catch(err => {
-            // const error = err.response
-            //     ? err.response.data.error
-            //     : (err.message + ', more details in the console');
-            // error(error)
+        .catch((err: AxiosError<{ error: string }>) => {
+            const error = (err.response && err.response.data) ? err.response.data.error : err.message;
+            dispatch(setAppErrorAC(error));
         })
 }
 
-export const uploadUserProfileTC: any = () => (dispatch: Dispatch, getState: any) => {
+export const editNameTC: any = (name:string) => (dispatch: Dispatch) => {
 
-    const userName = getState().profile.name
-
-    return profileAPI.updateProfile(userName)
-        .then(res => {
-            dispatch(setUserProfileNameAC(res.data))
+    return profileAPI.updateProfile(name)
+        .then(() => {
+            dispatch(setUserProfileNameAC(name))
 
         })
-        .catch(err => {
-            })
+        .catch((err: AxiosError<{ error: string }>) => {
+            const error = (err.response && err.response.data) ? err.response.data.error : err.message;
+            dispatch(setAppErrorAC(error));
+        })
         .finally(() => {
         })
 }
-
 
 export const logOutTC:any = () => (dispatch: Dispatch) => {
 
@@ -90,14 +64,17 @@ export const logOutTC:any = () => (dispatch: Dispatch) => {
         .then(() => {
             dispatch(isLoginAC(false))
         })
-        .catch(err => {
-
+        .catch((err: AxiosError<{ error: string }>) => {
+            const error = (err.response && err.response.data) ? err.response.data.error : err.message;
+            dispatch(setAppErrorAC(error));
         })
         .finally(() => {
         })
 }
 
-
+//types
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_NEW_USER_NAME = 'SET_NEW_USER_NAME'
 
 export type ProfileType = {
     _id: string | null
@@ -112,12 +89,29 @@ export type ProfileType = {
     rememberMe: boolean | null
     error: string | null
 }
-
 export type ProfileInitialStateType = {
     profile: ProfileType
     myId: string | null
     error: string | null
     status: string | null
+}
+const initialState: ProfileInitialStateType = {
+    profile: {
+        _id: null,
+        email: null,
+        name: null,
+        avatar: null,
+        publicCardPacksCount: null,
+        created: null,
+        updated: null,
+        isAdmin: null,
+        verified: null,
+        rememberMe: null,
+        error: null
+    },
+    myId: null,
+    error: null,
+    status: 'idle'
 }
 
 export type ProfileActionsType = ReturnType<typeof setUserProfileAC> | ReturnType<typeof setUserProfileNameAC>
