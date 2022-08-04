@@ -1,0 +1,7 @@
+.packsContainer {
+    width: 1100px;
+    min-height: 670px;
+    margin: 25px auto 0;
+    border-radius: 7px;
+    background: hsla(0.75turn 40% 55% / .3);
+}

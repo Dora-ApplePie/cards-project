@@ -25,6 +25,9 @@ function Header() {
                 <li>
                     <NavLink to={PATH.SUPER_COMPONENTS}>Super Components</NavLink>
                 </li>
+                <li>
+                    <NavLink to={PATH.PACKS_LIST}>Packs List</NavLink>
+                </li>
             </ul>
         </header>
     )
