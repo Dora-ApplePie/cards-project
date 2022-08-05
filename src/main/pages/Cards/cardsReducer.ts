@@ -12,9 +12,7 @@ export const cardsReducer = (state: initialStateType = initialState, action: Act
 				...state,
 				cards: action.cards
 			}
-		}
-
-		default:
+		}default:
 			return state
 	}
 }
