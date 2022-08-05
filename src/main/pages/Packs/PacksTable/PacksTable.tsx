@@ -9,7 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import TableCell from "@mui/material/TableCell";
 import {TableRowItem} from "./TableRowItem/TableRowItem";
-import {setSortPackName} from "./packsTableReducer";
+import {setCardsPageCount, setPage, setSortPackName} from "./packsTableReducer";
+import {PaginationComponent} from "../Pagination/PaginationComponent";
 
 
 const PacksTable = () => {
@@ -26,17 +27,17 @@ const PacksTable = () => {
 
     //pagination
 
-    // const cardPacksTotalCount = useAppSelector(state => state.packList.cardPacksTotalCount);
-    // const pageCount = useAppSelector(state => state.tablePacks.pageCount);
-    // const page = useAppSelector(state => state.tablePacks.page);
+    const totalCardsCount = useAppSelector(state => state.packList.cardPacksTotalCount);
+    const pageCount = useAppSelector(state => state.tablePacks.pageCount);
+    const page = useAppSelector(state => state.tablePacks.page);
 
-    // const handleChangePage = (page: number) => {
-    //     dispatch(setPage(page));
-    // }
-    //
-    // const handleChangeValueSelect = (value: number) => {
-    //     dispatch(setCardsPageCount(value));
-    // }
+    const handleChangePage = (page: number) => {
+        dispatch(setPage(page));
+    }
+
+    const handleChangeValueSelect = (value: number) => {
+        dispatch(setCardsPageCount(value));
+    }
 
     const handleNameSort = () => {
         setName(name === '0name' ? '1name' : '0name');
@@ -127,6 +128,15 @@ const PacksTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <PaginationComponent
+                totalCardsCount={totalCardsCount}
+                pageCount={pageCount}
+                page={page}
+                title="Cards per Page"
+                disable={status === 'loading'}
+                onChangePage={handleChangePage}
+                onChangeValue={handleChangeValueSelect}
+            />
         </div>
     )
 };
