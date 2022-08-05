@@ -17,7 +17,7 @@ const App = () => {
     if (!isInitialized) {
         return <div
             style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
-            <CircularProgress/>
+            <CircularProgress color="secondary"/>
         </div>
     }
 

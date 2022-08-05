@@ -1,32 +1,30 @@
-import {loginApi, ProfileType} from "../../../api/login-api/loginAPI";
+import {loginApi, UserResponseType} from "../../../api/login-api/loginAPI";
 import {Dispatch} from "redux";
 import {AppThunk} from "../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 import {AxiosError} from "axios";
 
-const initialState: InitialStateType = {
-    profile: {
-        _id: null,
-        name: '',
-        email: null,
-        avatar: '',
-        isAdmin: null,
-        publicCardPacksCount: null,
-        rememberMe: null,
-        updated: null,
-        verified: null,
-        created: null,
-        error: '',
-    },
+const initialState: LoginDataUserType = {
+    _id: '',
+    email: '',
+    name: '',
+    avatar: '',
+    publicCardPacksCount: 0,
+    created: new Date(),
+    updated: new Date(),
+    isAdmin: false,
+    verified: false,
+    rememberMe: false,
+    error: '',
+    __v: 0,
+    token: '',
+    tokenDeathTime: 0,
     isLogin: false,
 };
 
-export type InitialStateType = {
-    profile: ProfileType;
-    isLogin: boolean;
-};
+export type LoginStateType = typeof initialState;
 
-export const loginReducer = (state: InitialStateType = initialState, action: InitialAuthStateType): InitialStateType => {
+export const loginReducer = (state: LoginStateType = initialState, action: InitialAuthStateType): LoginStateType => {
     switch (action.type) {
         case 'LOGIN/SIGN_IN':
             return {...state, ...action.data};
@@ -39,7 +37,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Ini
 };
 
 //actions
-export const signInAC = (data: ProfileType) => ({type: 'LOGIN/SIGN_IN', data} as const);
+export const signInAC = (data: UserResponseType) => ({type: 'LOGIN/SIGN_IN', data} as const);
 export const isLoginAC = (value: boolean) =>
     ({type: 'LOGIN/IS-LOGIN', payload: {value}} as const);
 
@@ -66,4 +64,7 @@ export const requestLoginTC = (data: { email: string; password: string; remember
 type InitialAuthStateType = SignInActionType | LoginActionType
 export type LoginActionType = ReturnType<typeof isLoginAC>
 export type SignInActionType = ReturnType<typeof signInAC>
+export type LoginDataUserType = UserResponseType & {
+    isLogin: boolean
+}
 
