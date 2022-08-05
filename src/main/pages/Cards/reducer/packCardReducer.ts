@@ -52,7 +52,7 @@ export const setUserCardId = (userId: string) => ({
     userId,
 } as const);
 
-export const setUserCardName = (name: string) => ({
+export const setUserCardName = (name: string| null) => ({
     type: 'CARDS-NAME/SET-USER-CARD-NAME',
     name,
 } as const);
@@ -111,7 +111,7 @@ export const fetchCardsTC = (): AppThunk => async (dispatch: Dispatch, getState:
 export type CardsNameStateType = CardsTypeResponseType & {
     cardsPack_id: string
     cardQuestion?: string
-    name: string
+    name: string | null
     cardId: string
     question: string
     answer: string

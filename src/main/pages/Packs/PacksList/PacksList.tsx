@@ -32,8 +32,8 @@ export const PacksList = () => {
 
 
     useEffect(() => {
-        dispatch(fetchCardPacks());
-    }, [page, pageCount, sortPackName, searchPackName, commonUserId, commonMin, commonMax]);
+        dispatch(getPacksTC());
+    }, [dispatch]);
 
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>

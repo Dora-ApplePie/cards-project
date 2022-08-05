@@ -4,6 +4,7 @@ import {AppStoreType, AppThunk} from "../../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../../app/app-reducer";
 import {Dispatch} from "redux";
 import {setPacksAC} from "../packsReducer";
+import { packsAPI } from '../../../../api/cards&packsAPI/PacksAPI';
 
 const initialState: PacksListStateType = {
     cardPacks: [] as PackType[],
@@ -39,21 +40,20 @@ export const setPackModalParams = (data: { packId: string, packName?: string }) 
 
 
 export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () => AppStoreType) => {
-    const {pageCount, page, packName, sortPacks, user_id, min, max} = getState().tablePacks;
-    const params = {
-        packName,
-        sortPacks,
-        page,
-        pageCount,
-        user_id,
-        min,
-        max,
-    }
+
+    const state = getState()
+    const searchName = state.packs.searchName
+    const min = state.packs.min
+    const max = state.packs.max
+    const sortPacks = state.packs.sortPacks
+    const currentPage = state.packs.page
+    const packsOnPage = state.packs.packsPerPage
+    const myId = state.profile.myId
 
     dispatch(getStatusAC('loading'));
-    packsListAPI.getPacks(params)
+    packsAPI.getPacksData(searchName, min, max, sortPacks, currentPage, packsOnPage, myId)
         .then(res => {
-            dispatch(setPacksListData(res.data));
+            dispatch(setPacksAC(res.cardPacks));
 
         })
         .catch((e: AxiosError<{ error: string }>) => {
