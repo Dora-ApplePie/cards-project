@@ -6,6 +6,12 @@ import PacksTable from "../PacksTable/PacksTable";
 import {PATH} from "../../../Routes/Routes";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {fetchCardPacks} from "./packsListReducer";
+import {setProfileIdAC} from "../../Profile/profileReducer";
+import {addPackTC, deletePackTC, getPacksTC, updatePackTС} from "../packsReducer";
+import {useSelector} from "react-redux";
+import {AppStoreType} from "../../../../app/store";
+import {Packs} from "../Packs";
+import {RequestStatusType} from "../../../../app/app-reducer";
 
 
 
@@ -20,6 +26,10 @@ export const PacksList = () => {
     const commonUserId = useAppSelector(state => state.tablePacks.user_id);
     const commonMin = useAppSelector(state => state.tablePacks.min);
     const commonMax = useAppSelector(state => state.tablePacks.max);
+    const myId = useSelector<AppStoreType, string | null>(state => state.profile.profile._id)
+    const status = useSelector<AppStoreType, RequestStatusType>(state => state.app.status)
+
+
 
     useEffect(() => {
         dispatch(fetchCardPacks());
@@ -29,9 +39,37 @@ export const PacksList = () => {
         return <Navigate to={PATH.LOGIN}/>
     }
 
+    const getAllPacks = () => {
+        dispatch(setProfileIdAC(null))
+        dispatch(getPacksTC())
+    }
+
+    const getOnlyMyPacks = () => {
+        dispatch(setProfileIdAC(myId))
+        dispatch(getPacksTC())
+    }
+
+    const addPackHandler = () => {
+        dispatch(addPackTC('newPack'))
+    }
+
+    const deletePack = (title: string) => {
+        dispatch(deletePackTC(title))
+
+    }
+    const changeName = (id:string|null) => {
+        dispatch(updatePackTС(id,'!newPackName!'))
+    }
+
+
     return (
         <div className={styles.packsContainer}>
-            <PacksTable/>
+            <Packs status={status}
+                   getAllPacks={getAllPacks}
+                   getOnlyMyPacks={getOnlyMyPacks}
+                   addPackHandler={addPackHandler}
+                   deletePack={deletePack}
+                   changeName={changeName}/>
         </div>
     )
 };

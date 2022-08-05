@@ -3,6 +3,7 @@ import {AxiosError} from 'axios';
 import {AppStoreType, AppThunk} from "../../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../../app/app-reducer";
 import {Dispatch} from "redux";
+import {setPacksAC} from "../packsReducer";
 
 const initialState: PacksListStateType = {
     cardPacks: [] as PackType[],
@@ -53,6 +54,7 @@ export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () 
     packsListAPI.getPacks(params)
         .then(res => {
             dispatch(setPacksListData(res.data));
+
         })
         .catch((e: AxiosError<{ error: string }>) => {
             dispatch(setAppErrorAC(e.response ? e.response.data.error : e.message));

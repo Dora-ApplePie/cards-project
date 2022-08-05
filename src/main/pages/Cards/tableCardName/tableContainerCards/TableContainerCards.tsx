@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Rating from '@mui/material/Rating';
 import {setSortCards} from '../../reducer/packCardReducer';
 import styles from '../tableCardName.module.css';
 import TableContainer from '@mui/material/TableContainer';
@@ -16,6 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Grade';
 import FavoriteBorderIcon from '@mui/icons-material/Grade';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CreateIcon from '@mui/icons-material/Create';
+import { Rating } from '@mui/material';
 
 export const TableContainerCards = () => {
     const [question, setQuestion] = useState<'0question' | '1question'>('0question');

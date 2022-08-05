@@ -11,6 +11,7 @@ import {requestLoginTC} from "./loginReducer";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../Routes/Routes";
+import s from './Login.module.css'
 
 type FormikErrorType = {
     email?: string
@@ -61,7 +62,7 @@ const Login = () => {
     }
 
     return (
-        <Grid container justifyContent={'center'}>
+        <Grid  container justifyContent={'center'}>
             <Grid item justifyContent={'center'}>
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
@@ -71,6 +72,7 @@ const Login = () => {
                                        margin="normal"
                                        color="secondary"
                                        disabled={status === 'loading'}
+                                       style={{minWidth: '305px'}}
                                        {...formik.getFieldProps('email')}
                             />
                             {formik.touched.email && formik.errors.email &&
@@ -96,9 +98,9 @@ const Login = () => {
                             <Button disabled={status === 'loading'} color="secondary" type={'submit'} variant={'contained'}>
                                 Login
                             </Button>
-                            <NavLink to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>
-                            <div style={{color: "grey"}}>Don't have an account?</div>
-                            <NavLink to={PATH.REGISTRATION} onClick={handleClick}>Sign Up</NavLink>
+                            <NavLink className={s.forgotPassword} to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>
+                            <div className={s.forgotPassword}>Don't have an account?</div>
+                            <NavLink className={s.forgotPassword} to={PATH.REGISTRATION} onClick={handleClick}>Sign Up</NavLink>
                         </FormGroup>
                     </FormControl>
                 </form>

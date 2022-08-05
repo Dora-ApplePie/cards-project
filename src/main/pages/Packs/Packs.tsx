@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import React, {ChangeEvent, useState} from 'react';
 import {RequestStatusType} from '../../../app/app-reducer';
 import {Input} from "@mui/material";
+import PacksTable from "./PacksTable/PacksTable";
 
 
 type PacksPropsType = {
@@ -58,6 +59,8 @@ export const Packs = (props: PacksPropsType) => {
                 <Input placeholder={'Enter pack id to update name'} onChange={onChange1} value={id}/>
 
             </Button>
+            <PacksTable/>
+
         </div>
     )
 }
