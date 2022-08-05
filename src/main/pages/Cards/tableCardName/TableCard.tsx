@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles from './tableCardName.module.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import {setCardsPage, setCardsPageCount} from '../reducer/packCardReducer';
@@ -39,14 +38,14 @@ export const TableCard = () => {
 
     return (
         <>
-            <div className={styles.arrow_back}>
+            <div>
                 <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
                     <ArrowBackIcon fontSize="small"/>
                 </IconButton>
-                <h2 className={styles.table_title}>{packName}</h2>
+                <h2>{packName}</h2>
             </div>
             <TableContainerCards/>
-            <div className={styles.paginationContainer}>
+            <div>
                 <PaginationComponent
                     page={page}
                     pageCount={pageCount}

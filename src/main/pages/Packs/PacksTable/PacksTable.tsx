@@ -25,13 +25,12 @@ const PacksTable = () => {
     const [userName, setUserName] = useState<'0user_name' | '1user_name'>('0user_name');
 
     const dispatch = useAppDispatch();
-
-    //pagination
-
+    
     const totalCardsCount = useAppSelector(state => state.packList.cardPacksTotalCount);
     const pageCount = useAppSelector(state => state.tablePacks.pageCount);
     const page = useAppSelector(state => state.tablePacks.page);
 
+    //pagination
     const handleChangePage = (page: number) => {
         dispatch(setPage(page));
     }
@@ -61,91 +60,90 @@ const PacksTable = () => {
     }
 
     return (
-            <Paper elevation={3}>
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow sx={{display: 'grid', gridTemplateColumns: '21% 15% 19% 17% 28%'}}>
-                                <TableCell>
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={name === '1name' ? 'asc' : 'desc'}
-                                        onClick={handleNameSort}
-                                    >
-                                    </TableSortLabel>
-                                    <b>Name</b>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={cardsCount === '1cardsCount' ? 'asc' : 'desc'}
-                                        onClick={handleCardsCount}
-                                    >
-                                    </TableSortLabel>
-                                    <b>Cards</b>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={updated === '1updated' ? 'asc' : 'desc'}
-                                        onClick={handleSortUpdated}
-                                    >
-                                    </TableSortLabel>
-                                    <b>Last Updated</b>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={userName === '1user_name' ? 'asc' : 'desc'}
-                                        onClick={handleSortUserName}
-                                    >
-                                    </TableSortLabel>
-                                    <b>Created by</b>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <b>Actions</b>
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {cardPacks.length ? cardPacks.map(({
-                                                                   _id,
-                                                                   name,
-                                                                   cardsCount,
-                                                                   updated,
-                                                                   user_name,
-                                                                   user_id
-                                                               }) => (
-                                <TableRowItem
-                                    key={_id}
-                                    _id={_id}
-                                    name={name}
-                                    cardsCount={cardsCount}
-                                    updated={updated}
-                                    user_name={user_name}
-                                    user_id={user_id}
-                                    status={status}/>
-                            )) : (
-                                <TableRow>
-                                    <TableCell className={styles.loading_packs}>{'Loading packs...'}</TableCell>
-                                </TableRow>)}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <PaginationComponent
-                    totalCardsCount={totalCardsCount}
-                    pageCount={pageCount}
-                    page={page}
-                    title="Cards per Page"
-                    disable={status === 'loading'}
-                    onChangePage={handleChangePage}
-                    onChangeValue={handleChangeValueSelect}
-                />
-            </Paper>
+        <Paper elevation={3}>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow sx={{display: 'grid', gridTemplateColumns: '21% 15% 19% 17% 28%'}}>
+                            <TableCell>
+                                <TableSortLabel
+                                    active={true}
+                                    disabled={status === 'loading'}
+                                    direction={name === '1name' ? 'asc' : 'desc'}
+                                    onClick={handleNameSort}
+                                >
+                                </TableSortLabel>
+                                <b>Name</b>
+                            </TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={true}
+                                    disabled={status === 'loading'}
+                                    direction={cardsCount === '1cardsCount' ? 'asc' : 'desc'}
+                                    onClick={handleCardsCount}
+                                >
+                                </TableSortLabel>
+                                <b>Cards</b>
+                            </TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={true}
+                                    disabled={status === 'loading'}
+                                    direction={updated === '1updated' ? 'asc' : 'desc'}
+                                    onClick={handleSortUpdated}
+                                >
+                                </TableSortLabel>
+                                <b>Last Updated</b>
+                            </TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={true}
+                                    disabled={status === 'loading'}
+                                    direction={userName === '1user_name' ? 'asc' : 'desc'}
+                                    onClick={handleSortUserName}
+                                >
+                                </TableSortLabel>
+                                <b>Created by</b>
+                            </TableCell>
+                            <TableCell align="center">
+                                <b>Actions</b>
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {cardPacks.length ? cardPacks.map(({
+                                                               _id,
+                                                               name,
+                                                               cardsCount,
+                                                               updated,
+                                                               user_name,
+                                                               user_id
+                                                           }) => (<TableRowItem
+                                key={_id}
+                                _id={_id}
+                                name={name}
+                                cardsCount={cardsCount}
+                                updated={updated}
+                                user_name={user_name}
+                                user_id={user_id}
+                                status={status}/>
+                        )) : (
+                            <TableRow>
+                                <TableCell className={styles.loading_packs}>{'Loading packs...'}</TableCell>
+                            </TableRow>)}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <PaginationComponent
+                totalCardsCount={totalCardsCount}
+                pageCount={pageCount}
+                page={page}
+                title="Cards per Page"
+                disable={status === 'loading'}
+                onChangePage={handleChangePage}
+                onChangeValue={handleChangeValueSelect}
+            />
+        </Paper>
     )
 };
 

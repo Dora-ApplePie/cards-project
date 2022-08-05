@@ -56,7 +56,7 @@ export const TableContainerCards = () => {
             <Paper elevation={3}>
                 <TableContainer>
                     <Table>
-                        <TableHead className={styles.wrapperRowCards}>
+                        <TableHead>
                             <TableRow>
                                 <TableCell align="justify">
                                     <TableSortLabel
