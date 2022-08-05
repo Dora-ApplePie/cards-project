@@ -9,6 +9,7 @@ import {RegisterActionType, registrationReducer} from "../main/pages/Registratio
 import {appReducer} from "./app-reducer";
 import {packsListReducer} from "../main/pages/Packs/PacksList/packsListReducer";
 import {packsTableReducer} from "../main/pages/Packs/PacksTable/packsTableReducer";
+import {cardsNameReducer} from "../main/pages/Cards/reducer/packCardReducer";
 
 
 const reducers = combineReducers({
@@ -21,6 +22,7 @@ const reducers = combineReducers({
     setPassword: setPasswordReducer,
     packList: packsListReducer,
     tablePacks: packsTableReducer,
+    cardPack: cardsNameReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunk))

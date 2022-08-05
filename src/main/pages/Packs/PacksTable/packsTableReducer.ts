@@ -2,7 +2,7 @@ const initialState: TablePacksType = {
     packName: '',
     sortPacks: '',
     page: 1,
-    pageCount: 20,
+    pageCount: 15,
     user_id: '',
     min: 0,
     max: 110,

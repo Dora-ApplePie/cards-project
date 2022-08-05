@@ -5,7 +5,12 @@ import {RequestStatusType} from "../../../../../app/app-reducer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Button from "@mui/material/Button";
-import {useAppSelector} from "../../../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
+import {IconButton} from "@mui/material";
+import {PATH} from "../../../../Routes/Routes";
+import {setUserCardId, setUserCardName} from "../../../Cards/reducer/packCardReducer";
+import {useNavigate} from "react-router-dom";
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 
 type TableRowPackType = {
     _id: string
@@ -23,27 +28,29 @@ export const TableRowItem = memo((props: TableRowPackType) => {
 
     const userId = useAppSelector(state => state.login._id);
 
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    // const handleSendPackId = () => {
-    //     dispatch(setUserCardId(_id));
-    //     dispatch(setUserCardName(name));
-    //     navigate(PATH.PACKS + '/' + PATH.CARDS);
-    // };
+
+    const handleSendPackId = () => {
+        dispatch(setUserCardId(_id));
+        dispatch(setUserCardName(name));
+        navigate(PATH.PACKS + '/' + PATH.CARDS);
+    };
 
     return (
         <>
             <TableRow sx={{display: 'grid', gridTemplateColumns: '25% 8% 24% 15% 28%'}}>
                 <TableCell component="th" scope="row" className={styles.sell}>
                     <span style={{display: 'inline-block', flex: '1 1 auto'}}>{name}</span>
-                    {/*<IconButton*/}
-                    {/*    disabled={status === 'loading'}*/}
-                    {/*    aria-label="expand row"*/}
-                    {/*    size="small"*/}
-                    {/*    onClick={handleSendPackId}*/}
-                    {/*>*/}
-                    {/*    <DriveFolderUploadIcon/>*/}
-                    {/*</IconButton>*/}
+                    <IconButton
+                        disabled={status === 'loading'}
+                        aria-label="expand row"
+                        size="small"
+                        onClick={handleSendPackId}
+                    >
+                        <DriveFolderUploadIcon/>
+                    </IconButton>
                 </TableCell>
                 <TableCell className={styles.sell}>{cardsCount}</TableCell>
                 <TableCell className={styles.sell}>
