@@ -143,7 +143,7 @@ export const TableContainerCards = () => {
                                     </TableRow>
                                 ) : (
                                     <TableRow>
-                                        <TableCell>Now pack...</TableCell>
+                                        <TableCell>Loading...</TableCell>
                                     </TableRow>)}
                         </TableBody>
                     </Table>
