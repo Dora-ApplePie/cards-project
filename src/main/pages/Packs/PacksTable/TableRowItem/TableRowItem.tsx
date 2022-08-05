@@ -35,7 +35,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const handleSendPackId = () => {
         dispatch(setUserCardId(_id));
         dispatch(setUserCardName(name));
-        navigate(PATH.PACKS + '/' + PATH.CARDS);
+        navigate(`/packs/cards/${_id}`);
     };
 
     return (
