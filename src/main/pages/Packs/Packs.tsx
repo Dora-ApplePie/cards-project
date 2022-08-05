@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {RequestStatusType} from '../../../app/app-reducer';
 import {Input} from "@mui/material";
 
@@ -9,21 +9,32 @@ type PacksPropsType = {
     getAllPacks: () => void
     getOnlyMyPacks: () => void
     addPackHandler: () => void
-    deletePack: (id:string) => void
+    deletePack: (id: string) => void
+    changeName:(id:string|null)=>void
 }
 
-export const Packs = (props:PacksPropsType) => {
+export const Packs = (props: PacksPropsType) => {
     let [title, setTitle] = useState('')
+    let [id, setId] = useState('')
 
-    const onChangeH = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         return setTitle(e.currentTarget.value)
     }
 
-    const deletePackHandler =()=> {
+    const onChange1 = (e: ChangeEvent<HTMLInputElement>) => {
+        return setId(e.currentTarget.value)
+    }
+
+    const deletePackHandler = () => {
         if (title.trim() !== '') {
             props.deletePack(title);
             setTitle('')
         }
+    }
+
+    const onChangePackHandler=()=> {
+        props.changeName(id)
+        setId('')
     }
 
     return (
@@ -35,11 +46,18 @@ export const Packs = (props:PacksPropsType) => {
             <Button onClick={props.addPackHandler} disabled={props.status === 'loading'}>
                 Add pack
             </Button>
-            <Button onClick={deletePackHandler} disabled={props.status === 'loading'}>
-                Delete pack
-            </Button>
+            <div>
+                <Button onClick={deletePackHandler} disabled={props.status === 'loading'}>
+                    Delete pack
+                </Button>
+                <Input placeholder={'Enter pack id to delete'} onChange={onChange} value={title}/>
+            </div>
 
-            <Input placeholder={'Enter pack id for delete'} onChange={onChangeH} value={title}/>
+            <Button onClick={onChangePackHandler} disabled={props.status === 'loading'}>
+                update pack name
+                <Input placeholder={'Enter pack id to update name'} onChange={onChange1} value={id}/>
+
+            </Button>
         </div>
     )
 }

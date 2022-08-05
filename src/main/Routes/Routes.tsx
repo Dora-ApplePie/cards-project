@@ -9,6 +9,7 @@ import Login from "../pages/Login/Login";
 import SetPassword from "../pages/setPassword/SetPassword";
 import {ProfileContainer} from "../pages/Profile/ProfileContainer";
 import {PacksContainer} from "../pages/Packs/PacksContainer";
+import { CardsContainer } from '../pages/Cards/CardsContainer';
 
 export const PATH = {
     REGISTRATION: '/register',
@@ -18,7 +19,9 @@ export const PATH = {
     FORGOT_PASSWORD: '/forgot-password',
     SET_PASSWORD: '/set-password/:token',
     SUPER_COMPONENTS: '/super-components',
-    PACKS:'/Packs'
+    PACKS:'/Packs',
+    CARDS:'/Cards'
+
 }
 
 function Pages() {
@@ -31,9 +34,10 @@ function Pages() {
                 <Route path={PATH.PROFILE} element={<ProfileContainer/>}/> // profile container first
                 <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
                 <Route path={PATH.SET_PASSWORD} element={<SetPassword/>}/>
-                <Route path={PATH.PACKS} element={<PacksContainer/>}/>
                 {/*<Route path={PATH.SUPER_COMPONENTS} element={<SuperComponents/>}/>*/}
                 <Route path={PATH.PAGE404} element={<Page404/>}/>
+                <Route path={PATH.PACKS} element={<PacksContainer/>}/>
+                <Route path={PATH.CARDS + `/:id`} element={<CardsContainer/>}/>
                 <Route path={'/*'} element={<Page404/>}/>
 
             </Routes>

@@ -97,6 +97,25 @@ export const deletePackTC: any = (PackId: string | null): ThunkType => (dispatch
         })
 }
 
+export const updatePackTС:any = (packId: string, name: string): ThunkType => (dispatch, getState) => {
+    dispatch(getStatusAC('loading'))
+    const newPack = {
+        _id: packId,
+        name: name
+    }
+
+    packsAPI.updatePack(newPack)
+        .then(() => {
+            dispatch(getPacksTC())
+        })
+        .catch((error)=> {
+            console.log(error.response.data.error);
+        })
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'))
+        })
+}
+
 
 type ActionsType =
     ReturnType<typeof setPacksAC> | ReturnType<typeof getStatusAC>

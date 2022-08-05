@@ -18,20 +18,16 @@ type updateCardType = {
 }
 
 export const cardsAPI = {
-	getCards: async (cardsPack_id: string, pageCount: number = 50, page: number = 1) => {
-		const response = await instance.get(`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}`)
-		return response.data
+	getCards(cardsPack_id: string, pageCount: number = 50, page: number = 1) {
+		return instance.get(`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}`).then(res=>res.data)
 	},
-	addNewCard: async (newCard: newCardType) => {
-		const response = await instance.post('cards/card', {card: newCard})
-		return response.data
+	addNewCard(newCard: newCardType) {
+		return  instance.post('cards/card', {card: newCard}).then(res=>res.data)
 	},
-	updateCard: async (updateCard: updateCardType) => {
-		const response = await instance.put('cards/card', {card: updateCard})
-		return response.data
+	updateCard (updateCard: updateCardType) {
+		return instance.put('cards/card', {card: updateCard}).then(res=>res.data)
 	},
-	deleteCard: async (cardsPack_id: string) => {
-		const response = await instance.delete(`cards/card?id=${cardsPack_id}` )
-		return response.data
+	deleteCard (cardsPack_id: string) {
+		return instance.delete(`cards/card?id=${cardsPack_id}` ).then(res=>res.data)
 	}
 }
