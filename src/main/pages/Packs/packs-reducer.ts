@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 import {AppStoreType} from "../../../app/store";
 import {ThunkAction} from "redux-thunk";
 import {getStatusAC, RequestStatusType, setAppErrorAC} from '../../../app/app-reducer';
-import {packsAPI} from '../../../api/PacksAPI';
+import {packsAPI} from '../../../api/cards&packsAPI/PacksAPI';
 import {AxiosError} from "axios";
 
 enum PACKS {
@@ -65,6 +65,32 @@ export const getPacksTC: any = () => (dispatch: Dispatch, getState: () => AppSto
         .catch((err: AxiosError<{ error: string }>) => {
             const error = (err.response && err.response.data) ? err.response.data.error : err.message;
             dispatch(setAppErrorAC(error));
+        })
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'))
+        })
+}
+
+export const addPackTC:any = (name: string): ThunkType => (dispatch, getState) => {
+    dispatch(getStatusAC('loading'))
+
+    packsAPI.addPack({name})
+        .then(response => {
+            console.log(response)
+            dispatch(getPacksTC())
+        })
+        .catch()
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'))
+        })
+}
+
+export const deletePackTC: any = (PackId: string | null): ThunkType => (dispatch) => {
+    dispatch(getStatusAC('loading'))
+    packsAPI.deletePack(PackId)
+        .then(() => {dispatch(getPacksTC())})
+        .catch((error)=>{
+            console.log(error.response.data.error);
         })
         .finally(() => {
             dispatch(getStatusAC('succeeded'))

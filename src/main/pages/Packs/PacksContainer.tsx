@@ -1,10 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
-import {
-	getPacksTC,
-	PackType,
-} from './packs-reducer';
+import {addPackTC, deletePackTC, getPacksTC} from './packs-reducer';
 import {AppStoreType} from "../../../app/store";
 import { PATH } from '../../Routes/Routes';
 import { setProfileIdAC } from '../Profile/profileReducer';
@@ -16,9 +13,8 @@ import {RequestStatusType} from "../../../app/app-reducer";
 export const PacksContainer = () => {
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLogin)
-	const packs = useSelector<AppStoreType, PackType[]>(state => state.packs.packs)
 	const myId = useSelector<AppStoreType, string | null>(state => state.profile.profile._id)
-	const status = useSelector<AppStoreType, RequestStatusType>(state => state.packs.status)
+	const status = useSelector<AppStoreType, RequestStatusType>(state => state.app.status)
 
 	useEffect(() => {
 		dispatch(setProfileIdAC(null))
@@ -29,10 +25,32 @@ export const PacksContainer = () => {
 		return <Navigate to={PATH.LOGIN}/>
 	}
 
+	const getAllPacks = () => {
+		dispatch(setProfileIdAC(null))
+		dispatch(getPacksTC())
+	}
+
+	const getOnlyMyPacks = () => {
+		dispatch(setProfileIdAC(myId))
+		dispatch(getPacksTC())
+	}
+
+	const addPackHandler = () => {
+		dispatch(addPackTC('newPack'))
+	}
+
+	const deletePack =(title:string)=>{
+		dispatch(deletePackTC(title))
+	}
+
 
 	return (
 		<>
-			<Packs packs={packs} myId={myId} status={status}/>
+			<Packs status={status}
+				   getAllPacks={getAllPacks}
+				   getOnlyMyPacks={getOnlyMyPacks}
+				   addPackHandler={addPackHandler}
+				   deletePack={deletePack}/>
 		</>
 	)
 }

@@ -7,7 +7,7 @@ import {ForgotPasswordActionType, forgotPasswordReducer} from "../main/pages/fog
 import {ActionsForSetPasswordType, setPasswordReducer} from "../main/pages/setPassword/setPasswordReducer";
 import {RegisterActionType, registrationReducer} from "../main/pages/Registration/registrationReducer";
 import {appReducer} from "./app-reducer";
-import {packsReducer} from "../main/pages/packs/packs-reducer";
+import {packsReducer} from "../main/pages/Packs/packs-reducer";
 
 
 const reducers = combineReducers({

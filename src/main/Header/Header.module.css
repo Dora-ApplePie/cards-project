@@ -1,27 +1,30 @@
 .header {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background: #e0ebe8;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #e0ebe8;
+    width: 100%;
 }
+
 .header__list {
-  display: flex;
-  align-items: center;
+    display: contents;
 }
+
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
+
 .header__list li a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 170px;
-  height: 60px;
-  color: #1c1c1e;
-  text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 60px;
+    color: #1c1c1e;
+    text-decoration: none;
 }
 
 .header__list li a:hover {
-  color: #a663de;
+    color: #a663de;
 }

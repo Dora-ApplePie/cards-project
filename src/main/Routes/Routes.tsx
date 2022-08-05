@@ -8,7 +8,7 @@ import ForgotPassword from "../pages/fogotPassword/ForgotPassword";
 import Login from "../pages/Login/Login";
 import SetPassword from "../pages/setPassword/SetPassword";
 import {ProfileContainer} from "../pages/Profile/ProfileContainer";
-import {PacksContainer} from "../pages/packs/PacksContainer";
+import {PacksContainer} from "../pages/Packs/PacksContainer";
 
 export const PATH = {
     REGISTRATION: '/register',
@@ -18,7 +18,7 @@ export const PATH = {
     FORGOT_PASSWORD: '/forgot-password',
     SET_PASSWORD: '/set-password/:token',
     SUPER_COMPONENTS: '/super-components',
-    PACKS:'/packs'
+    PACKS:'/Packs'
 }
 
 function Pages() {
