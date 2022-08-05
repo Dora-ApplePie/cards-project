@@ -17,7 +17,7 @@ import {PaginationComponent} from "../Pagination/PaginationComponent";
 const PacksTable = () => {
 
     const status = useAppSelector(state => state.app.status)
-    const cardPacks = useAppSelector(state => state.packList.cardPacks);
+    const cardPacks = useAppSelector(state => state.packs.packs);
 
     const [name, setName] = useState<'0name' | '1name'>('0name');
     const [cardsCount, setCardsCount] = useState<'0cardsCount' | '1cardsCount'>('0cardsCount');

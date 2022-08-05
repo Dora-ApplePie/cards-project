@@ -14,11 +14,11 @@ import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 
 type TableRowPackType = {
     _id: string
-    name: string
-    cardsCount: number
-    updated: string
-    user_name: string
-    user_id: string
+    name: string | null
+    cardsCount: number | null
+    updated: Date | null
+    user_name: string | null
+    user_id: string | null
     status: RequestStatusType
 }
 
@@ -54,7 +54,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 </TableCell>
                 <TableCell className={styles.sell}>{cardsCount}</TableCell>
                 <TableCell className={styles.sell}>
-                    {new Date(updated).toLocaleDateString()}
+                    {new Date().toLocaleDateString()}
                 </TableCell>
                 <TableCell className={styles.sell}>
                     {user_name}
@@ -62,15 +62,6 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 <TableCell align="center" className={styles.ButtonGroup}>
                     {userId === user_id
                         ? <>
-                            <Button color="secondary" type={'submit'} variant="outlined"
-                                    disabled={status === 'loading'}>
-
-                                Delete
-                            </Button>
-                            <Button style={{marginRight: "5px", marginLeft: "5px"}} color="secondary" type={'submit'} variant="outlined"
-                                    disabled={status === 'loading'}>
-                                Edit
-                            </Button>
                         </> : null}
                     <Button color="secondary" type={'submit'} variant="outlined"
                             disabled={!cardsCount || status === 'loading'}>Learn</Button>
