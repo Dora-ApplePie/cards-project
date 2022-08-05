@@ -10,7 +10,6 @@ const App = () => {
 
     const dispatch = useAppDispatch();
     const isInitialized = useAppSelector((state) => state.app.initialized)
-
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [dispatch])

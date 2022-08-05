@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import {TextField} from "@material-ui/core";
 import {RequestStatusType} from "../../../app/app-reducer";
 import {CircularProgress} from "@mui/material";
+import {PacksContainer} from "../packs/PacksContainer";
 
 
 type ProfilePropsType = {
@@ -15,7 +16,7 @@ type ProfilePropsType = {
     status: RequestStatusType
 }
 
-const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, status}) => {
+const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, status}, getAllPacks) => {
 
     let [editMode, setEditMode] = useState(false)
     let [name, setName] = useState(profile.name)
@@ -29,6 +30,8 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
         EditMode(name)
     }
     const onChangeNameHandler = (e: ChangeEvent<HTMLInputElement>) => setName(e.currentTarget.value)
+
+
 
 
     const CardsMessage = profile.publicCardPacksCount === 0
@@ -46,7 +49,7 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
 
             <div>
                 <div className={s.avatarBox}>
-                    <img className={s.avatar} src={avatar} alt={'avatar'}/>
+                    <img className={s.avatar} src={profile.avatar || avatar} alt={'avatar'}/>
                 </div>
             </div>
             <div className={s.wrap}>

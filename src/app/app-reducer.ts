@@ -2,6 +2,7 @@ import {AppThunk} from "./store";
 import {Dispatch} from "redux";
 import {authApi} from "../api/auth-api/authAPI";
 import {isLoginAC, signInAC} from "../main/pages/Login/loginReducer";
+import {authMeTC, setProfileIdAC} from "../main/pages/Profile/profileReducer";
 
 export type RequestStatusType = 'loading' | 'succeeded'| 'idle';
 
@@ -23,7 +24,7 @@ export const appReducer = (
 ): InitialStateType => {
     switch (action.type) {
         case 'APP/INITIALIZED':
-            return {...state, initialized: action.value};
+            return {...state, initialized: true};
 
         case 'APP/GET-STATUS':
             return {...state, status: action.status};
@@ -41,7 +42,8 @@ export const appReducer = (
 export type AppActionType =
     | ReturnType<typeof initializedAC>
     | ReturnType<typeof getStatusAC>
-    | ReturnType<typeof setAppErrorAC>;
+    | ReturnType<typeof setAppErrorAC>
+    | ReturnType<typeof setProfileIdAC>;
 
 
 //actions
@@ -59,8 +61,10 @@ export const initializeAppTC = (): AppThunk => (dispatch: Dispatch) => {
     authApi
         .me()
         .then((res) => {
+            dispatch(authMeTC())
             dispatch(signInAC(res.data));
-            dispatch(isLoginAC(true));
+            dispatch(isLoginAC(true))
+            dispatch(setProfileIdAC(res.data._id))
         })
         .catch(error => {
             dispatch(isLoginAC(false));

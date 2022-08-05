@@ -20,6 +20,7 @@ export const ProfileContainer = () => {
         dispatch(authMeTC())
     },[])
 
+
     const logOutHandler = useCallback(() => {
         dispatch(logOutTC())
     }, [])
@@ -28,9 +29,14 @@ export const ProfileContainer = () => {
         dispatch(editNameTC(name))
     }, [dispatch])
 
+
+
+
     if (!isLogin) {
         return <Navigate to={PATH.LOGIN}/>
     }
+
+
     return (
         <div>
             <Profile profile={profile} logOutHandler={logOutHandler} EditMode={activateEditMode} status={status}/>

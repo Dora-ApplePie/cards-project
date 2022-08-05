@@ -1,9 +1,29 @@
 import {Dispatch} from 'redux';
 import {authApi} from "../../../api/auth-api/authAPI";
-import { profileAPI } from '../../../api/profile-api/profileAPI';
+import {profileAPI} from '../../../api/profile-api/profileAPI';
 import {isLoginAC} from "../Login/loginReducer";
 import {AxiosError} from "axios";
 import {getStatusAC, RequestStatusType, setAppErrorAC} from "../../../app/app-reducer";
+
+
+const initialState: ProfileInitialStateType = {
+    profile: {
+        _id: null,
+        email: null,
+        name: null,
+        avatar: null,
+        publicCardPacksCount: null,
+        created: null,
+        updated: null,
+        isAdmin: null,
+        verified: null,
+        rememberMe: null,
+        error: null
+    },
+    myId: null,
+    error: null,
+    status: 'idle'
+}
 
 export const profileReducer = (state: ProfileInitialStateType = initialState, action: ProfileActionsType): ProfileInitialStateType => {
     switch (action.type) {
@@ -19,6 +39,9 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
                 profile: {...state.profile, name: action.name}
             }
         }
+        case SET_MY_ID:
+            console.log('id',action.myId)
+            return {...state, myId: action.myId}
         default:
             return state
     }
@@ -27,9 +50,11 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
 // actions
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserProfileNameAC = (name: string | null) => ({type: SET_NEW_USER_NAME, name} as const)
+export const setProfileIdAC = (myId: string | null) => ({type: SET_MY_ID, myId} as const)
+
 
 //thunks
-export const authMeTC = (): any => (dispatch: Dispatch) => {
+export const authMeTC:any = () => (dispatch: Dispatch) => {
     dispatch(getStatusAC('loading'))
 
     return authApi.me()
@@ -37,6 +62,7 @@ export const authMeTC = (): any => (dispatch: Dispatch) => {
             if (res.status === 200) {
                 dispatch(isLoginAC(true))
                 dispatch(setUserProfileAC(res.data))
+                dispatch(setProfileIdAC(res.data._id))
             }
         })
         .catch((err: AxiosError<{ error: string }>) => {
@@ -49,7 +75,7 @@ export const authMeTC = (): any => (dispatch: Dispatch) => {
         })
 }
 
-export const editNameTC: any = (name:string) => (dispatch: Dispatch) => {
+export const editNameTC: any = (name: string) => (dispatch: Dispatch) => {
     dispatch(getStatusAC('loading'))
     return profileAPI.updateProfile(name)
         .then(() => {
@@ -66,7 +92,7 @@ export const editNameTC: any = (name:string) => (dispatch: Dispatch) => {
         })
 }
 
-export const logOutTC:any = () => (dispatch: Dispatch) => {
+export const logOutTC: any = () => (dispatch: Dispatch) => {
 
     profileAPI.logOut()
         .then(() => {
@@ -83,6 +109,8 @@ export const logOutTC:any = () => (dispatch: Dispatch) => {
 //types
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_NEW_USER_NAME = 'SET_NEW_USER_NAME'
+const SET_MY_ID = 'SET_MY_ID'
+
 
 export type ProfileType = {
     _id: string | null
@@ -103,24 +131,10 @@ export type ProfileInitialStateType = {
     error: string | null
     status: RequestStatusType
 }
-const initialState: ProfileInitialStateType = {
-    profile: {
-        _id: null,
-        email: null,
-        name: null,
-        avatar: null,
-        publicCardPacksCount: null,
-        created: null,
-        updated: null,
-        isAdmin: null,
-        verified: null,
-        rememberMe: null,
-        error: null
-    },
-    myId: null,
-    error: null,
-    status: 'idle'
-}
 
-export type ProfileActionsType = ReturnType<typeof setUserProfileAC> | ReturnType<typeof setUserProfileNameAC>
+
+export type ProfileActionsType =
+    ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setUserProfileNameAC>
+    | ReturnType<typeof setProfileIdAC>
 

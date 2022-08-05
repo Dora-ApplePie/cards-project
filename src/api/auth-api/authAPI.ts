@@ -1,5 +1,5 @@
 import {instance} from "../login-api/loginAPI";
-import axios, {AxiosResponse} from "axios";
+import {AxiosResponse} from "axios";
 
 export type ForgotPasswordPayloadType = {
     email: string
