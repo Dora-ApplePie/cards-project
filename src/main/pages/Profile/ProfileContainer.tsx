@@ -1,24 +1,21 @@
 import React, {useCallback, useEffect} from 'react';
-import {authMeTC, editNameTC, logOutTC, ProfileType} from "./profileReducer";
+import {editNameTC, logOutTC, ProfileType} from "./profileReducer";
 import {AppStoreType} from '../../../app/store';
 import {Navigate} from 'react-router-dom';
 import {PATH} from "../../Routes/Routes";
 import {useDispatch, useSelector} from 'react-redux';
 import { RequestStatusType } from '../../../app/app-reducer';
 import Profile from './Profile';
+import {useAppSelector} from "../../../app/hooks";
 
 
 export const ProfileContainer = () => {
 
     const dispatch = useDispatch()
-    const isLogin = useSelector<AppStoreType, boolean>(state => state.login.isLogin)
-    const profile = useSelector<AppStoreType, ProfileType>(state => state.profile.profile)
-    const status = useSelector<AppStoreType, RequestStatusType>(state => state.profile.status)
+    const isLogin = useAppSelector<boolean>(state => state.login.isLogin)
+    const profile = useAppSelector<ProfileType>(state => state.profile.profile)
+    const status = useAppSelector<RequestStatusType>(state => state.profile.status)
 
-
-    useEffect(()=>{
-        dispatch(authMeTC())
-    },[])
 
 
     const logOutHandler = useCallback(() => {

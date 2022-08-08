@@ -1,11 +1,5 @@
-import axios from 'axios';
 import { PackType } from '../../main/pages/Packs/packsReducer';
-
-const instance = axios.create({
-	// baseURL: 'https://neko-back.herokuapp.com/2.0/',
-	baseURL: 'http://localhost:7542/2.0/',
-	withCredentials: true
-})
+import {instance} from "../login-api/loginAPI";
 
 
 export const packsAPI = {

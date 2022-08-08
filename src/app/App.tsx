@@ -11,7 +11,9 @@ const App = () => {
     const dispatch = useAppDispatch();
     const isInitialized = useAppSelector((state) => state.app.initialized)
     useEffect(() => {
+        if (!isInitialized){
         dispatch(initializeAppTC())
+        }
     }, [dispatch])
 
     if (!isInitialized) {

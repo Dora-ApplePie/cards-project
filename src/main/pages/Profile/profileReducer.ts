@@ -118,8 +118,8 @@ export type ProfileType = {
     name: string | null
     avatar: string | null
     publicCardPacksCount: number | null
-    created: string | null
-    updated: string | null
+    created: Date | null
+    updated: Date | null
     isAdmin: boolean | null
     verified: boolean | null
     rememberMe: boolean | null
