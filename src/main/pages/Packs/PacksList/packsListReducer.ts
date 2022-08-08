@@ -39,19 +39,23 @@ export const setPackModalParams = (data: { packId: string, packName?: string }) 
 
 
 export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () => AppStoreType) => {
-    const {pageCount, page, packName, sortPacks, user_id, min, max} = getState().tablePacks;
-    const params = {
+    const {pageCount, page, packName, sortPacks, min, max} = getState().tablePacks;
+    const user_id = getState().profile.myId
+
+    let tableParams = {
         packName,
         sortPacks,
         page,
         pageCount,
-        user_id,
         min,
-        max,
+        max
     }
 
+    const params = {...tableParams, user_id}
+
+
     dispatch(getStatusAC('loading'));
-    packsListAPI.getPacks(params)
+    packsListAPI.getPacks( params)
         .then(res => {
             dispatch(setPacksListData(res.data));
 

@@ -97,7 +97,7 @@ export const deletePackTC: any = (PackId: string | null): ThunkType => (dispatch
         })
 }
 
-export const updatePackTС:any = (packId: string, name: string): ThunkType => (dispatch, getState) => {
+export const updatePackTC:any = (packId: string, name: string): ThunkType => (dispatch, getState) => {
     dispatch(getStatusAC('loading'))
     const newPack = {
         _id: packId,

@@ -7,7 +7,7 @@ import {PATH} from "../../../Routes/Routes";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {fetchCardPacks} from "./packsListReducer";
 import {setProfileIdAC} from "../../Profile/profileReducer";
-import {addPackTC, deletePackTC, getPacksTC, updatePackTС} from "../packsReducer";
+import {addPackTC, deletePackTC, getPacksTC, updatePackTC} from "../packsReducer";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../../app/store";
 import {Packs} from "../Packs";
@@ -32,6 +32,8 @@ export const PacksList = () => {
 
 
     useEffect(() => {
+        dispatch(setProfileIdAC(null))
+
         dispatch(fetchCardPacks());
     }, [page, pageCount, sortPackName, searchPackName, commonUserId, commonMin, commonMax]);
 
@@ -41,12 +43,12 @@ export const PacksList = () => {
 
     const getAllPacks = () => {
         dispatch(setProfileIdAC(null))
-        dispatch(getPacksTC())
+        dispatch(fetchCardPacks())
     }
 
     const getOnlyMyPacks = () => {
         dispatch(setProfileIdAC(myId))
-        dispatch(getPacksTC())
+        dispatch(fetchCardPacks())
     }
 
     const addPackHandler = () => {
@@ -58,7 +60,7 @@ export const PacksList = () => {
 
     }
     const changeName = (id:string|null) => {
-        dispatch(updatePackTС(id,'!newPackName!'))
+        dispatch(updatePackTC(id,'!newPackName!'))
     }
 
 

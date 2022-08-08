@@ -1,7 +1,7 @@
-import React, {ChangeEvent, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
-import {addPackTC, deletePackTC, getPacksTC, updatePackTС} from './packsReducer';
+import {addPackTC, deletePackTC, getPacksTC, updatePackTC} from './packsReducer';
 import {AppStoreType} from "../../../app/store";
 import {PATH} from '../../Routes/Routes';
 import {setProfileIdAC} from '../Profile/profileReducer';
@@ -43,7 +43,7 @@ export const PacksContainer = () => {
 
     }
     const changeName = (id:string|null) => {
-        dispatch(updatePackTС(id,'!newPackName!'))
+        dispatch(updatePackTC(id,'!newPackName!'))
     }
 
 
