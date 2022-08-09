@@ -10,6 +10,7 @@ import {getCardsPack, setCardPack, updateGradePack} from './learnPackReducer';
 import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {getCard} from "../../../../utils/smartRandom";
 import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 
 const grades = [
     {value: 1, label: 'Did not know'},
@@ -46,7 +47,7 @@ export const LearnPack = () => {
         setShowAnswer(false);
     }
 
-    const handleChangeGrade = (e: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const handleChangeGrade = (e: ChangeEvent<HTMLInputElement>) => {
         const gradeNumbers = [1, 2, 3, 4, 5];
         const value = Number(e.currentTarget.value);
 
@@ -68,44 +69,51 @@ export const LearnPack = () => {
     }, [cards]);
 
     return (
-        <div className={styles.wrapper}>
-            {status === 'loading'
-                ? (
-                    <Typography mt={10} variant="h4" sx={{textAlign: 'center'}}>Wait a minute...</Typography>
-                ) : (
-                    <><h3 className={styles.title}>Learn “Pack Name”</h3>
-                        <p className={styles.text}><b>Question: </b>{`“${card.question}”`}</p>
-                        {showAnswer
-                            ? (
-                                <><p className={styles.text}><b>Answer: </b>{`“${card.answer}”`}</p>
-                                    <div className={styles.rate}>
-                                        <div className={styles.label}>Rate yourself:</div>
-                                        <FormControl>
-                                            <RadioGroup defaultValue={1}>
-                                                {grades.map(({value, label}, i) => (
-                                                    <FormControlLabel
-                                                        key={value + i}
-                                                        value={value}
-                                                        control={<Radio size="small" value={value} onChange={handleChangeGrade}/>}
-                                                        label={label}
-                                                    />))}
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </div>
-                                    <div className={styles.buttons_answer}>
-                                        <Button onClick={handleCancel}>Cancel</Button>
-                                        <Button onClick={handleNext}>Next</Button>
-                                    </div>
-                                </>
-                            ) : (
-                                <div className={styles.buttons_question}>
-                                    <Button onClick={handleCancel}>Cancel</Button>
-                                    <Button onClick={handleToggleShowAnswer}>Show answer</Button>
-                                </div>
-                            )}
-                    </>
-                )}
-        </div>
 
+        <div className={styles.wrapper}>
+            <Paper style={{padding: "30px"}}>
+                {status === 'loading'
+                    ? (
+                        <Typography mt={1} variant="h4" sx={{textAlign: 'center'}}>Loading...</Typography>
+                    ) : (
+                        <><h3 className={styles.title}>Learn “Pack Name”</h3>
+                            <p className={styles.text}><b>Question: </b>{`“${card.question}”`}</p>
+                            {showAnswer
+                                ? (
+                                    <><p className={styles.text}><b>Answer: </b>{`“${card.answer}”`}</p>
+                                        <div className={styles.rate}>
+                                            <div className={styles.label}>Rate yourself:</div>
+                                            <FormControl>
+                                                <RadioGroup defaultValue={1}>
+                                                    {grades.map(({value, label}, i) => (
+                                                        <FormControlLabel
+                                                            key={value + i}
+                                                            value={value}
+                                                            control={<Radio color="secondary" size="small" value={value}
+                                                                            onChange={handleChangeGrade}/>}
+                                                            label={label}
+                                                        />))}
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </div>
+                                        <div className={styles.buttons_answer}>
+                                            <Button color="secondary" type={'submit'} variant="outlined"
+                                                    onClick={handleCancel}>Back to pack list</Button>
+                                            <Button color="secondary" type={'submit'} variant="outlined"
+                                                    onClick={handleNext}>Next</Button>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className={styles.buttons_question}>
+                                        <Button color="secondary" type={'submit'} variant="outlined"
+                                                onClick={handleCancel}>Back to pack list</Button>
+                                        <Button color="secondary" type={'submit'} variant="outlined"
+                                                onClick={handleToggleShowAnswer}>Show answer</Button>
+                                    </div>
+                                )}
+                        </>
+                    )}
+            </Paper>
+        </div>
     )
 };
