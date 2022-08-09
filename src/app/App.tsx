@@ -10,6 +10,7 @@ const App = () => {
 
     const dispatch = useAppDispatch();
     const isInitialized = useAppSelector((state) => state.app.initialized)
+
     useEffect(() => {
         if (!isInitialized){
         dispatch(initializeAppTC())
@@ -22,6 +23,8 @@ const App = () => {
             <CircularProgress color="secondary"/>
         </div>
     }
+
+
 
     return (
         <div className="App">

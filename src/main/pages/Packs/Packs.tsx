@@ -11,7 +11,7 @@ type PacksPropsType = {
     getOnlyMyPacks: () => void
     addPackHandler: () => void
     deletePack: (id: string) => void
-    changeName:(id:string|null)=>void
+    changeName:(id:string)=>void
 }
 
 export const Packs = (props: PacksPropsType) => {

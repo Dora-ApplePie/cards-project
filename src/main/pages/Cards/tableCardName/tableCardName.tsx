@@ -31,7 +31,7 @@ export const TableCardName = () => {
 	}
 
 	if (!cardsPack_id) {
-		return <Navigate to={PATH.PACKS + '/' + PATH.PACKS_LIST}/>
+		return <Navigate to={PATH.CARDS}/>
 	}
 
 	return (

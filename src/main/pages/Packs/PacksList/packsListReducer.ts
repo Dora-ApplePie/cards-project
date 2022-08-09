@@ -3,7 +3,7 @@ import {AxiosError} from 'axios';
 import {AppStoreType, AppThunk} from "../../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../../app/app-reducer";
 import {Dispatch} from "redux";
-import {setPacksAC} from "../packsReducer";
+import {packsAPI} from "../../../../api/cards&packsAPI/PacksAPI";
 
 const initialState: PacksListStateType = {
     cardPacks: [] as PackType[],
@@ -65,6 +65,51 @@ export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () 
         })
         .finally(() => {
             dispatch(getStatusAC('idle'));
+        })
+}
+
+export const addPackTC = (name: string): AppThunk => (dispatch, getState) => {
+    dispatch(getStatusAC('loading'))
+
+    packsAPI.addPack({name})
+        .then(response => {
+            console.log(response)
+            dispatch(fetchCardPacks())
+        })
+        .catch()
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'))
+        })
+}
+
+export const deletePackTC = (packId: string | null): AppThunk => (dispatch) => {
+    dispatch(getStatusAC('loading'))
+    packsAPI.deletePack(packId)
+        .then(() => {dispatch(fetchCardPacks())})
+        .catch((error)=>{
+            console.log(error.response.data.error);
+        })
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'))
+        })
+}
+
+export const updatePackTC = (packId: string, name: string): AppThunk => (dispatch, getState) => {
+    dispatch(getStatusAC('loading'))
+    const newPack = {
+        _id: packId,
+        name: name
+    }
+
+    packsAPI.updatePack(newPack)
+        .then(() => {
+            dispatch(fetchCardPacks())
+        })
+        .catch((error)=> {
+            console.log(error.response.data.error);
+        })
+        .finally(() => {
+            dispatch(getStatusAC('succeeded'))
         })
 }
 

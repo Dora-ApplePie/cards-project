@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {memo} from 'react';
 import styles from './TableRowItem.module.css';
 import {RequestStatusType} from "../../../../../app/app-reducer";
@@ -9,8 +9,14 @@ import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {IconButton} from "@mui/material";
 import {PATH} from "../../../../Routes/Routes";
 import {setUserCardId, setUserCardName} from "../../../Cards/reducer/packCardReducer";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import DeleteIcon from '@material-ui/icons/Delete';
+import UpdateIcon from '@mui/icons-material/Update';
+import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
+import {deletePackTC, updatePackTC} from "../../PacksList/packsListReducer";
+import { ModalBase } from '../../../../common/Modal/ModalBase';
+
 
 type TableRowPackType = {
     _id: string
@@ -24,9 +30,14 @@ type TableRowPackType = {
 
 
 export const TableRowItem = memo((props: TableRowPackType) => {
+    const [activeModalDelete, setActiveModalDelete] = useState<boolean>(false)
+    const [activeModalUpdate, setActiveModalUpdate] = useState<boolean>(false)
+    const [value, setValue] = useState<string>('')
+
     const {_id, user_id, name, cardsCount, updated, user_name, status} = props;
 
-    const userId = useAppSelector(state => state.login._id);
+
+    const userId = useAppSelector(state => state.profile.myId);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -35,8 +46,37 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const handleSendPackId = () => {
         dispatch(setUserCardId(_id));
         dispatch(setUserCardName(name));
-        navigate(PATH.PACKS + '/' + PATH.CARDS);
+        navigate(PATH.CARDS + `/${_id}`);
     };
+
+    const confirmRemovePack = (packId: string) => {
+        console.log('packId', packId)
+        dispatch(deletePackTC(packId))
+        closeDeleteModalForm()
+    }
+
+    const closeDeleteModalForm = () => {
+        setActiveModalDelete(false)
+    }
+
+    const closeUpdateModalForm = () => {
+        setActiveModalUpdate(false)
+
+    }
+
+    const onChangeTextUpdateHandler = (value: string) => {
+        setValue(value)
+    }
+    const closeUpdateModal = () => {
+        closeUpdateModalForm()
+        setValue('')
+    }
+
+    const updatePack = (packId: string, value: string) => {
+        dispatch(updatePackTC(packId, value))
+        closeUpdateModalForm()
+        setValue('')
+    }
 
     return (
         <>
@@ -60,18 +100,31 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                     {user_name}
                 </TableCell>
                 <TableCell align="center" className={styles.ButtonGroup}>
-                    {userId === user_id
-                        ? <>
-                            <Button color="secondary" type={'submit'} variant="outlined"
-                                    disabled={status === 'loading'}>
 
-                                Delete
-                            </Button>
-                            <Button style={{marginRight: "5px", marginLeft: "5px"}} color="secondary" type={'submit'} variant="outlined"
-                                    disabled={status === 'loading'}>
-                                Edit
-                            </Button>
-                        </> : null}
+                    <>
+                        <Button onClick={() => {setActiveModalUpdate(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<UpdateIcon/>}/>
+
+                        {activeModalUpdate && <ModalBase
+                            packId={_id}
+                            isAddingForm={false}
+                            closeModal={closeUpdateModal}
+                            input={value}
+                            onChangeText={onChangeTextUpdateHandler}
+                            addTextHandler={updatePack}
+                            title='Please, enter new pack name'
+                        />}
+
+                        <Button onClick={() => {setActiveModalDelete(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<DeleteIcon/>}/>
+
+                        {activeModalDelete && <ModalConfirm
+                            cardId={'zaglushka'}
+                            packID={_id}
+                            confirmHandler={confirmRemovePack}
+                            cancelHandler={closeDeleteModalForm}
+                            title='Are you sure you want to delete this pack?'/>
+                        }
+                    </>
+
                     <Button color="secondary" type={'submit'} variant="outlined"
                             disabled={!cardsCount || status === 'loading'}>Learn</Button>
                 </TableCell>
