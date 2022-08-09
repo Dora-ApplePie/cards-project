@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './App.css';
+import './App.module.css';
 import Main from "../main/Main";
 import {CircularProgress} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "./hooks";

@@ -9,13 +9,16 @@ import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {IconButton} from "@mui/material";
 import {PATH} from "../../../../Routes/Routes";
 import {setUserCardId, setUserCardName} from "../../../Cards/reducer/packCardReducer";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
-import DeleteIcon from '@material-ui/icons/Delete';
-import UpdateIcon from '@mui/icons-material/Update';
 import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
-import {deletePackTC, updatePackTC} from "../../PacksList/packsListReducer";
+import {deletePackTC, updatePackTC} from "../../packsListReducer";
 import { ModalBase } from '../../../../common/Modal/ModalBase';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsIcon from '@mui/icons-material/Settings';
+import SchoolIcon from '@mui/icons-material/School';
+
+import {grey} from "@mui/material/colors";
 
 
 type TableRowPackType = {
@@ -102,7 +105,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 <TableCell align="center" className={styles.ButtonGroup}>
 
                     <>
-                        <Button onClick={() => {setActiveModalUpdate(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<UpdateIcon/>}/>
+                        <Button onClick={() => {setActiveModalUpdate(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<SettingsIcon />}/>
 
                         {activeModalUpdate && <ModalBase
                             packId={_id}
@@ -126,7 +129,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                     </>
 
                     <Button color="secondary" type={'submit'} variant="outlined"
-                            disabled={!cardsCount || status === 'loading'}>Learn</Button>
+                            disabled={!cardsCount || status === 'loading'}><SchoolIcon/></Button>
                 </TableCell>
             </TableRow>
         </>

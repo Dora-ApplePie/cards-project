@@ -1,7 +1,9 @@
 import React, {ChangeEvent, FC} from 'react'
 import {useParams} from 'react-router-dom';
 import {Button, Input} from "@mui/material";
-
+import s from './ModalUpload.module.css'
+import SuperButton from "../SuperComponents/c2-SuperButton/SuperButton";
+import CloseIcon from '@mui/icons-material/Close';
 type PropsType = {
     closeModal: () => void
     input: string
@@ -23,7 +25,6 @@ export const ModalBase: FC<PropsType> = ({
                                              addNewItemHandler,
                                              isAddingForm
                                          }) => {
-    const paramsPack = useParams<{ packId: string }>()
     const paramsCard = useParams<{ cardId: string }>()
 
     const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,15 +44,15 @@ export const ModalBase: FC<PropsType> = ({
     }
 
     return (
-        <div>
-            <div>
-                <div>
-                    <Button onClick={closeModal}><span>&times;</span></Button>
+        <div className={s.wrapper}>
+            <div className={s.modal}>
+                <div className={s.closeBtnWrapper}>
+                    <Button className={s.buttonClose} onClick={closeModal} size="large"><CloseIcon fontSize="large"/></Button>
                 </div>
-                <div>{title}</div>
+                <div className={s.title}>{title}</div>
                 <div>
-                    <Input onChange={onChangeCallback} value={input}/>
-                    <Button onClick={isAddingForm ? successAddHandler : successHandler} disabled={!input}
+                    <Input  className={s.input} onChange={onChangeCallback} value={input}/>
+                    <Button className={s.buttonAccept} onClick={isAddingForm ? successAddHandler : successHandler} disabled={!input}
                     >Ok</Button>
                 </div>
             </div>

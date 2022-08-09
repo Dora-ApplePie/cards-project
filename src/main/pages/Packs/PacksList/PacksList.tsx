@@ -4,7 +4,7 @@ import styles from './PacksList.module.css';
 import {Navigate} from 'react-router-dom';
 import {PATH} from "../../../Routes/Routes";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {addPackTC, deletePackTC, fetchCardPacks, updatePackTC} from "./packsListReducer";
+import {addPackTC, deletePackTC, fetchCardPacks, updatePackTC} from "../packsListReducer";
 import {setProfileIdAC} from "../../Profile/profileReducer";
 import {Packs} from "../Packs";
 

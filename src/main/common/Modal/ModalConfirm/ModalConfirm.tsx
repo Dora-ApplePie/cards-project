@@ -1,5 +1,9 @@
 import React, {FC} from 'react'
-import {Button} from "@mui/material";
+import {Button, Stack} from "@mui/material"
+import s from './../ModalUpload.module.css'
+import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 
 type PropsType = {
     confirmHandler: (id: string) => void
@@ -23,20 +27,18 @@ export const ModalConfirm: FC<PropsType> = ({confirmHandler, cancelHandler, titl
 
 
     return (
-        <>
-            <div>
-                <div>
-                    <div>
-                        <Button onClick={cancelHandler}><span>&times;</span></Button>
+            <div className={s.wrapper}>
+                <div className={s.modal}>
+                    <div className={s.closeBtnWrapper}>
+                        <Button className={s.buttonClose} onClick={cancelHandler} size="medium"><CloseIcon fontSize="large"/></Button>
                     </div>
-                    <div>{title}</div>
-                    <div>
-                        <Button onClick={successHandler}>Yes</Button>
-                        <Button onClick={cancelHandler}>No</Button>
-                    </div>
+                    <div className={s.title}>{title}</div>
+                    <Stack  direction="row" spacing={2}>
+                        <Button variant="contained" color="success" onClick={successHandler}>Yes</Button>
+                        <Button variant="contained" color="error" onClick={cancelHandler}>No</Button>
+                    </Stack>
                 </div>
             </div>
-        </>
     )
 }
 

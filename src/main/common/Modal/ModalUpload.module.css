@@ -1,0 +1,95 @@
+.wrapper {
+  font-family: "Jost", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(40, 44, 52, 0.8);
+  z-index: 1000;
+  padding: 10px;
+}
+
+/*.modal {*/
+/*  max-width: 22vw;*/
+/*  min-width: 320px;*/
+/*  height: auto;*/
+/*  border-radius: 10px;*/
+/*  padding: 20px*/
+/*}*/
+/*.title {*/
+/*  font-size: 24px;*/
+/*  color: white;*/
+/*}*/
+
+.input {
+  width: auto;
+  height: 35px;
+  padding: 0 0 0 20px;
+  margin: 0 auto 20px;
+}
+
+/*.btnClose {*/
+/*  border: none !important;*/
+/*  background: none !important;*/
+/*  width: auto !important;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  outline: none !important;*/
+/*  cursor: pointer;*/
+/*}*/
+
+.closeBtnWrapper {
+  display: contents;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+
+.modal {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px 10px 10px;
+  box-shadow: 0 0 10px rgb(22, 20, 24); /* Параметры тени */
+
+}
+
+.buttonClose {
+  width: 30px;
+  font-size: 20px;
+  color: #c0c5cb;
+  align-self: flex-end;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 10px;
+}
+.img {
+  width: 82px;
+  margin-bottom: 15px;
+}
+.title {
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+.buttonAccept {
+  background-color: #ed6755;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  padding: 14px;
+  font-size: 16px;
+  color: white;
+}
+
+
+
+

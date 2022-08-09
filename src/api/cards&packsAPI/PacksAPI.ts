@@ -1,10 +1,10 @@
-import { PackType } from '../../main/pages/Packs/packsReducer';
 import {instance} from "../login-api/loginAPI";
+import {AxiosResponse} from "axios";
 
 
 export const packsAPI = {
-	getPacksData(packName: string, min: number, max: number, sortPacks: string, page: number = 1, pageCount: number = 20, myId: string | null) {
-		return instance.get<ResponseGetPacksType>(`cards/pack?pageCount=${pageCount}&page=${page}&packName=${packName}&sortPacks=${sortPacks}&min=${min}&max=${max}&user_id=${myId === null ? '' : myId}`).then(response => response.data)
+	getPacks(data: PacksParamsType) {
+		return instance.get<PacksParamsResponseType, AxiosResponse<PacksParamsResponseType>, PacksParamsType>(`cards/pack`, {params: data});
 	},
 	addPack (newPack: any){
 		return instance.post('cards/pack', {cardsPack: newPack}).then(response=>response.data)
@@ -17,14 +17,41 @@ export const packsAPI = {
 	}
 }
 
-
-export type ResponseGetPacksType = {
-	cardPacks: Array<PackType>
-	cardPacksTotalCount: number
-	minCardsCount: number | null
-	maxCardsCount: number | null
-	page: number | null
-	pageCount: number | null
-	sortPacks: string
-	packUserId: string
+//types
+export type PackType = {
+	_id: string
+	user_id: string
+	user_name: string
+	private: false
+	name: string
+	path: string
+	grade: number
+	shots: number
+	cardsCount: number
+	type: string
+	rating: number
+	created: string
+	updated: string
+	more_id: string
+	__v: number
 }
+export type PacksParamsType = {
+	packName: string
+	min?: number
+	max?: number
+	sortPacks: string
+	page: number
+	pageCount: number
+	user_id?: string | null
+}
+export type PacksParamsResponseType = {
+	cardPacks: PackType[]
+	page: number
+	pageCount: number
+	cardPacksTotalCount: number
+	minCardsCount: number
+	maxCardsCount: number
+	token: string
+	tokenDeathTime: number
+}
+
