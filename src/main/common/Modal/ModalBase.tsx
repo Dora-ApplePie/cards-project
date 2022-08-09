@@ -2,7 +2,6 @@ import React, {ChangeEvent, FC} from 'react'
 import {useParams} from 'react-router-dom';
 import {Button, Input} from "@mui/material";
 import s from './ModalUpload.module.css'
-import SuperButton from "../SuperComponents/c2-SuperButton/SuperButton";
 import CloseIcon from '@mui/icons-material/Close';
 type PropsType = {
     closeModal: () => void

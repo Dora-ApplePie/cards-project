@@ -1,63 +1,68 @@
 import React, {ChangeEvent, FC} from 'react'
-import {useParams} from 'react-router-dom';
 import {Button} from "@material-ui/core";
 import {Input} from "@mui/material";
+import s from './../ModalUpload.module.css'
+import CloseIcon from "@mui/icons-material/Close";
+
 
 type PropsType = {
     closeModal: () => void
-    inputFirst: string
-    inputSecond: string
-    onChangeTextFirst: (value: string) => void
-    onChangeTextSecond: (value: string) => void
+    question: string
+    answer: string
+    onChangeQuestion: (value: string) => void
+    onChangeAnswer: (value: string) => void
     addTextHandler: (id: string, value1: string, value2: string) => void
     title: string
+    cardId?: string
+    packId?: string
 }
 
 export const ModalCard: FC<PropsType> = ({
                                              closeModal,
-                                             inputFirst,
-                                             onChangeTextFirst,
-                                             onChangeTextSecond,
+                                             question,
+                                             onChangeQuestion,
+                                             onChangeAnswer,
                                              addTextHandler,
-                                             title, inputSecond
+                                             title,
+                                             cardId,
+                                             answer,
+                                             packId
                                          }) => {
-    const paramsCard = useParams<{ cardId: string }>()
-    const params = useParams<{ packId: string }>()
 
     const onChangeCallbackForFirstInput = (event: ChangeEvent<HTMLInputElement>) => {
-        onChangeTextFirst(event.currentTarget.value)
+        onChangeQuestion(event.currentTarget.value)
     }
 
     const onChangeCallbackForSecondInput = (event: ChangeEvent<HTMLInputElement>) => {
-        onChangeTextSecond(event.currentTarget.value)
+        onChangeAnswer(event.currentTarget.value)
     }
 
     const successHandler = () => {
-        if (paramsCard.cardId) {
-            addTextHandler(paramsCard.cardId, inputFirst, inputSecond)
-        } else if (params.packId) {
-            addTextHandler(params.packId, inputFirst, inputSecond)
+        if (cardId) {
+            addTextHandler(cardId, question, answer)
+        } else if (packId) {
+            addTextHandler(packId, question, answer)
         }
     }
 
 
     return (
-        <div>
-            <div>
-                <div >
-                    <Button onClick={closeModal} >
-                        <span >&times;</span>
+        <div className={s.wrapper}>
+            <div className={s.modal}>
+                <div className={s.closeBtnWrapper}>
+                    <Button className={s.buttonClose} onClick={closeModal} size="large">
+                        <CloseIcon fontSize="large"/>
                     </Button>
                 </div>
-                <div >{title}</div>
+                <div className={s.title}>{title}</div>
                 <div >
-                    <Input onChange={onChangeCallbackForFirstInput}  value={inputFirst}
+                    <Input className={s.input}  onChange={onChangeCallbackForFirstInput}  value={question}
                                     placeholder='question'/>
-                    <Input onChange={onChangeCallbackForSecondInput}
-                                    value={inputSecond}
+                    <Input className={s.input}  onChange={onChangeCallbackForSecondInput}
+                                    value={answer}
                                     placeholder='answer'/>
-                    <Button  onClick={successHandler}
-                                 disabled={!(inputFirst || inputSecond)}>Ok
+                    <Button  className={s.buttonAccept} onClick={successHandler}
+                                 disabled={!(question || answer)}>Ok
                     </Button>
                 </div>
             </div>

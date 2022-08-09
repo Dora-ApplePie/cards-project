@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 import styles from './tableCardName.module.css';
-import {fetchCardsTC} from "../reducer/packCardReducer";
+import {fetchCardsTC} from "../cardsReducer";
 import {TableCard} from "./TableCard";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../../Routes/Routes";

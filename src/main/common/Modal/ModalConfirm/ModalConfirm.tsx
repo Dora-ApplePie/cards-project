@@ -1,7 +1,6 @@
 import React, {FC} from 'react'
 import {Button, Stack} from "@mui/material"
 import s from './../ModalUpload.module.css'
-import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 
@@ -10,7 +9,7 @@ type PropsType = {
     cancelHandler: () => void
     title: string
     packID?: string
-    cardId?: string
+    cardId?:string
 
 }
 

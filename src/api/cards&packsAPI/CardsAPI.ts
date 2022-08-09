@@ -1,10 +1,5 @@
-import axios from 'axios';
-
-const instance = axios.create({
-	// baseURL: 'https://neko-back.herokuapp.com/2.0/',
-	baseURL: 'http://localhost:7542/2.0/',
-	withCredentials: true
-})
+import {AxiosResponse} from 'axios';
+import { instance } from '../login-api/loginAPI';
 
 type newCardType = {
 	cardsPack_id: string,
@@ -15,11 +10,12 @@ type newCardType = {
 type updateCardType = {
 	_id: string,
 	question?: string,
+	answer?: string
 }
 
 export const cardsAPI = {
-	getCards(cardsPack_id: string, pageCount: number = 50, page: number = 1) {
-		return instance.get(`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}`).then(res=>res.data)
+	getCards(data: CardParamsType) {
+		return instance.get<any, AxiosResponse<CardsTypeResponseType>, CardParamsType>('cards/card', {params: data});
 	},
 	addNewCard(newCard: newCardType) {
 		return  instance.post('cards/card', {card: newCard}).then(res=>res.data)
@@ -30,4 +26,40 @@ export const cardsAPI = {
 	deleteCard (cardsPack_id: string) {
 		return instance.delete(`cards/card?id=${cardsPack_id}` ).then(res=>res.data)
 	}
+}
+
+//types
+export type CardParamsType = {
+	cardAnswer?: string
+	cardQuestion?: string
+	cardsPack_id: string
+	min?: number
+	max?: number
+	sortCards?: string
+	page?: number
+	pageCount?: number
+}
+
+export type CardsTypeResponseType = {
+	cards: CardType[]
+	cardsTotalCount: number
+	maxGrade: number
+	minGrade: number
+	page: number
+	pageCount: number
+	packUserId: string
+	token: string
+	tokenDeathTime: number
+}
+
+export type CardType = {
+	answer: string
+	question: string
+	cardsPack_id: string
+	grade: number
+	shots: number
+	user_id: string
+	created: string
+	updated: string
+	_id: string
 }

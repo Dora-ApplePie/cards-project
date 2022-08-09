@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {IconButton} from "@mui/material";
 import {PATH} from "../../../../Routes/Routes";
-import {setUserCardId, setUserCardName} from "../../../Cards/reducer/packCardReducer";
+import {setUserCardId, setUserCardName} from "../../../Cards/cardsReducer";
 import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
@@ -18,7 +18,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SchoolIcon from '@mui/icons-material/School';
 
-import {grey} from "@mui/material/colors";
 
 
 type TableRowPackType = {
@@ -120,7 +119,6 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                         <Button onClick={() => {setActiveModalDelete(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<DeleteIcon/>}/>
 
                         {activeModalDelete && <ModalConfirm
-                            cardId={'zaglushka'}
                             packID={_id}
                             confirmHandler={confirmRemovePack}
                             cancelHandler={closeDeleteModalForm}

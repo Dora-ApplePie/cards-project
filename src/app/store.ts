@@ -9,7 +9,7 @@ import {RegisterActionType, registrationReducer} from "../main/pages/Registratio
 import {appReducer} from "./app-reducer";
 import {packsListReducer} from "../main/pages/Packs/packsListReducer";
 import {packsTableReducer} from "../main/pages/Packs/PacksTable/packsTableReducer";
-import {cardsNameReducer} from "../main/pages/Cards/reducer/packCardReducer";
+import {cardsNameReducer} from "../main/pages/Cards/cardsReducer";
 
 
 const reducers = combineReducers({
