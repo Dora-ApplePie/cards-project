@@ -1,9 +1,9 @@
-import {instance} from "../login-api/loginAPI";
+import {instance} from "../instance/instance";
 import {AxiosResponse} from "axios";
 
 export const authApi = {
     me() {
-        return instance.post('auth/me', {});
+        return instance.post('auth/me');
     },
     forgotPassword(data: ForgotPasswordPayloadType) {
         return instance.post<any, AxiosResponse<ResponseType>, ForgotPasswordPayloadType>(`auth/forgot`, data);

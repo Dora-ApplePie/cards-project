@@ -2,21 +2,16 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import styles from './PacksList.module.css';
 import {Navigate} from 'react-router-dom';
-import PacksTable from "../PacksTable/PacksTable";
 import {PATH} from "../../../Routes/Routes";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {fetchCardPacks} from "./packsListReducer";
+import {addPackTC, deletePackTC, fetchCardPacks, updatePackTC} from "../packsListReducer";
 import {setProfileIdAC} from "../../Profile/profileReducer";
-import {addPackTC, deletePackTC, getPacksTC, updatePackTС} from "../packsReducer";
-import {useSelector} from "react-redux";
-import {AppStoreType} from "../../../../app/store";
 import {Packs} from "../Packs";
-import {RequestStatusType} from "../../../../app/app-reducer";
-
 
 
 export const PacksList = () => {
     const dispatch = useAppDispatch();
+
 
     const isLoggedIn = useAppSelector(state => state.login.isLogin);
     const page = useAppSelector(state => state.tablePacks.page);
@@ -26,9 +21,8 @@ export const PacksList = () => {
     const commonUserId = useAppSelector(state => state.tablePacks.user_id);
     const commonMin = useAppSelector(state => state.tablePacks.min);
     const commonMax = useAppSelector(state => state.tablePacks.max);
-    const myId = useSelector<AppStoreType, string | null>(state => state.profile.profile._id)
-    const status = useSelector<AppStoreType, RequestStatusType>(state => state.app.status)
-
+    const myId = useAppSelector(state => state.profile.profile._id)
+    const status = useAppSelector(state => state.app.status)
 
 
     useEffect(() => {
@@ -41,12 +35,12 @@ export const PacksList = () => {
 
     const getAllPacks = () => {
         dispatch(setProfileIdAC(null))
-        dispatch(getPacksTC())
+        dispatch(fetchCardPacks())
     }
 
     const getOnlyMyPacks = () => {
         dispatch(setProfileIdAC(myId))
-        dispatch(getPacksTC())
+        dispatch(fetchCardPacks())
     }
 
     const addPackHandler = () => {
@@ -57,12 +51,13 @@ export const PacksList = () => {
         dispatch(deletePackTC(title))
 
     }
-    const changeName = (id:string|null) => {
-        dispatch(updatePackTС(id,'!newPackName!'))
+    const changeName = (packId: string) => {
+        dispatch(updatePackTC(packId, '!newPackName!'))
     }
 
 
     return (
+
         <div className={styles.packsContainer}>
             <Packs status={status}
                    getAllPacks={getAllPacks}
@@ -70,6 +65,8 @@ export const PacksList = () => {
                    addPackHandler={addPackHandler}
                    deletePack={deletePack}
                    changeName={changeName}/>
+
         </div>
+
     )
 };

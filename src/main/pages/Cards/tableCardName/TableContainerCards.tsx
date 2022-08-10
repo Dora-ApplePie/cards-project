@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {setSortCards} from '../../reducer/packCardReducer';
-import styles from '../tableCardName.module.css';
+import {deleteCardTC, setSortCards, updateCardTC} from '../cardsReducer';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -10,25 +9,45 @@ import TableBody from '@mui/material/TableBody';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import TableCell from '@mui/material/TableCell/TableCell';
-import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import FavoriteIcon from '@mui/icons-material/Grade';
 import FavoriteBorderIcon from '@mui/icons-material/Grade';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CreateIcon from '@mui/icons-material/Create';
-import { Rating } from '@mui/material';
+import {Rating} from '@mui/material';
+import {ModalConfirm} from "../../../common/Modal/ModalConfirm/ModalConfirm";
+import {ModalCard} from '../../../common/Modal/ModalCard/ModalCard';
 
 export const TableContainerCards = () => {
     const [question, setQuestion] = useState<'0question' | '1question'>('0question');
     const [answer, setAnswer] = useState<'0answer' | '1answer'>('0answer');
     const [updated, setUpdated] = useState<'0updated' | '1updated'>('0updated');
     const [grade, setGrade] = useState<'0grade' | '1grade'>('0grade');
+    const [activeModalDelete, setActiveModalDelete] = useState<boolean>(false)
+    const [activeModalUpdate, setActiveModalUpdate] = useState<boolean>(false)
+    const [updateQuestion, setUpdateQuestion] = useState<string>('')
+    const [updateAnswer, setUpdateAnswer] = useState<string>('')
 
 
-    const userId = useAppSelector(state => state.login._id)
+    const userId = useAppSelector(state => state.profile.myId)
     const cards = useAppSelector(state => state.cardPack.cards)
     const status = useAppSelector(state => state.app.status)
+    const cardsPack_id = useAppSelector(state => state.cardPack.cardsPack_id)
 
     const dispatch = useAppDispatch();
+
+    const confirmRemoveCard = (cardsId: string) => {
+        dispatch(deleteCardTC(cardsPack_id, cardsId))
+        closeDeleteModalForm()
+    }
+
+    const closeDeleteModalForm = () => {
+        setActiveModalDelete(false)
+    }
+
+    const closeUpdateModalForm = () => {
+        setActiveModalUpdate(false)
+    }
 
 
     const handleSortQuestion = () => {
@@ -50,6 +69,17 @@ export const TableContainerCards = () => {
         setGrade(grade === '0grade' ? '1grade' : '0grade');
         grade && dispatch(setSortCards(grade));
     }
+
+    const onChangeQuestionUpdateHandler = (value: string) => {setUpdateQuestion(value)}
+    const onChangeAnswerUpdateHandler = (value: string) => {setUpdateAnswer(value)}
+
+    const updateCard = (cardId: string, question: string, answer: string) => {
+        dispatch(updateCardTC(cardsPack_id, cardId, question, answer))
+        closeUpdateModalForm()
+        setUpdateQuestion('')
+        setUpdateAnswer('')
+    }
+
 
     return (
         <Table>
@@ -123,27 +153,50 @@ export const TableContainerCards = () => {
                                                 readOnly
                                             />
                                         </TableCell>
-                                        <TableCell align="center" >
+                                        <TableCell align="center">
                                             {userId === user_id
                                                 ? <TableRow>
-                                                    <IconButton
-                                                        disabled={status === 'loading'}
-                                                        aria-label="delete"
+                                                    <IconButton onClick={() => {
+                                                        setActiveModalDelete(true)
+                                                    }}
+                                                                disabled={status === 'loading'}
+                                                                aria-label="delete"
                                                     >
                                                         <DeleteForeverIcon/>
                                                     </IconButton>
+
+                                                    {activeModalDelete &&
+                                                    <ModalConfirm confirmHandler={confirmRemoveCard}
+                                                                  cancelHandler={closeDeleteModalForm}
+                                                                  title='Are you sure you want to delete this card?'
+                                                                  cardId={_id}
+                                                    />}
                                                     <IconButton
+                                                        onClick={() => {
+                                                            setActiveModalUpdate(true)
+                                                        }}
                                                         disabled={status === 'loading'}
                                                         aria-label="delete"
                                                     >
                                                         <CreateIcon/>
                                                     </IconButton>
+
+                                                    {activeModalUpdate && <ModalCard
+                                                        onChangeQuestion={onChangeQuestionUpdateHandler}
+                                                        onChangeAnswer={onChangeAnswerUpdateHandler}
+                                                        closeModal={closeUpdateModalForm}
+                                                        question={updateQuestion}
+                                                        answer={updateAnswer}
+                                                        addTextHandler={updateCard}
+                                                        cardId={_id}
+                                                        title='Please, update this card'/>}
                                                 </TableRow> : null}
                                         </TableCell>
                                     </TableRow>
                                 ) : (
                                     <TableRow>
-                                        <TableCell>Loading...</TableCell>
+                                        <TableCell> No Any cards yet
+                                        </TableCell>
                                     </TableRow>)}
                         </TableBody>
                     </Table>

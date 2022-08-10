@@ -1,9 +1,10 @@
 import {Dispatch} from 'redux';
-import {authApi} from "../../../api/auth-api/authAPI";
-import {profileAPI} from '../../../api/profile-api/profileAPI';
+import {authApi} from "../../../api/authApi/authAPI";
+import {profileAPI} from '../../../api/profileApi/profileAPI';
 import {isLoginAC} from "../Login/loginReducer";
 import {AxiosError} from "axios";
 import {getStatusAC, RequestStatusType, setAppErrorAC} from "../../../app/app-reducer";
+import {AppThunk} from "../../../app/store";
 
 
 const initialState: ProfileInitialStateType = {
@@ -42,6 +43,11 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
         case SET_MY_ID:
             console.log('id',action.myId)
             return {...state, myId: action.myId}
+        case SET_NEW_AVATAR: {
+            return {
+                ...state, profile: {...state.profile, avatar: action.avatar}
+            }
+        }
         default:
             return state
     }
@@ -51,6 +57,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserProfileNameAC = (name: string | null) => ({type: SET_NEW_USER_NAME, name} as const)
 export const setProfileIdAC = (myId: string | null) => ({type: SET_MY_ID, myId} as const)
+export const setUserAvatarAC = (avatar: string | null | any) => ({type: SET_NEW_AVATAR, avatar} as const)
 
 
 //thunks
@@ -75,11 +82,14 @@ export const authMeTC:any = () => (dispatch: Dispatch) => {
         })
 }
 
-export const editNameTC: any = (name: string) => (dispatch: Dispatch) => {
+export const editProfileTC:any = ():AppThunk => (dispatch, getState) => {
     dispatch(getStatusAC('loading'))
-    return profileAPI.updateProfile(name)
+    const ava = getState().profile.profile.avatar
+    const name = getState().profile.profile.name
+    return profileAPI.updateProfile(name, ava)
         .then(() => {
             dispatch(setUserProfileNameAC(name))
+            dispatch(setUserAvatarAC(name))
 
         })
         .catch((err: AxiosError<{ error: string }>) => {
@@ -110,6 +120,7 @@ export const logOutTC: any = () => (dispatch: Dispatch) => {
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_NEW_USER_NAME = 'SET_NEW_USER_NAME'
 const SET_MY_ID = 'SET_MY_ID'
+const SET_NEW_AVATAR = 'SET_NEW_AVATAR'
 
 
 export type ProfileType = {
@@ -118,8 +129,8 @@ export type ProfileType = {
     name: string | null
     avatar: string | null
     publicCardPacksCount: number | null
-    created: string | null
-    updated: string | null
+    created: Date | null
+    updated: Date | null
     isAdmin: boolean | null
     verified: boolean | null
     rememberMe: boolean | null
@@ -134,7 +145,8 @@ export type ProfileInitialStateType = {
 
 
 export type ProfileActionsType =
-    ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setUserProfileNameAC>
     | ReturnType<typeof setProfileIdAC>
+    | ReturnType<typeof setUserAvatarAC>
 

@@ -23,7 +23,7 @@ function Header() {
                     <NavLink to={PATH.SET_PASSWORD}>Set password</NavLink>
                 </li>
                 <li>
-                    <NavLink to={PATH.PACKS_LIST}>Packs</NavLink>
+                    <NavLink to={PATH.PACKS}>Packs</NavLink>
                 </li>
                 {/*<li>*/}
                 {/*    <NavLink to={PATH.SUPER_COMPONENTS}>Super Components</NavLink>*/}

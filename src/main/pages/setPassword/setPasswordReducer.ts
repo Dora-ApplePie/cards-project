@@ -1,5 +1,5 @@
 import {AppThunk} from '../../../app/store';
-import {authApi, UpdatePasswordPayloadType} from "../../../api/auth-api/authAPI";
+import {authApi, UpdatePasswordPayloadType} from "../../../api/authApi/authAPI";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 
 const initialState: SetPasswordStateType = {

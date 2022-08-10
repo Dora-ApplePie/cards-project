@@ -8,7 +8,8 @@ import SetPassword from "../pages/setPassword/SetPassword";
 import SuperComponents from "../common/SuperComponents/SuperComponents";
 import {ProfileContainer} from "../pages/Profile/ProfileContainer";
 import {PacksList} from "../pages/Packs/PacksList/PacksList";
-import {TableCardName} from "../pages/Cards/tableCardName/tableCardName";
+import {TableCardName} from "../pages/Cards/tableCardName/TableCardName";
+import { LearnPack } from '../pages/Packs/PacksTable/learnPack/LearnPack';
 
 export const PATH = {
     REGISTRATION: '/register',
@@ -18,9 +19,10 @@ export const PATH = {
     FORGOT_PASSWORD: '/forgot-password',
     SET_PASSWORD: '/set-password/:token',
     SUPER_COMPONENTS: '/super-components',
-    PACKS_LIST: '/packs-list',
     PACKS: '/packs',
-    CARDS: 'cards/:id',
+    CARDS: '/cards',
+    LEARN_PACK: 'learn-pack/:id',
+
 }
 
 function Pages() {
@@ -34,16 +36,13 @@ function Pages() {
                 <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
                 <Route path={PATH.SET_PASSWORD} element={<SetPassword/>}/>
                 <Route path={PATH.SUPER_COMPONENTS} element={<SuperComponents/>}/>
-                <Route path={PATH.PACKS_LIST} element={<PacksList/>}/>
-
-                <Route path={PATH.PACKS} element={<><Outlet/></>}>
-                    <Route index element={<Navigate to={PATH.PACKS + '/' + PATH.PACKS_LIST}/>}/>
-                    <Route path={PATH.PACKS_LIST} element={<PacksList/>}/>
-                    <Route path={PATH.CARDS} element={<TableCardName/>}/>
-                </Route>
-
+                <Route path={PATH.PACKS} element={<PacksList/>}/>
+                <Route path={PATH.CARDS + `/:id`} element={<TableCardName/>}/>
                 <Route path={PATH.PAGE404} element={<Page404/>}/>
                 <Route path={'/*'} element={<Page404/>}/>
+                <Route path={PATH.LEARN_PACK} element={<LearnPack/>}/>
+
+
 
             </Routes>
     )

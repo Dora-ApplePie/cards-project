@@ -1,6 +1,6 @@
 import {AppThunk} from '../../../app/store';
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
-import {authApi} from "../../../api/auth-api/authAPI";
+import {authApi} from "../../../api/authApi/authAPI";
 
 export type ForgotPasswordActionType = {
     email: string

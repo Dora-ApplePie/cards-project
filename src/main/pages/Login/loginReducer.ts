@@ -1,33 +1,28 @@
-import {loginApi, UserResponseType} from "../../../api/login-api/loginAPI";
-import {Dispatch} from "redux";
 import {AppThunk} from "../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 import {AxiosError} from "axios";
+import {ProfileType, setUserProfileAC} from "../Profile/profileReducer";
+import {loginApi, LoginPayloadType } from "../../../api/loginApi/loginAPI";
 
 const initialState: LoginDataUserType = {
-    _id: '',
-    email: '',
-    name: '',
-    avatar: '',
-    publicCardPacksCount: 0,
-    created: new Date(),
-    updated: new Date(),
-    isAdmin: false,
-    verified: false,
-    rememberMe: false,
-    error: '',
-    __v: 0,
-    token: '',
-    tokenDeathTime: 0,
+    _id: null,
+    email: null,
+    name: null,
+    avatar: null,
+    publicCardPacksCount: null,
+    created: null,
+    updated: null,
+    isAdmin: null,
+    verified: null,
+    rememberMe: null,
+    error: null,
     isLogin: false,
 };
 
 export type LoginStateType = typeof initialState;
 
-export const loginReducer = (state: LoginStateType = initialState, action: InitialAuthStateType): LoginStateType => {
+export const loginReducer = (state: LoginStateType = initialState, action: LoginActionType): LoginStateType => {
     switch (action.type) {
-        case 'LOGIN/SIGN_IN':
-            return {...state, ...action.data};
         case 'LOGIN/IS-LOGIN':
             return {...state, isLogin: action.payload.value};
         default: {
@@ -37,19 +32,18 @@ export const loginReducer = (state: LoginStateType = initialState, action: Initi
 };
 
 //actions
-export const signInAC = (data: UserResponseType) => ({type: 'LOGIN/SIGN_IN', data} as const);
 export const isLoginAC = (value: boolean) =>
     ({type: 'LOGIN/IS-LOGIN', payload: {value}} as const);
 
 //thunk
-export const requestLoginTC = (data: { email: string; password: string; rememberMe: boolean }): AppThunk =>
-    (dispatch: Dispatch) => {
+export const requestLoginTC = (data:LoginPayloadType): AppThunk =>
+    (dispatch) => {
         dispatch(getStatusAC('loading'));
 
         loginApi.loginRequest(data)
             .then(res => {
-                dispatch(signInAC(res.data));
-                dispatch(isLoginAC(true));
+                dispatch(isLoginAC(true))
+                dispatch(setUserProfileAC(res.data));
             })
             .catch((e: AxiosError<{ error: string }>) => {
                 const error = (e.response && e.response.data) ? e.response.data.error : e.message;
@@ -61,10 +55,8 @@ export const requestLoginTC = (data: { email: string; password: string; remember
     };
 
 //types
-type InitialAuthStateType = SignInActionType | LoginActionType
 export type LoginActionType = ReturnType<typeof isLoginAC>
-export type SignInActionType = ReturnType<typeof signInAC>
-export type LoginDataUserType = UserResponseType & {
+export type LoginDataUserType = ProfileType & {
     isLogin: boolean
 }
 

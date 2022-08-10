@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import {TextField} from "@material-ui/core";
 import {RequestStatusType} from "../../../app/app-reducer";
 import {CircularProgress} from "@mui/material";
-import {PacksContainer} from "../Packs/PacksContainer";
 
 
 type ProfilePropsType = {

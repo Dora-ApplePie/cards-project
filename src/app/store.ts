@@ -7,10 +7,10 @@ import {ForgotPasswordActionType, forgotPasswordReducer} from "../main/pages/fog
 import {ActionsForSetPasswordType, setPasswordReducer} from "../main/pages/setPassword/setPasswordReducer";
 import {RegisterActionType, registrationReducer} from "../main/pages/Registration/registrationReducer";
 import {appReducer} from "./app-reducer";
-import {packsListReducer} from "../main/pages/Packs/PacksList/packsListReducer";
+import {packsListReducer} from "../main/pages/Packs/packsListReducer";
 import {packsTableReducer} from "../main/pages/Packs/PacksTable/packsTableReducer";
-import {cardsNameReducer} from "../main/pages/Cards/reducer/packCardReducer";
-import {packsReducer} from "../main/pages/Packs/packsReducer";
+import {cardsNameReducer} from "../main/pages/Cards/cardsReducer";
+import {learnPackReducer} from "../main/pages/Packs/PacksTable/learnPack/learnPackReducer";
 
 
 const reducers = combineReducers({
@@ -24,7 +24,7 @@ const reducers = combineReducers({
     packList: packsListReducer,
     tablePacks: packsTableReducer,
     cardPack: cardsNameReducer,
-    packs: packsReducer
+    learnPack: learnPackReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunk))
