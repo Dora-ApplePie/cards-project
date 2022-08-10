@@ -93,7 +93,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 <TableCell align="center" className={styles.ButtonGroup}>
 
                     <>
-                        <Button onClick={() => {setActiveModalUpdate(true)}}
+                        <Button sx={{color:'darkgreen'}} onClick={() => {setActiveModalUpdate(true)}}
                                 disabled={user_id !== userId || status === 'loading'}>
                             <SettingsIcon/>
                         </Button>
@@ -108,7 +108,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                             title='Please, enter new pack name'
                         />}
 
-                        <Button onClick={() => {setActiveModalDelete(true)}}
+                        <Button sx={{color:'darkgreen'}} onClick={() => {setActiveModalDelete(true)}}
                                 disabled={user_id !== userId || status === 'loading'}>
                             <DeleteIcon/>
                         </Button>
@@ -121,7 +121,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
 
                     </>
 
-                    <Button type={'submit'}
+                    <Button type={'submit'} sx={{color:'darkgreen'}}
                             disabled={!cardsCount || status === 'loading'}
                             onClick={handleLearnPack}><SchoolIcon/></Button>
                 </TableCell>

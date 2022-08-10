@@ -21,7 +21,7 @@ const PacksTable = () => {
 
     const [name, setName] = useState<'0name' | '1name'>('0name');
     const [cardsCount, setCardsCount] = useState<'0cardsCount' | '1cardsCount'>('0cardsCount');
-    const [updated, setUpdated] = useState<'0updated' | '1updated'>('0updated');
+    const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
     const [userName, setUserName] = useState<'0user_name' | '1user_name'>('0user_name');
 
     const dispatch = useAppDispatch();
@@ -50,6 +50,7 @@ const PacksTable = () => {
     }
 
     const handleSortUpdated = () => {
+        console.log(updated)
         setUpdated(updated === '0updated' ? '1updated' : '0updated');
         updated && dispatch(setSortPackName(updated));
     }

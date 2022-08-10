@@ -51,8 +51,12 @@ export const TableCard = () => {
         }
     }
 
-    const onChangeTextAddHandlerFirst = (value: string) => {setQuestion(value)}
-    const onChangeTextAddHandlerSecond = (value: string) => {setAnswer(value)}
+    const onChangeTextAddHandlerFirst = (value: string) => {
+        setQuestion(value)
+    }
+    const onChangeTextAddHandlerSecond = (value: string) => {
+        setAnswer(value)
+    }
 
     const closeModal = () => setActiveModal(false)
 
@@ -61,12 +65,15 @@ export const TableCard = () => {
         <>
             <div>
                 <span className={st.Addcardbtn}>
-                    <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
-                    <ArrowBackIcon fontSize="small"/>
-                </IconButton>
+                    <>
+                        <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
+                             <ArrowBackIcon fontSize='large'/>
+                        </IconButton>
+                    </>
+                <h2>{packName}</h2>
 
                     <div>
-                        <Button onClick={() => {
+                        <Button size='large' color='success' variant="contained" onClick={() => {
                             setActiveModal(true)
                         }} disabled={myId !== packUserId || status === 'loading'}>Add card</Button>
                     </div>
@@ -84,7 +91,6 @@ export const TableCard = () => {
                 />}
 
 
-                <h2>{packName}</h2>
             </div>
             <TableContainerCards/>
             <div>

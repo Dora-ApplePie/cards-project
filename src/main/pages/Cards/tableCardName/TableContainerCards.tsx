@@ -21,7 +21,7 @@ import {ModalCard} from '../../../common/Modal/ModalCard/ModalCard';
 export const TableContainerCards = () => {
     const [question, setQuestion] = useState<'0question' | '1question'>('0question');
     const [answer, setAnswer] = useState<'0answer' | '1answer'>('0answer');
-    const [updated, setUpdated] = useState<'0updated' | '1updated'>('0updated');
+    const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
     const [grade, setGrade] = useState<'0grade' | '1grade'>('0grade');
     const [activeModalDelete, setActiveModalDelete] = useState<boolean>(false)
     const [activeModalUpdate, setActiveModalUpdate] = useState<boolean>(false)

@@ -2,14 +2,16 @@
     height: 60px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     background: ghostwhite;
     width: 100%;
     border-radius: 10px;
 }
 
+
 .header__list {
     display: contents;
+
 }
 
 ul {
@@ -22,6 +24,7 @@ ul {
     flex-direction: row;
     justify-content: space-around;
     height: 60px;
+    padding-left: 20px;
     color: #1c1c1e;
     text-decoration: none;
     transition: all .5s ease;
