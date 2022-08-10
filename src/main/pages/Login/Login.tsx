@@ -99,7 +99,7 @@ const Login = () => {
                                 Login
                             </Button>
                             <NavLink className={s.forgotPassword} to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>
-                            <div className={s.forgotPassword}>Don't have an account?</div>
+                            <div style={{color: "grey"}} className={s.forgotPassword}>Don't have an account?</div>
                             <NavLink className={s.forgotPassword} to={PATH.REGISTRATION} onClick={handleClick}>Sign Up</NavLink>
                         </FormGroup>
                     </FormControl>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {PackType} from '../../main/pages/Packs/packsReducer';
-import {instance} from "../login-api/loginAPI";
+import {instance} from "../instance/instance";
 
 
 export const packsAPI = {

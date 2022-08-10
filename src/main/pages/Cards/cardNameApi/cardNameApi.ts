@@ -1,5 +1,6 @@
 import {AxiosResponse} from 'axios';
-import {instance} from "../../../../api/login-api/loginAPI";
+import {instance} from "../../../../api/instance/instance";
+
 
 
 export const cardNameAPI = {

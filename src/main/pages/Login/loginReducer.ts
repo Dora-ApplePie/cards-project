@@ -1,4 +1,4 @@
-import {loginApi, UserResponseType} from "../../../api/login-api/loginAPI";
+import {loginApi, UserResponseType} from "../../../api/loginApi/loginAPI";
 import {Dispatch} from "redux";
 import {AppThunk} from "../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";

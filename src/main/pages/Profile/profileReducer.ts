@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
-import {authApi} from "../../../api/auth-api/authAPI";
-import {profileAPI} from '../../../api/profile-api/profileAPI';
+import {authApi} from "../../../api/authApi/authAPI";
+import {profileAPI} from '../../../api/profileApi/profileAPI';
 import {isLoginAC} from "../Login/loginReducer";
 import {AxiosError} from "axios";
 import {getStatusAC, RequestStatusType, setAppErrorAC} from "../../../app/app-reducer";

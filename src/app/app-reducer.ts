@@ -1,10 +1,10 @@
 import {AppThunk} from "./store";
 import {Dispatch} from "redux";
-import {authApi} from "../api/auth-api/authAPI";
+import {authApi} from "../api/authApi/authAPI";
 import {isLoginAC, signInAC} from "../main/pages/Login/loginReducer";
 import {authMeTC, setProfileIdAC} from "../main/pages/Profile/profileReducer";
 
-export type RequestStatusType = 'loading' | 'succeeded'| 'idle';
+export type RequestStatusType = 'loading' | 'succeeded'| 'idle' | 'failed';
 
 export type InitialStateType = {
     initialized: boolean;

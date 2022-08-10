@@ -1,5 +1,5 @@
 import axios, {AxiosError} from 'axios';
-import {cardNameAPI, CardsTypeResponseType, CardType,} from '../cardName-api/cardName-api';
+import {cardNameAPI, CardsTypeResponseType, CardType,} from '../cardNameApi/cardNameApi';
 import {AppStoreType, AppThunk} from "../../../../app/store";
 import {Dispatch} from "redux";
 import {getStatusAC, setAppErrorAC} from "../../../../app/app-reducer";
@@ -44,7 +44,6 @@ export const cardsNameReducer = (state: CardsNameStateType = initialState, actio
             return state;
     }
 };
-
 
 
 export const setUserCardId = (userId: string) => ({
