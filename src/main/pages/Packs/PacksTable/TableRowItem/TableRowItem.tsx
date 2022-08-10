@@ -38,7 +38,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const {_id, user_id, name, cardsCount, updated, user_name, status} = props;
 
 
-    const userId = useAppSelector(state => state.profile.myId);
+    const userId = useAppSelector(state => state.profile.profile._id);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
