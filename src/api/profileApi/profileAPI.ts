@@ -1,4 +1,4 @@
-import {instance} from "../login-api/loginAPI";
+import {instance} from "../instance/instance";
 
 export const profileAPI = {
 

@@ -48,7 +48,11 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const handleSendPackId = () => {
         dispatch(setUserCardId(_id));
         dispatch(setUserCardName(name));
-        navigate(PATH.CARDS + `/${_id}`);
+        navigate(`/packs/cards/${_id}`);
+    };
+
+    const handleLearnPack = () => {
+        navigate(`/packs/learn-pack/${_id}`);
     };
 
     const confirmRemovePack = (packId: string) => {
@@ -127,6 +131,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                     </>
 
                     <Button color="secondary" type={'submit'} variant="outlined"
+                            disabled={!cardsCount || status === 'loading'} onClick={handleLearnPack}>Learn</Button>
                             disabled={!cardsCount || status === 'loading'}><SchoolIcon/></Button>
                 </TableCell>
             </TableRow>

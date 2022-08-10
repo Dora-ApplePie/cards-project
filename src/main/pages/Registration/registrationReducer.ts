@@ -1,42 +1,58 @@
 import {AppThunk} from "../../../app/store";
 import {AxiosError} from "axios";
 import {Dispatch} from "redux";
-import {registrationApi} from "../../../api/register-api/registrationAPI";
+import {registrationApi} from "../../../api/registerApi/registrationAPI";
+import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 
-const initialState = {}
+const initialState: RegistrationStateType = {
+    message: null,
+};
 
-export const registrationReducer = (state: InitialRegistrationStateType = initialState, action: RegisterActionType): InitialRegistrationStateType => {
+export const registrationReducer = (state: RegistrationStateType = initialState, action: RegisterActionType): RegistrationStateType => {
     switch (action.type) {
-        case "REGISTRATION":
-            return {...state};
-
+        case 'REGISTRATION/SET-MESSAGE':
+            return {...state, message: action.message};
         default:
             return state;
     }
 };
 
 //actions
-export const RegistrationAC = (data:{email: string, password: string}) => ({type: 'REGISTRATION', data} as const)
+export const setRegisterMessageAC = (message: string | null) => ({type: 'REGISTRATION/SET-MESSAGE', message} as const);
 
 //thunk
 export const registrationTC = (data: { email: string; password: string }): AppThunk =>
     (dispatch: Dispatch) => {
-        //dispatch(getStatusAC('loading'));
-
+        dispatch(getStatusAC('loading'));
         registrationApi.registrationRequest(data)
-            .then(res => {
-                dispatch(RegistrationAC(res.data));
+            .then((res) => {
+                if (res.data.addedUser) {
+                    dispatch(setRegisterMessageAC('You have successfully registered'));
+                } else if (res.data.error) {
+                    dispatch(setAppErrorAC(res.data.error));
+                } else {
+                    dispatch(setRegisterMessageAC('Some error occurred'));
+                }
             })
-            .catch((e: AxiosError<{ error: string }>) => {
-                const error = (e.response && e.response.data) ? e.response.data.error : e.message;
-                //dispatch(setAppErrorAC(error));
+            .catch((error: AxiosError<{ error: string }>) => {
+                if (error.response) {
+                    if (error.response.data === undefined) {
+                        dispatch(setAppErrorAC(error.message));
+                        dispatch(getStatusAC('failed'));
+                    } else {
+                        dispatch(setAppErrorAC(error.response.data.error));
+                        dispatch(getStatusAC('failed'));
+                    }
+                }
             })
             .finally(() => {
-                //dispatch(getStatusAC('succeeded'));
-            })
+                dispatch(getStatusAC('idle'));
+            });
     };
 
 //types
-type InitialRegistrationStateType = {}
-export type RegisterActionType = ReturnType<typeof RegistrationAC>
+export type RegistrationStateType = {
+    message: string | null
+}
+export type RegisterActionType = ReturnType<typeof setRegisterMessageAC>
 
