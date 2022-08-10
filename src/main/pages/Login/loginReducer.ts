@@ -53,7 +53,8 @@ export const requestLoginTC = (data: { email: string; password: string; remember
             })
             .catch((e: AxiosError<{ error: string }>) => {
                 const error = (e.response && e.response.data) ? e.response.data.error : e.message;
-                dispatch(setAppErrorAC(error));
+                console.log(error)
+                // dispatch(setAppErrorAC(error));
             })
             .finally(() => {
                 dispatch(getStatusAC('succeeded'));
