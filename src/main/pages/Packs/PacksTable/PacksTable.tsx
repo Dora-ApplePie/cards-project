@@ -12,6 +12,7 @@ import TableCell from "@mui/material/TableCell";
 import {TableRowItem} from "./TableRowItem/TableRowItem";
 import {setCardsPageCount, setPage, setSortPackName} from "./packsTableReducer";
 import {PaginationComponent} from "../Pagination/PaginationComponent";
+import { Search } from '../../../common/Search/Search';
 
 
 const PacksTable = () => {
@@ -61,6 +62,9 @@ const PacksTable = () => {
 
     return (
         <Paper elevation={3}>
+            <div>
+               <Search/>
+            </div>
             <TableContainer>
                 <Table>
                     <TableHead>

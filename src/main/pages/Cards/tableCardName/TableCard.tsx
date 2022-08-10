@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import {useState} from "react";
 import {ModalCard} from "../../../common/Modal/ModalCard/ModalCard";
 import st from './../../Packs/Packs.module.css'
+import {shorter} from "../../../utils/shorter";
 
 export const TableCard = () => {
     const dispatch = useAppDispatch();
@@ -84,7 +85,7 @@ export const TableCard = () => {
                 />}
 
 
-                <h2>{packName}</h2>
+                <h2>{shorter(packName, 50)}</h2>
             </div>
             <TableContainerCards/>
             <div>

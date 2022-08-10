@@ -17,6 +17,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import {Rating} from '@mui/material';
 import {ModalConfirm} from "../../../common/Modal/ModalConfirm/ModalConfirm";
 import {ModalCard} from '../../../common/Modal/ModalCard/ModalCard';
+import {shorter} from "../../../utils/shorter";
 
 export const TableContainerCards = () => {
     const [question, setQuestion] = useState<'0question' | '1question'>('0question');
@@ -135,10 +136,10 @@ export const TableContainerCards = () => {
                                     <TableRow key={_id}>
                                         <TableCell component="th" scope="row">
                                         <span style={{display: 'inline-block', flex: '1 1 auto'}}>
-                                            {question}
+                                             {shorter(question, 50)}
                                         </span>
                                         </TableCell>
-                                        <TableCell align="justify">{answer}</TableCell>
+                                        <TableCell align="justify">{shorter(answer, 100)}</TableCell>
                                         <TableCell align="justify">
                                             {new Date(updated).toLocaleDateString()}
                                         </TableCell>

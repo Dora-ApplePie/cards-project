@@ -18,6 +18,8 @@ export const packsTableReducer = (state: TablePacksType = initialState, action: 
             return {...state, pageCount: action.pageCount};
         case 'TABLE-PACKS/SET-SORT-PACK-NAME':
             return {...state, sortPacks: action.sortPackName};
+      case 'TABLE-PACKS/SET-SEARCH-PACK-NAME':
+          return {...state, packName: action.searchPackName};
         default:
             return state;
     }
@@ -38,11 +40,17 @@ export const setSortPackName = (sortPackName: string) => ({
     sortPackName,
 } as const);
 
+export const setSearchPackName = (searchPackName: string) => ({
+    type: 'TABLE-PACKS/SET-SEARCH-PACK-NAME',
+    searchPackName,
+} as const);
+
 
 export type TablePacksActionsType =
     | ReturnType<typeof setPage>
     | ReturnType<typeof setCardsPageCount>
     | ReturnType<typeof setSortPackName>
+    | ReturnType<typeof setSearchPackName>
 
 export type TablePacksType = {
     packName: string
