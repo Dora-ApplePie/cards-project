@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navigate, Outlet, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Registration from "../pages/Registration/Registration";
 import Page404 from "../pages/Page_404/Page404";
 import ForgotPassword from "../pages/fogotPassword/ForgotPassword";
@@ -37,6 +37,7 @@ function Pages() {
                 <Route path={PATH.SET_PASSWORD} element={<SetPassword/>}/>
                 <Route path={PATH.SUPER_COMPONENTS} element={<SuperComponents/>}/>
                 <Route path={PATH.PACKS} element={<PacksList/>}/>
+                <Route path={PATH.CARDS} element={<Navigate to={PATH.PACKS}/>}/>
                 <Route path={PATH.CARDS + `/:id`} element={<TableCardName/>}/>
                 <Route path={PATH.PAGE404} element={<Page404/>}/>
                 <Route path={'/*'} element={<Page404/>}/>

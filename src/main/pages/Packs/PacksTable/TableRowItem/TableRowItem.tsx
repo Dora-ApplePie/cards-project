@@ -12,11 +12,10 @@ import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
 import {deletePackTC, updatePackTC} from "../../packsListReducer";
-import { ModalBase } from '../../../../common/Modal/ModalBase';
+import {ModalBase} from '../../../../common/Modal/ModalBase';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SchoolIcon from '@mui/icons-material/School';
-
 
 
 type TableRowPackType = {
@@ -36,10 +35,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const [value, setValue] = useState<string>('')
 
     const {_id, user_id, name, cardsCount, updated, user_name, status} = props;
-
-
-    const userId = useAppSelector(state => state.profile.myId);
-
+    const userId = useAppSelector(state => state.profile.profile._id);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -50,9 +46,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
         navigate(`/cards/${_id}`);
     };
 
-    const handleLearnPack = () => {
-        navigate(`/learn-pack/${_id}`);
-    };
+    const handleLearnPack = () => navigate(`/learn-pack/${_id}`)
 
     const confirmRemovePack = (packId: string) => {
         console.log('packId', packId)
@@ -60,18 +54,10 @@ export const TableRowItem = memo((props: TableRowPackType) => {
         closeDeleteModalForm()
     }
 
-    const closeDeleteModalForm = () => {
-        setActiveModalDelete(false)
-    }
+    const closeDeleteModalForm = () => setActiveModalDelete(false)
+    const closeUpdateModalForm = () => setActiveModalUpdate(false)
+    const onChangeTextUpdateHandler = (value: string) => setValue(value)
 
-    const closeUpdateModalForm = () => {
-        setActiveModalUpdate(false)
-
-    }
-
-    const onChangeTextUpdateHandler = (value: string) => {
-        setValue(value)
-    }
     const closeUpdateModal = () => {
         closeUpdateModalForm()
         setValue('')
@@ -107,7 +93,10 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 <TableCell align="center" className={styles.ButtonGroup}>
 
                     <>
-                        <Button onClick={() => {setActiveModalUpdate(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<SettingsIcon />}/>
+                        <Button onClick={() => {setActiveModalUpdate(true)}}
+                                disabled={user_id !== userId || status === 'loading'}>
+                            <SettingsIcon/>
+                        </Button>
 
                         {activeModalUpdate && <ModalBase
                             packId={_id}
@@ -119,18 +108,22 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                             title='Please, enter new pack name'
                         />}
 
-                        <Button onClick={() => {setActiveModalDelete(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<DeleteIcon/>}/>
+                        <Button onClick={() => {setActiveModalDelete(true)}}
+                                disabled={user_id !== userId || status === 'loading'}>
+                            <DeleteIcon/>
+                        </Button>
 
                         {activeModalDelete && <ModalConfirm
                             packID={_id}
                             confirmHandler={confirmRemovePack}
                             cancelHandler={closeDeleteModalForm}
-                            title='Are you sure you want to delete this pack?'/>
-                        }
+                            title='Are you sure you want to delete this pack?'/>}
+
                     </>
 
-                    <Button color="secondary" type={'submit'} variant="outlined"
-                            disabled={!cardsCount || status === 'loading'} onClick={handleLearnPack}><SchoolIcon/></Button>
+                    <Button type={'submit'}
+                            disabled={!cardsCount || status === 'loading'}
+                            onClick={handleLearnPack}><SchoolIcon/></Button>
                 </TableCell>
             </TableRow>
         </>
