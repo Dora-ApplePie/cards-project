@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navigate, Outlet, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Registration from "../pages/Registration/Registration";
 import Page404 from "../pages/Page_404/Page404";
 import ForgotPassword from "../pages/fogotPassword/ForgotPassword";
