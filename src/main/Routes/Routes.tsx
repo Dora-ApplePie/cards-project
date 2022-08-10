@@ -9,6 +9,7 @@ import SuperComponents from "../common/SuperComponents/SuperComponents";
 import {ProfileContainer} from "../pages/Profile/ProfileContainer";
 import {PacksList} from "../pages/Packs/PacksList/PacksList";
 import {TableCardName} from "../pages/Cards/tableCardName/TableCardName";
+import { LearnPack } from '../pages/Packs/PacksTable/learnPack/LearnPack';
 
 export const PATH = {
     REGISTRATION: '/register',
@@ -20,6 +21,8 @@ export const PATH = {
     SUPER_COMPONENTS: '/super-components',
     PACKS: '/packs',
     CARDS: '/cards',
+    LEARN_PACK: 'learn-pack/:id',
+
 }
 
 function Pages() {
@@ -37,6 +40,9 @@ function Pages() {
                 <Route path={PATH.CARDS + `/:id`} element={<TableCardName/>}/>
                 <Route path={PATH.PAGE404} element={<Page404/>}/>
                 <Route path={'/*'} element={<Page404/>}/>
+                <Route path={PATH.LEARN_PACK} element={<LearnPack/>}/>
+
+
 
             </Routes>
     )

@@ -10,6 +10,7 @@ import {appReducer} from "./app-reducer";
 import {packsListReducer} from "../main/pages/Packs/packsListReducer";
 import {packsTableReducer} from "../main/pages/Packs/PacksTable/packsTableReducer";
 import {cardsNameReducer} from "../main/pages/Cards/cardsReducer";
+import {learnPackReducer} from "../main/pages/Packs/PacksTable/learnPack/learnPackReducer";
 
 
 const reducers = combineReducers({
@@ -23,6 +24,7 @@ const reducers = combineReducers({
     packList: packsListReducer,
     tablePacks: packsTableReducer,
     cardPack: cardsNameReducer,
+    learnPack: learnPackReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunk))

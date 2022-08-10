@@ -2,7 +2,7 @@ import {AppThunk} from "./store";
 import {Dispatch} from "redux";
 import {authMeTC, setProfileIdAC} from "../main/pages/Profile/profileReducer";
 
-export type RequestStatusType = 'loading' | 'succeeded'| 'idle';
+export type RequestStatusType = 'loading' | 'succeeded'| 'idle'| 'failed'
 
 export type InitialStateType = {
     initialized: boolean;

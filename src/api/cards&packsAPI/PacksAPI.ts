@@ -1,5 +1,5 @@
-import {instance} from "../login-api/loginAPI";
 import {AxiosResponse} from "axios";
+import { instance } from "../instance/instance";
 
 
 export const packsAPI = {

@@ -39,7 +39,7 @@ export const LearnPack = () => {
     }
 
     const handleCancel = () => {
-        navigate(`/packs-list`);
+        navigate(`/packs`);
     }
 
     const handleNext = () => {

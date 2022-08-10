@@ -1,8 +1,8 @@
-import {loginApi, LoginPayloadType} from "../../../api/login-api/loginAPI";
 import {AppThunk} from "../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 import {AxiosError} from "axios";
 import {ProfileType, setUserProfileAC} from "../Profile/profileReducer";
+import {loginApi, LoginPayloadType } from "../../../api/loginApi/loginAPI";
 
 const initialState: LoginDataUserType = {
     _id: null,

@@ -7,7 +7,6 @@ import TableCell from "@mui/material/TableCell";
 import Button from "@mui/material/Button";
 import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {IconButton} from "@mui/material";
-import {PATH} from "../../../../Routes/Routes";
 import {setUserCardId, setUserCardName} from "../../../Cards/cardsReducer";
 import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
@@ -48,11 +47,11 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const handleSendPackId = () => {
         dispatch(setUserCardId(_id));
         dispatch(setUserCardName(name));
-        navigate(`/packs/cards/${_id}`);
+        navigate(`/cards/${_id}`);
     };
 
     const handleLearnPack = () => {
-        navigate(`/packs/learn-pack/${_id}`);
+        navigate(`/learn-pack/${_id}`);
     };
 
     const confirmRemovePack = (packId: string) => {
@@ -131,8 +130,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                     </>
 
                     <Button color="secondary" type={'submit'} variant="outlined"
-                            disabled={!cardsCount || status === 'loading'} onClick={handleLearnPack}>Learn</Button>
-                            disabled={!cardsCount || status === 'loading'}><SchoolIcon/></Button>
+                            disabled={!cardsCount || status === 'loading'} onClick={handleLearnPack}><SchoolIcon/></Button>
                 </TableCell>
             </TableRow>
         </>

@@ -1,5 +1,5 @@
 import {AxiosResponse} from 'axios';
-import { instance } from '../login-api/loginAPI';
+import { instance } from '../instance/instance';
 
 type newCardType = {
 	cardsPack_id: string,
