@@ -83,7 +83,7 @@ export const TableContainerCards = () => {
 
     return (
         <Table>
-            <Paper elevation={3}>
+            <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
                 <TableContainer>
                     <Table>
                         <TableHead>

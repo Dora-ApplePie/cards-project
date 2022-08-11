@@ -25,7 +25,7 @@ const PacksTable = () => {
     const [userName, setUserName] = useState<'0user_name' | '1user_name'>('0user_name');
 
     const dispatch = useAppDispatch();
-    
+
     const totalCardsCount = useAppSelector(state => state.packList.cardPacksTotalCount);
     const pageCount = useAppSelector(state => state.tablePacks.pageCount);
     const page = useAppSelector(state => state.tablePacks.page);
@@ -61,9 +61,10 @@ const PacksTable = () => {
     }
 
     return (
-        <Paper elevation={3}>
-            <TableContainer>
-                <Table>
+        <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
+            <TableContainer >
+
+                <Table >
                     <TableHead>
                         <TableRow sx={{display: 'grid', gridTemplateColumns: '21% 15% 19% 17% 28%'}}>
                             <TableCell>
