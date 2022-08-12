@@ -84,7 +84,6 @@ export const TableCard = () => {
                                            packId={cardsPackId}
                 />}
 
-
                 <h2>{shorter(packName, 50)}</h2>
             </div>
             <TableContainerCards/>

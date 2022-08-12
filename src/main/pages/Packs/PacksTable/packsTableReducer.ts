@@ -20,6 +20,10 @@ export const packsTableReducer = (state: TablePacksType = initialState, action: 
             return {...state, sortPacks: action.sortPackName};
       case 'TABLE-PACKS/SET-SEARCH-PACK-NAME':
           return {...state, packName: action.searchPackName};
+      case 'TABLE-PACKS/SET-MIN-NUMBER-CARDS':
+          return {...state, min: action.min};
+      case 'TABLE-PACKS/SET-MAX-NUMBER-CARDS':
+          return {...state, max: action.max};
         default:
             return state;
     }
@@ -45,12 +49,24 @@ export const setSearchPackName = (searchPackName: string) => ({
     searchPackName,
 } as const);
 
+export const setMinNumberCards = (min: number) => ({
+    type: 'TABLE-PACKS/SET-MIN-NUMBER-CARDS',
+    min,
+} as const);
+
+export const setMaxNumberCards = (max: number) => ({
+    type: 'TABLE-PACKS/SET-MAX-NUMBER-CARDS',
+    max,
+} as const);
+
 
 export type TablePacksActionsType =
     | ReturnType<typeof setPage>
     | ReturnType<typeof setCardsPageCount>
     | ReturnType<typeof setSortPackName>
     | ReturnType<typeof setSearchPackName>
+    | ReturnType<typeof setMinNumberCards>
+    | ReturnType<typeof setMaxNumberCards>
 
 export type TablePacksType = {
     packName: string

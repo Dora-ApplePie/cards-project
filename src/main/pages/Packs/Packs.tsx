@@ -4,6 +4,7 @@ import {RequestStatusType} from '../../../app/app-reducer';
 import PacksTable from "./PacksTable/PacksTable";
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import s from './Packs.module.css'
+import {CardSlider} from "../../common/CardSlider/CardSlider";
 
 type PacksPropsType = {
     status: RequestStatusType
@@ -20,8 +21,8 @@ export const Packs = (props: PacksPropsType) => {
         <div>
             <span className={s.Addbtn}>
                 <div>
-                    <Button onClick={props.getAllPacks}>All packs</Button>
-                    <Button onClick={props.getOnlyMyPacks}>My packs</Button>
+                    <Button color={"secondary"} variant="outlined" onClick={props.getAllPacks}>All packs</Button>
+                    <Button color={"secondary"} variant="outlined" onClick={props.getOnlyMyPacks}>My packs</Button>
                 </div>
                 <div>
                     <Button startIcon={<LibraryAddIcon/>}
@@ -31,6 +32,7 @@ export const Packs = (props: PacksPropsType) => {
                     </Button>
                 </div>
             </span>
+            <CardSlider/>
             <PacksTable/>
         </div>
     )
