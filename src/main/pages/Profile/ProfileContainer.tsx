@@ -1,16 +1,15 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import {editProfileTC, logOutTC, ProfileType} from "./profileReducer";
 import {Navigate} from 'react-router-dom';
 import {PATH} from "../../Routes/Routes";
-import {useDispatch} from 'react-redux';
 import { RequestStatusType } from '../../../app/app-reducer';
 import Profile from './Profile';
-import {useAppSelector} from "../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 
 
 export const ProfileContainer = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const isLogin = useAppSelector<boolean>(state => state.login.isLogin)
     const profile = useAppSelector<ProfileType>(state => state.profile.profile)
     const status = useAppSelector<RequestStatusType>(state => state.profile.status)

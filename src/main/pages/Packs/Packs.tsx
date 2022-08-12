@@ -39,21 +39,26 @@ export const Packs = (props: PacksPropsType) => {
     const onChangeTextHandler = (value: string) => setPackName(value)
 
 
-
     return (
         <div>
             <span className={s.Addbtn}>
-                <Stack direction='row' spacing={2}>
+                <div>
+                    <Stack direction='row' spacing={2}>
                     <Button color='success' variant="contained" onClick={props.getAllPacks}>All packs</Button>
                     <Button color='success' variant="contained" onClick={props.getOnlyMyPacks}>My packs</Button>
                 </Stack>
+                </div>
+                    <CardSlider/>
                 <div>
                     <Button color='success' variant="contained" startIcon={<LibraryAddIcon/>}
-                            onClick={()=>{setActiveModal(true)}}
+                            onClick={() => {
+                                setActiveModal(true)
+                            }}
                             disabled={props.status === 'loading'}>
                         Add pack
                     </Button>
                 </div>
+
 
                 {activeModal && <ModalChangeData
                     packId={packId}
@@ -64,8 +69,9 @@ export const Packs = (props: PacksPropsType) => {
                     isAddingForm={true}
                     title='Please, enter the name of the pack'/>}
             </span>
-            <CardSlider/>
             <PacksTable/>
+
+
         </div>
     )
 }

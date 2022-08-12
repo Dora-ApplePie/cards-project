@@ -24,9 +24,9 @@ export const CardSlider = () => {
     }
 
     return (
-        <div>
+        <div className={styles.slider}>
 
-            <h3>Number of cards</h3>
+            <div>Number of cards</div>
             <div>
                 <Slider
                     getAriaLabel={() => 'Temperature range'}

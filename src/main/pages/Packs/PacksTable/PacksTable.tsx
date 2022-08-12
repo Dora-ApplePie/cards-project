@@ -44,7 +44,6 @@ const PacksTable = () => {
     const totalCardsCount = useAppSelector(state => state.packList.cardPacksTotalCount);
     const pageCount = useAppSelector(state => state.tablePacks.pageCount);
     const page = useAppSelector(state => state.tablePacks.page);
-    const myId = useAppSelector(state => state.profile.myId);
 
     //pagination
     const handleChangePage = (page: number) => {
@@ -76,7 +75,7 @@ const PacksTable = () => {
     }
     return (
         <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
-            <div>
+            <div className={styles.search}>
                <Search value={value} callback={handleChangeValue}/>
             </div>
             <TableContainer>

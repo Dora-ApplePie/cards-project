@@ -25,6 +25,8 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
     let [name, setName] = useState(profile.name)
 
     const activateEditMode = () => {
+        {console.log(profile.avatar)}
+
         setEditMode(true)
         setName(profile.name)
     }
@@ -45,10 +47,15 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
     return (
         <div className={s.profileBox}>
             {status === 'loading' &&  <CircularProgress/>}
-            <Stack direction="row" spacing={5}>
-                <Button color="secondary" onClick={logOutHandler} endIcon={<LogoutIcon />}>Log Out</Button>
-                <Button color="secondary" onClick={activateEditMode} disabled={editMode} endIcon={<EditSharpIcon />}> Edit </Button>
+            <div>
+                <Stack direction="row" spacing={5}>
+                <Button color="secondary" onClick={logOutHandler} endIcon={<LogoutIcon/>}>Log Out</Button>
+                <Button color="secondary"
+                        onClick={activateEditMode}
+                        disabled={editMode}
+                        endIcon={<EditSharpIcon/>}> Edit </Button>
             </Stack>
+            </div>
 
             <div>
                 <div className={s.avatarBox}>
