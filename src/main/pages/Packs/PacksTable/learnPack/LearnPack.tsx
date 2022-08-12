@@ -77,7 +77,6 @@ export const LearnPack = () => {
     return (
 
         <div className={styles.wrapper}>
-            <Paper style={{padding: "30px"}}>
                 {status === 'loading'
                     ? (
                         <Typography mt={1} variant="h4" sx={{textAlign: 'center'}}>Loading...</Typography>
@@ -119,7 +118,6 @@ export const LearnPack = () => {
                                 )}
                         </>
                     )}
-            </Paper>
         </div>
     )
 };

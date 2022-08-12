@@ -42,11 +42,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
         }
         case SET_MY_ID:
             return {...state, myId: action.myId}
-        case SET_NEW_AVATAR: {
-            return {
-                ...state, profile: {...state.profile, avatar: action.avatar}
-            }
-        }
+
         default:
             return state
     }
@@ -56,11 +52,10 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserProfileNameAC = (name: string | null) => ({type: SET_NEW_USER_NAME, name} as const)
 export const setProfileIdAC = (myId: string | null) => ({type: SET_MY_ID, myId} as const)
-export const setUserAvatarAC = (avatar: string | null | any) => ({type: SET_NEW_AVATAR, avatar} as const)
 
 
 //thunks
-export const authMeTC: any = () => (dispatch: Dispatch) => {
+export const authMeTC:any = (): AppThunk  => (dispatch) => {
     dispatch(getStatusAC('loading'))
 
     return authApi.me()
@@ -81,9 +76,9 @@ export const authMeTC: any = () => (dispatch: Dispatch) => {
         })
 }
 
-export const editProfileTC: any = (name:string, ava: string): AppThunk => (dispatch, getState) => {
+export const editProfileTC: any = (name:string): AppThunk => (dispatch, getState) => {
     dispatch(getStatusAC('loading'))
-    return profileAPI.updateProfile(name, ava)
+    return profileAPI.updateProfile(name)
         .then(() => {
             dispatch(setUserProfileNameAC(name))
 
@@ -116,7 +111,6 @@ export const logOutTC: any = () => (dispatch: Dispatch) => {
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_NEW_USER_NAME = 'SET_NEW_USER_NAME'
 const SET_MY_ID = 'SET_MY_ID'
-const SET_NEW_AVATAR = 'SET_NEW_AVATAR'
 
 
 export type ProfileType = {
@@ -144,5 +138,4 @@ export type ProfileActionsType =
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setUserProfileNameAC>
     | ReturnType<typeof setProfileIdAC>
-    | ReturnType<typeof setUserAvatarAC>
 

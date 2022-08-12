@@ -25,8 +25,6 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
     let [name, setName] = useState(profile.name)
 
     const activateEditMode = () => {
-        {console.log(profile.avatar)}
-
         setEditMode(true)
         setName(profile.name)
     }
