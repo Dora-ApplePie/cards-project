@@ -101,7 +101,7 @@ export const TableCard = () => {
                                            packId={cardsPackId}
                 />}
 
-                <h2>{shorter(packName, 50)}</h2>
+                {/*<h2>{shorter(packName, 50)}</h2>*/}
             </div>
             <Search value={value} callback={changeValueHandler}/>
             <TableContainerCards/>

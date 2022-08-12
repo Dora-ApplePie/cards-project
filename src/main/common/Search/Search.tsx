@@ -17,7 +17,7 @@ export const Search = (props: TableRowPackType) => {
   return (
       <TextField
           fullWidth
-          sx={{backgroundColor: 'rgba(234,219,255,0.68)'}}
+          sx={{backgroundColor: 'rgba(234,255,255,0.68)', border: 'none', width: '300px', margin:'10px'}}
           size="small"
           placeholder="Search"
           disabled={status === 'loading'}

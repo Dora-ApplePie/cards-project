@@ -3,6 +3,7 @@ import Slider from '@mui/material/Slider';
 import styles from './CardSlider.module.css';
 import {useAppDispatch, useAppSelector} from '../../../app/hooks';
 import {setMaxNumberCards, setMinNumberCards} from "../../pages/Packs/PacksTable/packsTableReducer";
+import {Stack} from '@mui/material';
 
 
 export const CardSlider = () => {
@@ -26,19 +27,59 @@ export const CardSlider = () => {
     return (
         <div className={styles.slider}>
 
-            <div>Number of cards</div>
-            <div>
-                <Slider
-                    getAriaLabel={() => 'Temperature range'}
-                    value={value}
-                    onChange={handleSliderChange}
-                    valueLabelDisplay="auto"
-                    color={"secondary"}
-                    max={110}
-                    disabled={status === 'loading'}
-                    onChangeCommitted={handleClick}
-                />
-            </div>
+            <div style={{textAlign: "center"}}>Number of cards</div>
+            <span>
+                <Stack direction='row' spacing={2}>
+                <span>{value[0]}</span>
+                    <Slider
+                        sx={{  color: '#52af77',
+                            height: 8,
+                            '& .MuiSlider-track': {
+                                border: 'none',
+                            },
+                            '& .MuiSlider-thumb': {
+                                height: 24,
+                                width: 24,
+                                backgroundColor: '#fff',
+                                border: '2px solid currentColor',
+                                '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+                                    boxShadow: 'inherit',
+                                },
+                                '&:before': {
+                                    display: 'none',
+                                },
+                            },
+                            '& .MuiSlider-valueLabel': {
+                                lineHeight: 1.2,
+                                fontSize: 12,
+                                background: 'unset',
+                                padding: 0,
+                                width: 32,
+                                height: 32,
+                                borderRadius: '50% 50% 50% 0',
+                                backgroundColor: '#52af77',
+                                transformOrigin: 'bottom left',
+                                transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
+                                '&:before': { display: 'none' },
+                                '&.MuiSlider-valueLabelOpen': {
+                                    transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+                                },
+                                '& > *': {
+                                    transform: 'rotate(45deg)',
+                                },
+                            }}}
+                        getAriaLabel={() => 'Temperature range'}
+                        value={value}
+                        onChange={handleSliderChange}
+                        valueLabelDisplay="auto"
+                        max={110}
+                        disabled={status === 'loading'}
+                        onChangeCommitted={handleClick}
+                    />
+                <span>{value[1]}</span>
+                </Stack>
+            </span>
+
         </div>
     )
 }
