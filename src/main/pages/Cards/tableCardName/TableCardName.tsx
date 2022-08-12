@@ -21,6 +21,7 @@ export const TableCardName = () => {
 	const maxCards = useAppSelector(state => state.cardPack.max);
 
 	useEffect(() => {
+		console.log('cpid', cardsPack_id)
 		if (cardsPack_id) {
 			dispatch(fetchCardsTC());
 		}
@@ -31,7 +32,7 @@ export const TableCardName = () => {
 	}
 
 	if (!cardsPack_id) {
-		return <Navigate to={PATH.CARDS}/>
+		return <Navigate to={PATH.PACKS}/>
 	}
 
 	return (

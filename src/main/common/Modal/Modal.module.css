@@ -1,5 +1,4 @@
 .wrapper {
-  font-family: "Jost", sans-serif;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -13,18 +12,6 @@
   padding: 10px;
 }
 
-/*.modal {*/
-/*  max-width: 22vw;*/
-/*  min-width: 320px;*/
-/*  height: auto;*/
-/*  border-radius: 10px;*/
-/*  padding: 20px*/
-/*}*/
-/*.title {*/
-/*  font-size: 24px;*/
-/*  color: white;*/
-/*}*/
-
 .input {
   width: auto;
   height: 35px;
@@ -32,20 +19,13 @@
   margin: 0 auto 20px;
 }
 
-/*.btnClose {*/
-/*  border: none !important;*/
-/*  background: none !important;*/
-/*  width: auto !important;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  outline: none !important;*/
-/*  cursor: pointer;*/
-/*}*/
+
 
 .closeBtnWrapper {
-  display: contents;
-  justify-content: flex-end;
   cursor: pointer;
+  position: relative;
+  left: 155px;
+  top: -20px;
 }
 
 
@@ -54,11 +34,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ghostwhite;
   color: #000;
   text-align: center;
   border-radius: 20px;
-  padding: 10px 10px 10px;
+  padding: 20px 20px 20px 20px;
   box-shadow: 0 0 10px rgb(22, 20, 24); /* Параметры тени */
 
 }
@@ -72,10 +52,7 @@
   border: none;
   margin-bottom: 10px;
 }
-.img {
-  width: 82px;
-  margin-bottom: 15px;
-}
+
 .title {
   margin-bottom: 40px;
   font-size: 18px;

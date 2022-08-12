@@ -5,6 +5,7 @@ import {CircularProgress} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "./hooks";
 import {initializeAppTC} from "./app-reducer";
 import {ErrorSnackbar} from "../main/common/ErrorSnackbar/ErrorSnackbar";
+import s from './App.module.css'
 
 const App = () => {
 
@@ -27,7 +28,7 @@ const App = () => {
 
 
     return (
-        <div className="App">
+        <div className={s.app}>
             <ErrorSnackbar/>
             <Main/>
         </div>

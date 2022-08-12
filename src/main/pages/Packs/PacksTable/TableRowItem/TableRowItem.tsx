@@ -10,13 +10,13 @@ import {IconButton} from "@mui/material";
 import {setUserCardId, setUserCardName} from "../../../Cards/cardsReducer";
 import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
-import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
+import {ModalConfirmDelete} from "../../../../common/Modal/ModalConfirmDelete";
 import {deletePackTC, updatePackTC} from "../../packsListReducer";
-import { ModalBase } from '../../../../common/Modal/ModalBase';
+import {ModalChangeData} from '../../../../common/Modal/ModalChangeData';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SchoolIcon from '@mui/icons-material/School';
-
+import {shorter} from "../../../../utils/shorter";
 
 
 type TableRowPackType = {
@@ -36,10 +36,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
     const [value, setValue] = useState<string>('')
 
     const {_id, user_id, name, cardsCount, updated, user_name, status} = props;
-
-
     const userId = useAppSelector(state => state.profile.profile._id);
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -50,9 +47,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
         navigate(`/cards/${_id}`);
     };
 
-    const handleLearnPack = () => {
-        navigate(`/learn-pack/${_id}`);
-    };
+    const handleLearnPack = () => navigate(`/learn-pack/${_id}`)
 
     const confirmRemovePack = (packId: string) => {
         console.log('packId', packId)
@@ -60,18 +55,10 @@ export const TableRowItem = memo((props: TableRowPackType) => {
         closeDeleteModalForm()
     }
 
-    const closeDeleteModalForm = () => {
-        setActiveModalDelete(false)
-    }
+    const closeDeleteModalForm = () => setActiveModalDelete(false)
+    const closeUpdateModalForm = () => setActiveModalUpdate(false)
+    const onChangeTextUpdateHandler = (value: string) => setValue(value)
 
-    const closeUpdateModalForm = () => {
-        setActiveModalUpdate(false)
-
-    }
-
-    const onChangeTextUpdateHandler = (value: string) => {
-        setValue(value)
-    }
     const closeUpdateModal = () => {
         closeUpdateModalForm()
         setValue('')
@@ -87,7 +74,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
         <>
             <TableRow sx={{display: 'grid', gridTemplateColumns: '25% 8% 24% 15% 28%'}}>
                 <TableCell component="th" scope="row" className={styles.sell}>
-                    <span style={{display: 'inline-block', flex: '1 1 auto'}}>{name}</span>
+                    <span style={{display: 'inline-block', flex: '1 1 auto'}}>{shorter(name, 20)}</span>
                     <IconButton
                         disabled={status === 'loading'}
                         aria-label="expand row"
@@ -102,14 +89,17 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                     {new Date(updated).toLocaleDateString()}
                 </TableCell>
                 <TableCell className={styles.sell}>
-                    {user_name}
+                    {shorter(user_name, 20)}
                 </TableCell>
                 <TableCell align="center" className={styles.ButtonGroup}>
 
                     <>
-                        <Button onClick={() => {setActiveModalUpdate(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<SettingsIcon />}/>
+                        <IconButton sx={{color:'darkgreen'}} onClick={() => {setActiveModalUpdate(true)}}
+                                disabled={user_id !== userId || status === 'loading'}>
+                            <SettingsIcon/>
+                        </IconButton>
 
-                        {activeModalUpdate && <ModalBase
+                        {activeModalUpdate && <ModalChangeData
                             packId={_id}
                             isAddingForm={false}
                             closeModal={closeUpdateModal}
@@ -119,18 +109,22 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                             title='Please, enter new pack name'
                         />}
 
-                        <Button onClick={() => {setActiveModalDelete(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<DeleteIcon/>}/>
+                        <IconButton sx={{color:'darkgreen'}} onClick={() => {setActiveModalDelete(true)}}
+                                disabled={user_id !== userId || status === 'loading'}>
+                            <DeleteIcon/>
+                        </IconButton>
 
-                        {activeModalDelete && <ModalConfirm
+                        {activeModalDelete && <ModalConfirmDelete
                             packID={_id}
                             confirmHandler={confirmRemovePack}
-                            cancelHandler={closeDeleteModalForm}
-                            title='Are you sure you want to delete this pack?'/>
-                        }
+                            closeModal={closeDeleteModalForm}
+                            title='Are you sure you want to delete this pack?'/>}
+
                     </>
 
-                    <Button color="secondary" type={'submit'} variant="outlined"
-                            disabled={!cardsCount || status === 'loading'} onClick={handleLearnPack}><SchoolIcon/></Button>
+                    <IconButton type={'submit'} sx={{color:'darkgreen'}}
+                            disabled={!cardsCount || status === 'loading'}
+                            onClick={handleLearnPack}><SchoolIcon/></IconButton>
                 </TableCell>
             </TableRow>
         </>

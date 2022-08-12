@@ -1,15 +1,18 @@
 import * as React from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
-import {addCardTC, setCardsPage, setCardsPageCount} from '../cardsReducer';
+import {addCardTC, setCardsPage, setCardsPageCount, setSearchQuestion} from '../cardsReducer';
 import {useNavigate} from 'react-router-dom';
 import {TableContainerCards} from './TableContainerCards';
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {PaginationComponent} from "../../Packs/Pagination/PaginationComponent";
 import Button from '@mui/material/Button';
-import {useState} from "react";
-import {ModalCard} from "../../../common/Modal/ModalCard/ModalCard";
+import {ChangeEvent, useEffect, useState} from "react";
+import {ModalCard} from "../../../common/Modal/ModalCard";
 import st from './../../Packs/Packs.module.css'
+import {shorter} from "../../../utils/shorter";
+import {Search} from "../../../common/Search/Search";
+import useDebounce from "../../../utils/useDebounce";
 
 export const TableCard = () => {
     const dispatch = useAppDispatch();
@@ -25,9 +28,21 @@ export const TableCard = () => {
     const cardsPackId = useAppSelector(state => state.cardPack.cardsPack_id);
     const status = useAppSelector(state => state.app.status);
 
+    const [value, setValue] = useState('');
     const [activeModal, setActiveModal] = useState<boolean>(false)
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
+
+    const debouncedValue = useDebounce<string>(value, 500);
+
+    useEffect(() => {
+        dispatch(setSearchQuestion(debouncedValue));
+        dispatch(setCardsPage(1));
+    }, [debouncedValue])
+
+    const changeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.value);
+    }
 
     const addNewCardHandler = () => {
         dispatch(addCardTC(cardsPackId, question, answer))
@@ -61,12 +76,15 @@ export const TableCard = () => {
         <>
             <div>
                 <span className={st.Addcardbtn}>
-                    <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
-                    <ArrowBackIcon fontSize="small"/>
-                </IconButton>
+                    <>
+                        <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
+                             <ArrowBackIcon fontSize='large'/>
+                        </IconButton>
+                    </>
+                <h2>{packName}</h2>
 
                     <div>
-                        <Button onClick={() => {
+                        <Button size='large' color='success' variant="contained" onClick={() => {
                             setActiveModal(true)
                         }} disabled={myId !== packUserId || status === 'loading'}>Add card</Button>
                     </div>
@@ -83,9 +101,9 @@ export const TableCard = () => {
                                            packId={cardsPackId}
                 />}
 
-
-                <h2>{packName}</h2>
+                <h2>{shorter(packName, 50)}</h2>
             </div>
+            <Search value={value} callback={changeValueHandler}/>
             <TableContainerCards/>
             <div>
                 <PaginationComponent

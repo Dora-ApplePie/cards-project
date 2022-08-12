@@ -66,7 +66,7 @@ const Login = () => {
             <Grid item justifyContent={'center'}>
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
-                        <FormGroup>
+                        <FormGroup className={s.login}>
                             <h2 style={{textAlign: "center"}}>Sign In</h2>
                             <TextField label="Email"
                                        margin="normal"

@@ -5,7 +5,11 @@ import React, {ChangeEvent, useState} from "react";
 import Button from "@mui/material/Button";
 import {TextField} from "@material-ui/core";
 import {RequestStatusType} from "../../../app/app-reducer";
-import {CircularProgress} from "@mui/material";
+import {CircularProgress, Stack} from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
+import EditSharpIcon from '@mui/icons-material/EditSharp';
+
+
 
 
 type ProfilePropsType = {
@@ -41,10 +45,10 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
     return (
         <div className={s.profileBox}>
             {status === 'loading' &&  <CircularProgress/>}
-            <span>
-                <Button color="secondary" onClick={logOutHandler}>Log Out</Button>
-                <Button color="secondary" onClick={activateEditMode} disabled={editMode}> Edit </Button>
-            </span>
+            <Stack direction="row" spacing={5}>
+                <Button color="secondary" onClick={logOutHandler} endIcon={<LogoutIcon />}>Log Out</Button>
+                <Button color="secondary" onClick={activateEditMode} disabled={editMode} endIcon={<EditSharpIcon />}> Edit </Button>
+            </Stack>
 
             <div>
                 <div className={s.avatarBox}>

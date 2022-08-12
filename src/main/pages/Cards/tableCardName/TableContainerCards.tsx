@@ -15,13 +15,14 @@ import FavoriteBorderIcon from '@mui/icons-material/Grade';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CreateIcon from '@mui/icons-material/Create';
 import {Rating} from '@mui/material';
-import {ModalConfirm} from "../../../common/Modal/ModalConfirm/ModalConfirm";
-import {ModalCard} from '../../../common/Modal/ModalCard/ModalCard';
+import {ModalConfirmDelete} from "../../../common/Modal/ModalConfirmDelete";
+import {ModalCard} from '../../../common/Modal/ModalCard';
+import {shorter} from "../../../utils/shorter";
 
 export const TableContainerCards = () => {
     const [question, setQuestion] = useState<'0question' | '1question'>('0question');
     const [answer, setAnswer] = useState<'0answer' | '1answer'>('0answer');
-    const [updated, setUpdated] = useState<'0updated' | '1updated'>('0updated');
+    const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
     const [grade, setGrade] = useState<'0grade' | '1grade'>('0grade');
     const [activeModalDelete, setActiveModalDelete] = useState<boolean>(false)
     const [activeModalUpdate, setActiveModalUpdate] = useState<boolean>(false)
@@ -29,12 +30,16 @@ export const TableContainerCards = () => {
     const [updateAnswer, setUpdateAnswer] = useState<string>('')
 
 
-    const userId = useAppSelector(state => state.profile.myId)
+    const myId = useAppSelector(state => state.profile.myId)
+    const userId = useAppSelector(state => state.cardPack.packUserId)
     const cards = useAppSelector(state => state.cardPack.cards)
     const status = useAppSelector(state => state.app.status)
     const cardsPack_id = useAppSelector(state => state.cardPack.cardsPack_id)
 
     const dispatch = useAppDispatch();
+
+    const disabled = myId !== userId || status === 'loading'
+
 
     const confirmRemoveCard = (cardsId: string) => {
         dispatch(deleteCardTC(cardsPack_id, cardsId))
@@ -83,7 +88,7 @@ export const TableContainerCards = () => {
 
     return (
         <Table>
-            <Paper elevation={3}>
+            <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -131,14 +136,14 @@ export const TableContainerCards = () => {
                         </TableHead>
                         <TableBody>
                             {cards.length
-                                ? cards.map(({answer, question, updated, _id, user_id, grade}) =>
+                                ? cards.map(({answer, question, updated, _id, grade}) =>
                                     <TableRow key={_id}>
                                         <TableCell component="th" scope="row">
                                         <span style={{display: 'inline-block', flex: '1 1 auto'}}>
-                                            {question}
+                                             {shorter(question, 50)}
                                         </span>
                                         </TableCell>
-                                        <TableCell align="justify">{answer}</TableCell>
+                                        <TableCell align="justify">{shorter(answer, 100)}</TableCell>
                                         <TableCell align="justify">
                                             {new Date(updated).toLocaleDateString()}
                                         </TableCell>
@@ -154,49 +159,44 @@ export const TableContainerCards = () => {
                                             />
                                         </TableCell>
                                         <TableCell align="center">
-                                            {userId === user_id
-                                                ? <TableRow>
-                                                    <IconButton onClick={() => {
-                                                        setActiveModalDelete(true)
-                                                    }}
-                                                                disabled={status === 'loading'}
-                                                                aria-label="delete"
-                                                    >
-                                                        <DeleteForeverIcon/>
-                                                    </IconButton>
+                                            <TableRow>
+                                                <IconButton onClick={() => setActiveModalDelete(true)}
+                                                            disabled={disabled}
+                                                            aria-label="delete"
+                                                >
+                                                    <DeleteForeverIcon/>
+                                                </IconButton>
 
-                                                    {activeModalDelete &&
-                                                    <ModalConfirm confirmHandler={confirmRemoveCard}
-                                                                  cancelHandler={closeDeleteModalForm}
-                                                                  title='Are you sure you want to delete this card?'
-                                                                  cardId={_id}
-                                                    />}
-                                                    <IconButton
-                                                        onClick={() => {
-                                                            setActiveModalUpdate(true)
-                                                        }}
-                                                        disabled={status === 'loading'}
-                                                        aria-label="delete"
-                                                    >
-                                                        <CreateIcon/>
-                                                    </IconButton>
+                                                {activeModalDelete &&
+                                                <ModalConfirmDelete
+                                                    confirmHandler={confirmRemoveCard}
+                                                    closeModal={closeDeleteModalForm}
+                                                    title='Are you sure you want to delete this card?'
+                                                    cardId={_id}
+                                                />}
+                                                <IconButton
+                                                    onClick={() => setActiveModalUpdate(true)}
+                                                    disabled={disabled}
+                                                    aria-label="delete"
+                                                >
+                                                    <CreateIcon/>
+                                                </IconButton>
 
-                                                    {activeModalUpdate && <ModalCard
-                                                        onChangeQuestion={onChangeQuestionUpdateHandler}
-                                                        onChangeAnswer={onChangeAnswerUpdateHandler}
-                                                        closeModal={closeUpdateModalForm}
-                                                        question={updateQuestion}
-                                                        answer={updateAnswer}
-                                                        addTextHandler={updateCard}
-                                                        cardId={_id}
-                                                        title='Please, update this card'/>}
-                                                </TableRow> : null}
+                                                {activeModalUpdate && <ModalCard
+                                                    onChangeQuestion={onChangeQuestionUpdateHandler}
+                                                    onChangeAnswer={onChangeAnswerUpdateHandler}
+                                                    closeModal={closeUpdateModalForm}
+                                                    question={updateQuestion}
+                                                    answer={updateAnswer}
+                                                    addTextHandler={updateCard}
+                                                    cardId={_id}
+                                                    title='You can update this card'/>}
+                                            </TableRow>
                                         </TableCell>
                                     </TableRow>
                                 ) : (
                                     <TableRow>
-                                        <TableCell> No Any cards yet
-                                        </TableCell>
+                                        <TableCell>Loading cards..</TableCell>
                                     </TableRow>)}
                         </TableBody>
                     </Table>
