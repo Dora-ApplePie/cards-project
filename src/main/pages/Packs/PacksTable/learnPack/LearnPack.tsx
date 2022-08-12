@@ -11,6 +11,7 @@ import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {getCard} from "../../../../utils/smartRandom";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import {CardType} from "./learnPackApi";
 
 const grades = [
     {value: 1, label: 'Did not know'},
@@ -23,6 +24,7 @@ const grades = [
 export const LearnPack = () => {
     const [showAnswer, setShowAnswer] = useState(false);
     const [grade, setGrade] = useState(1);
+    const [cardId, setCardId] = useState<CardType | null>(null);
 
     const dispatch = useAppDispatch();
 
@@ -31,6 +33,7 @@ export const LearnPack = () => {
     const status = useAppSelector(state => state.app.status);
     const cards = useAppSelector(state => state.learnPack.cards);
     const card = useAppSelector(state => state.learnPack.card);
+    const packs = useAppSelector(state => state.packList.cardPacks);
 
     const navigate = useNavigate();
 
@@ -65,8 +68,11 @@ export const LearnPack = () => {
     useEffect(() => {
         if (cards.length > 0) {
             dispatch(setCardPack(getCard(cards)));
+            setCardId(getCard(cards))
         }
     }, [cards]);
+
+    const pack = packs.find(p => p._id === cardId?.cardsPack_id);
 
     return (
 
@@ -76,7 +82,7 @@ export const LearnPack = () => {
                     ? (
                         <Typography mt={1} variant="h4" sx={{textAlign: 'center'}}>Loading...</Typography>
                     ) : (
-                        <><h3 className={styles.title}>Learn “Pack Name”</h3>
+                        <><h3 className={styles.title}>{pack?.name}</h3>
                             <p className={styles.text}><b>Question: </b>{`“${card.question}”`}</p>
                             {showAnswer
                                 ? (
