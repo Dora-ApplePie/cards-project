@@ -8,7 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {PaginationComponent} from "../../Packs/Pagination/PaginationComponent";
 import Button from '@mui/material/Button';
 import {useState} from "react";
-import {ModalCard} from "../../../common/Modal/ModalCard/ModalCard";
+import {ModalCard} from "../../../common/Modal/ModalCard";
 import st from './../../Packs/Packs.module.css'
 
 export const TableCard = () => {

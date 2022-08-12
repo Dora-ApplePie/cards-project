@@ -10,9 +10,9 @@ import {IconButton} from "@mui/material";
 import {setUserCardId, setUserCardName} from "../../../Cards/cardsReducer";
 import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
-import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
+import {ModalConfirmDelete} from "../../../../common/Modal/ModalConfirmDelete";
 import {deletePackTC, updatePackTC} from "../../packsListReducer";
-import {ModalBase} from '../../../../common/Modal/ModalBase';
+import {ModalChangeData} from '../../../../common/Modal/ModalChangeData';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SchoolIcon from '@mui/icons-material/School';
@@ -93,12 +93,12 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 <TableCell align="center" className={styles.ButtonGroup}>
 
                     <>
-                        <Button sx={{color:'darkgreen'}} onClick={() => {setActiveModalUpdate(true)}}
+                        <IconButton sx={{color:'darkgreen'}} onClick={() => {setActiveModalUpdate(true)}}
                                 disabled={user_id !== userId || status === 'loading'}>
                             <SettingsIcon/>
-                        </Button>
+                        </IconButton>
 
-                        {activeModalUpdate && <ModalBase
+                        {activeModalUpdate && <ModalChangeData
                             packId={_id}
                             isAddingForm={false}
                             closeModal={closeUpdateModal}
@@ -108,22 +108,22 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                             title='Please, enter new pack name'
                         />}
 
-                        <Button sx={{color:'darkgreen'}} onClick={() => {setActiveModalDelete(true)}}
+                        <IconButton sx={{color:'darkgreen'}} onClick={() => {setActiveModalDelete(true)}}
                                 disabled={user_id !== userId || status === 'loading'}>
                             <DeleteIcon/>
-                        </Button>
+                        </IconButton>
 
-                        {activeModalDelete && <ModalConfirm
+                        {activeModalDelete && <ModalConfirmDelete
                             packID={_id}
                             confirmHandler={confirmRemovePack}
-                            cancelHandler={closeDeleteModalForm}
+                            closeModal={closeDeleteModalForm}
                             title='Are you sure you want to delete this pack?'/>}
 
                     </>
 
-                    <Button type={'submit'} sx={{color:'darkgreen'}}
+                    <IconButton type={'submit'} sx={{color:'darkgreen'}}
                             disabled={!cardsCount || status === 'loading'}
-                            onClick={handleLearnPack}><SchoolIcon/></Button>
+                            onClick={handleLearnPack}><SchoolIcon/></IconButton>
                 </TableCell>
             </TableRow>
         </>

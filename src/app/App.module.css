@@ -4,6 +4,6 @@ body {
     background: url('/../new/src/commonfiles/background48.png');
 }
 
-.App {
-
+.app {
+ align-items: center;
 }

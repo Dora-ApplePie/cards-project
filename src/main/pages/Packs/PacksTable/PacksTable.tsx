@@ -59,7 +59,6 @@ const PacksTable = () => {
         setUserName(userName === '0user_name' ? '1user_name' : '0user_name');
         userName && dispatch(setSortPackName(userName));
     }
-
     return (
         <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
             <TableContainer >
@@ -91,7 +90,7 @@ const PacksTable = () => {
                                 <TableSortLabel
                                     active={true}
                                     disabled={status === 'loading'}
-                                    direction={updated === '1updated' ? 'asc' : 'desc'}
+                                    direction={updated === '0updated' ? 'asc' : 'desc'}
                                     onClick={handleSortUpdated}
                                 >
                                 </TableSortLabel>

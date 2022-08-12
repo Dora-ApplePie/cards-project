@@ -1,7 +1,7 @@
-import React, {ChangeEvent, FC} from 'react'
+import React, {ChangeEvent, FC, KeyboardEvent} from 'react'
 import {Button} from "@material-ui/core";
 import {Input} from "@mui/material";
-import s from './../ModalUpload.module.css'
+import s from './Modal.module.css'
 import CloseIcon from "@mui/icons-material/Close";
 
 
@@ -29,11 +29,11 @@ export const ModalCard: FC<PropsType> = ({
                                              packId
                                          }) => {
 
-    const onChangeCallbackForFirstInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeCallbackForQuestion = (event: ChangeEvent<HTMLInputElement>) => {
         onChangeQuestion(event.currentTarget.value)
     }
 
-    const onChangeCallbackForSecondInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeCallbackForAnswer = (event: ChangeEvent<HTMLInputElement>) => {
         onChangeAnswer(event.currentTarget.value)
     }
 
@@ -45,10 +45,17 @@ export const ModalCard: FC<PropsType> = ({
         }
     }
 
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        console.log(e.key)
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    }
+
 
     return (
-        <div className={s.wrapper}>
-            <div className={s.modal}>
+        <div className={s.wrapper} onClick={closeModal} onKeyUp={onKeyPressHandler}>
+            <div className={s.modal} onClick={e => {e.stopPropagation()}}>
                 <div className={s.closeBtnWrapper}>
                     <Button className={s.buttonClose} onClick={closeModal} size="large">
                         <CloseIcon fontSize="large"/>
@@ -56,13 +63,13 @@ export const ModalCard: FC<PropsType> = ({
                 </div>
                 <div className={s.title}>{title}</div>
                 <div >
-                    <Input className={s.input}  onChange={onChangeCallbackForFirstInput}  value={question}
+                    <Input className={s.input}  onChange={onChangeCallbackForQuestion}  value={question}
                                     placeholder='question'/>
-                    <Input className={s.input}  onChange={onChangeCallbackForSecondInput}
+                    <Input className={s.input}  onChange={onChangeCallbackForAnswer}
                                     value={answer}
                                     placeholder='answer'/>
                     <Button  className={s.buttonAccept} onClick={successHandler}
-                                 disabled={!(question || answer)}>Ok
+                                 disabled={!(question && answer)}>Ok
                     </Button>
                 </div>
             </div>

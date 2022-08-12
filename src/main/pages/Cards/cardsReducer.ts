@@ -39,6 +39,11 @@ export const cardsNameReducer = (state: CardsNameStateType = initialState, actio
             return {...state, cardsPack_id: action.userId};
         case 'CARDS-NAME/SET-SORT-CARDS':
             return {...state, sortCards: action.sortCards};
+        case "CARDS-NAME/SET_PACK_CARDS_ID"  : {
+            return {
+                ...state, cardsPack_id: action.cardsPack_id
+            }
+        }
         default:
             return state;
     }
@@ -75,6 +80,9 @@ export const setSortCards = (sortCards: string) => ({
     sortCards,
 } as const);
 
+export const setPackCardsIdAC = (cardsPack_id: string) => ({type: 'CARDS-NAME/SET_PACK_CARDS_ID', cardsPack_id} as const)
+
+
 export const fetchCardsTC = (): AppThunk => async (dispatch, getState: () => AppStoreType) => {
     const {
         cardsPack_id,
@@ -94,7 +102,9 @@ export const fetchCardsTC = (): AppThunk => async (dispatch, getState: () => App
 
     try {
         const res = await cardsAPI.getCards(params);
-        dispatch(getCardsNameData(res.data));
+        dispatch(getCardsNameData(res.data))
+        dispatch(setPackCardsIdAC(cardsPack_id))
+        ;
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
         if (axios.isAxiosError(err)) {
@@ -123,7 +133,6 @@ export const addCardTC: any = (cardsPack_id: string, question?: string, answer?:
             dispatch(getStatusAC('succeeded'))
         })
 }
-
 
 export const deleteCardTC = (packId: string, cardsPack_id: string): AppThunk => (dispatch, getState) => {
     dispatch(getStatusAC('loading'))
@@ -178,4 +187,5 @@ export type CardsNameActionsType =
     | ReturnType<typeof setUserCardId>
     | ReturnType<typeof setUserCardName>
     | ReturnType<typeof setSortCards>
+    | ReturnType<typeof setPackCardsIdAC>
 

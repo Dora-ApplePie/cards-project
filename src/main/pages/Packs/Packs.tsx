@@ -5,7 +5,7 @@ import PacksTable from "./PacksTable/PacksTable";
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import s from './Packs.module.css'
 import Stack from '@mui/material/Stack';
-import {ModalBase} from '../../common/Modal/ModalBase';
+import {ModalChangeData} from '../../common/Modal/ModalChangeData';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {addPackTC} from "./packsListReducer";
 
@@ -54,7 +54,7 @@ export const Packs = (props: PacksPropsType) => {
                     </Button>
                 </div>
 
-                {activeModal && <ModalBase
+                {activeModal && <ModalChangeData
                     packId={packId}
                     closeModal={closeModal}
                     input={packName}
