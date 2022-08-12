@@ -12,12 +12,11 @@ import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import {ModalConfirm} from "../../../../common/Modal/ModalConfirm/ModalConfirm";
 import {deletePackTC, updatePackTC} from "../../packsListReducer";
-import { ModalBase } from '../../../../common/Modal/ModalBase';
+import {ModalBase} from '../../../../common/Modal/ModalBase';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SchoolIcon from '@mui/icons-material/School';
 import {shorter} from "../../../../utils/shorter";
-
 
 
 type TableRowPackType = {
@@ -108,7 +107,14 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                 <TableCell align="center" className={styles.ButtonGroup}>
 
                     <>
-                        <Button onClick={() => {setActiveModalUpdate(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<SettingsIcon />}/>
+                        <Button
+                            color="secondary"
+                            type={'submit'}
+                            onClick={() => {
+                                setActiveModalUpdate(true)
+                            }} disabled={user_id !== userId || status === 'loading'}>
+                            <SettingsIcon/>
+                        </Button>
 
                         {activeModalUpdate && <ModalBase
                             packId={_id}
@@ -120,7 +126,15 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                             title='Please, enter new pack name'
                         />}
 
-                        <Button onClick={() => {setActiveModalDelete(true)}} disabled={user_id !== userId || status === 'loading'} startIcon={<DeleteIcon/>}/>
+                        <Button color="secondary"
+                                type={'submit'}
+                                onClick={() => {
+                                    setActiveModalDelete(true)
+                                }}
+                                disabled={user_id !== userId || status === 'loading'}
+                        >
+                            <DeleteIcon/>
+                        </Button>
 
                         {activeModalDelete && <ModalConfirm
                             packID={_id}
@@ -130,8 +144,12 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                         }
                     </>
 
-                    <Button color="secondary" type={'submit'} variant="outlined"
-                            disabled={!cardsCount || status === 'loading'} onClick={handleLearnPack}><SchoolIcon/></Button>
+                    <Button color="secondary"
+                            type={'submit'}
+                            disabled={!cardsCount || status === 'loading'}
+                            onClick={handleLearnPack}>
+                        <SchoolIcon/>
+                    </Button>
                 </TableCell>
             </TableRow>
         </>

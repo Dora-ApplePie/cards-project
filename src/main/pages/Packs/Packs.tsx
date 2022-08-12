@@ -26,6 +26,8 @@ export const Packs = (props: PacksPropsType) => {
                 </div>
                 <div>
                     <Button startIcon={<LibraryAddIcon/>}
+                            color={"secondary"}
+                            variant={"contained"}
                             onClick={props.addPackHandler}
                             disabled={props.status === 'loading'}>
                         Add pack

@@ -1,27 +1,18 @@
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import React, {ChangeEvent, useEffect, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import useDebounce from "../../utils/useDebounce";
-import {setPage, setSearchPackName} from "../../pages/Packs/PacksTable/packsTableReducer";
+import React, {ChangeEvent} from "react";
+import {useAppSelector} from "../../../app/hooks";
 
-export const Search = () => {
+type TableRowPackType = {
+    value: string
+    callback: (e: ChangeEvent<HTMLInputElement>)=> void
+}
 
-    const dispatch = useAppDispatch();
+export const Search = (props: TableRowPackType) => {
+    const {value, callback} = props;
+
     const status = useAppSelector(state => state.app.status);
-    const [value, setValue] = useState('');
-    const debouncedValue = useDebounce<string>(value, 1000);
-
-    useEffect(() => {
-        dispatch(setSearchPackName(debouncedValue));
-        dispatch(setPage(1));
-    }, [debouncedValue])
-
-    const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value);
-
-    }
 
   return (
       <TextField
@@ -31,7 +22,7 @@ export const Search = () => {
           placeholder="Search"
           disabled={status === 'loading'}
           value={value}
-          onChange={handleChangeValue}
+          onChange={callback}
           InputProps={{startAdornment: <InputAdornment position="start"><SearchIcon/></InputAdornment>}}
       />
   )

@@ -163,7 +163,7 @@ export const TableContainerCards = () => {
                                                                 disabled={status === 'loading'}
                                                                 aria-label="delete"
                                                     >
-                                                        <DeleteForeverIcon/>
+                                                        <DeleteForeverIcon />
                                                     </IconButton>
 
                                                     {activeModalDelete &&

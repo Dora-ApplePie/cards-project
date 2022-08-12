@@ -39,6 +39,8 @@ export const cardsNameReducer = (state: CardsNameStateType = initialState, actio
             return {...state, cardsPack_id: action.userId};
         case 'CARDS-NAME/SET-SORT-CARDS':
             return {...state, sortCards: action.sortCards};
+        case 'CARDS-NAME/SET-CARDS-QUESTION':
+            return {...state, cardQuestion: action.searchCardQuestion};
         default:
             return state;
     }
@@ -75,6 +77,11 @@ export const setSortCards = (sortCards: string) => ({
     sortCards,
 } as const);
 
+export const setSearchQuestion = (searchCardQuestion: string) => ({
+    type: 'CARDS-NAME/SET-CARDS-QUESTION',
+    searchCardQuestion,
+} as const);
+
 export const fetchCardsTC = (): AppThunk => async (dispatch, getState: () => AppStoreType) => {
     const {
         cardsPack_id,
@@ -105,7 +112,7 @@ export const fetchCardsTC = (): AppThunk => async (dispatch, getState: () => App
     }
 }
 
-export const addCardTC: any = (cardsPack_id: string, question?: string, answer?: string): AppThunk => (dispatch, getState) => {
+export const addCardTC: any = (cardsPack_id: string, question?: string, answer?: string): AppThunk => (dispatch) => {
     dispatch(getStatusAC('loading'))
     const newCard = {
         cardsPack_id,
@@ -125,7 +132,7 @@ export const addCardTC: any = (cardsPack_id: string, question?: string, answer?:
 }
 
 
-export const deleteCardTC = (packId: string, cardsPack_id: string): AppThunk => (dispatch, getState) => {
+export const deleteCardTC = (packId: string, cardsPack_id: string): AppThunk => (dispatch) => {
     dispatch(getStatusAC('loading'))
     cardsAPI.deleteCard(cardsPack_id)
         .then((res) => {
@@ -139,7 +146,7 @@ export const deleteCardTC = (packId: string, cardsPack_id: string): AppThunk => 
         })
 }
 
-export const updateCardTC = (packId: string, cardId: string, question: string, answer: string): AppThunk => (dispatch, getState) => {
+export const updateCardTC = (packId: string, cardId: string, question: string, answer: string): AppThunk => (dispatch) => {
     dispatch(getStatusAC('loading'))
     const updateCard = {
         _id: cardId,
@@ -178,4 +185,5 @@ export type CardsNameActionsType =
     | ReturnType<typeof setUserCardId>
     | ReturnType<typeof setUserCardName>
     | ReturnType<typeof setSortCards>
+    | ReturnType<typeof setSearchQuestion>
 
