@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import styles from './PacksTable.module.css';
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import Table from '@mui/material/Table';
@@ -10,8 +10,10 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import TableCell from "@mui/material/TableCell";
 import {TableRowItem} from "./TableRowItem/TableRowItem";
-import {setCardsPageCount, setPage, setSortPackName} from "./packsTableReducer";
+import {setCardsPageCount, setPage, setSearchPackName, setSortPackName} from "./packsTableReducer";
 import {PaginationComponent} from "../Pagination/PaginationComponent";
+import { Search } from '../../../common/Search/Search';
+import useDebounce from "../../../utils/useDebounce";
 
 
 const PacksTable = () => {
@@ -19,13 +21,26 @@ const PacksTable = () => {
     const status = useAppSelector(state => state.app.status)
     const cardPacks = useAppSelector(state => state.packList.cardPacks);
 
+    const [value, setValue] = useState('');
+    const debouncedValue = useDebounce<string>(value, 1000);
+
+    useEffect(() => {
+        dispatch(setSearchPackName(debouncedValue));
+        dispatch(setPage(1));
+    }, [debouncedValue])
+
+    const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.value);
+
+    }
+
     const [name, setName] = useState<'0name' | '1name'>('0name');
     const [cardsCount, setCardsCount] = useState<'0cardsCount' | '1cardsCount'>('0cardsCount');
     const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
     const [userName, setUserName] = useState<'0user_name' | '1user_name'>('0user_name');
 
     const dispatch = useAppDispatch();
-
+    
     const totalCardsCount = useAppSelector(state => state.packList.cardPacksTotalCount);
     const pageCount = useAppSelector(state => state.tablePacks.pageCount);
     const page = useAppSelector(state => state.tablePacks.page);
@@ -50,7 +65,6 @@ const PacksTable = () => {
     }
 
     const handleSortUpdated = () => {
-        console.log(updated)
         setUpdated(updated === '0updated' ? '1updated' : '0updated');
         updated && dispatch(setSortPackName(updated));
     }
@@ -61,9 +75,11 @@ const PacksTable = () => {
     }
     return (
         <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
-            <TableContainer >
-
-                <Table >
+            <div>
+               <Search value={value} callback={handleChangeValue}/>
+            </div>
+            <TableContainer>
+                <Table>
                     <TableHead>
                         <TableRow sx={{display: 'grid', gridTemplateColumns: '21% 15% 19% 17% 28%'}}>
                             <TableCell>

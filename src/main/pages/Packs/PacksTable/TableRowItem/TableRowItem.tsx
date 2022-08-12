@@ -16,6 +16,7 @@ import {ModalChangeData} from '../../../../common/Modal/ModalChangeData';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SchoolIcon from '@mui/icons-material/School';
+import {shorter} from "../../../../utils/shorter";
 
 
 type TableRowPackType = {
@@ -73,7 +74,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
         <>
             <TableRow sx={{display: 'grid', gridTemplateColumns: '25% 8% 24% 15% 28%'}}>
                 <TableCell component="th" scope="row" className={styles.sell}>
-                    <span style={{display: 'inline-block', flex: '1 1 auto'}}>{name}</span>
+                    <span style={{display: 'inline-block', flex: '1 1 auto'}}>{shorter(name, 20)}</span>
                     <IconButton
                         disabled={status === 'loading'}
                         aria-label="expand row"
@@ -88,7 +89,7 @@ export const TableRowItem = memo((props: TableRowPackType) => {
                     {new Date(updated).toLocaleDateString()}
                 </TableCell>
                 <TableCell className={styles.sell}>
-                    {user_name}
+                    {shorter(user_name, 20)}
                 </TableCell>
                 <TableCell align="center" className={styles.ButtonGroup}>
 

@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import {ModalChangeData} from '../../common/Modal/ModalChangeData';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {addPackTC} from "./packsListReducer";
+import {CardSlider} from "../../common/CardSlider/CardSlider";
 
 type PacksPropsType = {
     status: RequestStatusType
@@ -63,6 +64,7 @@ export const Packs = (props: PacksPropsType) => {
                     isAddingForm={true}
                     title='Please, enter the name of the pack'/>}
             </span>
+            <CardSlider/>
             <PacksTable/>
         </div>
     )

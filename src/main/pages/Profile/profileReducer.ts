@@ -41,7 +41,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
             }
         }
         case SET_MY_ID:
-            console.log('id',action.myId)
+            console.log('id', action.myId)
             return {...state, myId: action.myId}
         case SET_NEW_AVATAR: {
             return {
@@ -61,7 +61,7 @@ export const setUserAvatarAC = (avatar: string | null | any) => ({type: SET_NEW_
 
 
 //thunks
-export const authMeTC:any = () => (dispatch: Dispatch) => {
+export const authMeTC: any = () => (dispatch: Dispatch) => {
     dispatch(getStatusAC('loading'))
 
     return authApi.me()
@@ -82,7 +82,7 @@ export const authMeTC:any = () => (dispatch: Dispatch) => {
         })
 }
 
-export const editProfileTC:any = ():AppThunk => (dispatch, getState) => {
+export const editProfileTC: any = (): AppThunk => (dispatch, getState) => {
     dispatch(getStatusAC('loading'))
     const ava = getState().profile.profile.avatar
     const name = getState().profile.profile.name
