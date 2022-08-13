@@ -1,9 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent, FC, useEffect} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 import {useParams} from 'react-router-dom';
-import {Button, Input, Modal} from "@mui/material";
+import {Button, Input} from "@mui/material";
 import s from './Modal.module.css'
 import CloseIcon from '@mui/icons-material/Close';
-
 type PropsType = {
     closeModal: () => void
     input: string
@@ -27,48 +26,34 @@ export const ModalChangeData: FC<PropsType> = ({
                                          }) => {
     const paramsCard = useParams<{ cardId: string }>()
 
-
     const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
         onChangeText(event.currentTarget.value)
     }
-
-
-        const successHandler = () => {
-            if (packId) {
-                addTextHandler && addTextHandler(packId, input)
-            } else if (paramsCard.cardId) {
-                addTextHandler && addTextHandler(paramsCard.cardId, input)
-            }
+    const successHandler = () => {
+        if (packId) {
+            addTextHandler && addTextHandler(packId, input)
+        } else if (paramsCard.cardId) {
+            addTextHandler && addTextHandler(paramsCard.cardId, input)
         }
-
-        const successAddHandler = () => {
-            addNewItemHandler && addNewItemHandler(input)
-        }
-
-        const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-            console.log(e.key)
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        }
-
-
-        return (
-            <div className={s.wrapper} onClick={closeModal} onKeyUp={onKeyPressHandler}>
-                <div className={s.modal} onClick={e => {e.stopPropagation()}}>
-                    <div className={s.closeBtnWrapper}>
-                        <Button className={s.buttonClose} onClick={closeModal} size="large"><CloseIcon
-                            fontSize="large"/></Button>
-                    </div>
-                    <div className={s.title}>{title}</div>
-                    <div>
-                        <Input className={s.input} onChange={onChangeCallback} value={input} onBlur={closeModal}/>
-                        <Button className={s.buttonAccept} onClick={isAddingForm ? successAddHandler : successHandler}
-                                disabled={!input}
-                        >Ok</Button>
-                    </div>
-                </div>
-            </div>
-        )
     }
 
+    const successAddHandler = () => {
+        addNewItemHandler && addNewItemHandler(input)
+    }
+
+    return (
+        <div className={s.wrapper}>
+            <div className={s.modal}>
+                <div className={s.closeBtnWrapper}>
+                    <Button className={s.buttonClose} onClick={closeModal} size="large"><CloseIcon fontSize="large"/></Button>
+                </div>
+                <div className={s.title}>{title}</div>
+                <div>
+                    <Input  className={s.input} onChange={onChangeCallback} value={input}/>
+                    <Button className={s.buttonAccept} onClick={isAddingForm ? successAddHandler : successHandler} disabled={!input}
+                    >Ok</Button>
+                </div>
+            </div>
+        </div>
+    )
+}

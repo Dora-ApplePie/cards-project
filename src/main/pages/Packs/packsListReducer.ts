@@ -70,7 +70,6 @@ export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () 
 
 export const addPackTC = (name: string): AppThunk => (dispatch, getState) => {
     dispatch(getStatusAC('loading'))
-
     packsAPI.addPack({name})
         .then(response => {
             console.log(response)

@@ -20,7 +20,8 @@ const App = () => {
 
     if (!isInitialized) {
         return <div
-            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            style={{textAlign: 'center', width: '100%', marginTop: 'auto', marginBottom:'auto', verticalAlign: 'middle' }
+            }>
             <CircularProgress color="secondary"/>
         </div>
     }

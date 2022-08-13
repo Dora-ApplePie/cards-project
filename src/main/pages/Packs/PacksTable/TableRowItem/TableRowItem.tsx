@@ -32,12 +32,14 @@ type TableRowPackType = {
 export const TableRowItem = memo((props: TableRowPackType) => {
     const [activeModalDelete, setActiveModalDelete] = useState<boolean>(false)
     const [activeModalUpdate, setActiveModalUpdate] = useState<boolean>(false)
-    const [value, setValue] = useState<string>('')
 
     const {_id, user_id, name, cardsCount, updated, user_name, status} = props;
     const userId = useAppSelector(state => state.profile.profile._id);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const [value, setValue] = useState<string>(name)
+
 
 
     const handleSendPackId = () => {

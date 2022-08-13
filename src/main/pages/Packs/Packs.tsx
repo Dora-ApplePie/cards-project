@@ -22,19 +22,19 @@ type PacksPropsType = {
 export const Packs = (props: PacksPropsType) => {
     const dispatch = useAppDispatch()
     const [activeModal, setActiveModal] = useState<boolean>(false)
-    const [packName, setPackName] = useState<string>('')
     const packId = useAppSelector(state => state.cardPack.cardsPack_id);
+    const [packName, setPackName] = useState<string>('')
+
 
 
     const onClickAddPackHandler = () => {
+        debugger
         dispatch(addPackTC(packName))
         closeModal()
-        setPackName('')
     }
 
     const closeModal = () => {
         setActiveModal(false)
-        setPackName('')
     }
     const onChangeTextHandler = (value: string) => setPackName(value)
 
@@ -50,10 +50,10 @@ export const Packs = (props: PacksPropsType) => {
                 </div>
                     <CardSlider/>
                 <div>
-                    <Button color='success' variant="contained" startIcon={<LibraryAddIcon/>}
-                            onClick={() => {
-                                setActiveModal(true)
-                            }}
+                    <Button color='success'
+                            variant="contained"
+                            startIcon={<LibraryAddIcon/>}
+                            onClick={() => {setActiveModal(true)}}
                             disabled={props.status === 'loading'}>
                         Add pack
                     </Button>
