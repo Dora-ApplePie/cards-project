@@ -19,10 +19,14 @@ const App = () => {
     }, [dispatch])
 
     if (!isInitialized) {
-        return <div
-            style={{textAlign: 'center', width: '100%', marginTop: 'auto', marginBottom:'auto', verticalAlign: 'middle' }
-            }>
-            <CircularProgress color="secondary"/>
+        return <div>
+            <CircularProgress sx={{
+                color: 'seagreen',
+                position: 'absolute',
+                top: '45%',
+                left: '45%',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)'}} />
         </div>
     }
 
