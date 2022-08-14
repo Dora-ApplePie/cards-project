@@ -52,6 +52,8 @@ export const ModalCard: FC<PropsType> = ({
         }
     }
 
+    console.log(cardId)
+
 
     return (
         <div className={s.wrapper} onClick={closeModal} onKeyUp={onKeyPressHandler}>

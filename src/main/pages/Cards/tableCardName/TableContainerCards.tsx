@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {deleteCardTC, setSortCards, updateCardTC} from '../cardsReducer';
+import {setSortCards} from '../cardsReducer';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -7,52 +7,20 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import TableBody from '@mui/material/TableBody';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
 import TableCell from '@mui/material/TableCell/TableCell';
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import FavoriteIcon from '@mui/icons-material/Grade';
-import FavoriteBorderIcon from '@mui/icons-material/Grade';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import CreateIcon from '@mui/icons-material/Create';
-import {Rating} from '@mui/material';
-import {ModalConfirmDelete} from "../../../common/Modal/ModalConfirmDelete";
-import {ModalCard} from '../../../common/Modal/ModalCard';
-import {shorter} from "../../../utils/shorter";
+import {CircularProgress} from '@material-ui/core';
+import {TableCardRow} from './TableCardRow';
 
 export const TableContainerCards = () => {
+
+    const cards = useAppSelector(state => state.cardPack.cards)
+    const status = useAppSelector(state => state.app.status)
     const [question, setQuestion] = useState<'0question' | '1question'>('0question');
     const [answer, setAnswer] = useState<'0answer' | '1answer'>('0answer');
     const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
     const [grade, setGrade] = useState<'0grade' | '1grade'>('0grade');
-    const [activeModalDelete, setActiveModalDelete] = useState<boolean>(false)
-    const [activeModalUpdate, setActiveModalUpdate] = useState<boolean>(false)
-    const [updateQuestion, setUpdateQuestion] = useState<string>('')
-    const [updateAnswer, setUpdateAnswer] = useState<string>('')
-
-
-    const myId = useAppSelector(state => state.profile.myId)
-    const userId = useAppSelector(state => state.cardPack.packUserId)
-    const cards = useAppSelector(state => state.cardPack.cards)
-    const status = useAppSelector(state => state.app.status)
-    const cardsPack_id = useAppSelector(state => state.cardPack.cardsPack_id)
-
     const dispatch = useAppDispatch();
-
-    const disabled = myId !== userId || status === 'loading'
-
-
-    const confirmRemoveCard = (cardsId: string) => {
-        dispatch(deleteCardTC(cardsPack_id, cardsId))
-        closeDeleteModalForm()
-    }
-
-    const closeDeleteModalForm = () => {
-        setActiveModalDelete(false)
-    }
-
-    const closeUpdateModalForm = () => {
-        setActiveModalUpdate(false)
-    }
 
 
     const handleSortQuestion = () => {
@@ -75,15 +43,6 @@ export const TableContainerCards = () => {
         grade && dispatch(setSortCards(grade));
     }
 
-    const onChangeQuestionUpdateHandler = (value: string) => {setUpdateQuestion(value)}
-    const onChangeAnswerUpdateHandler = (value: string) => {setUpdateAnswer(value)}
-
-    const updateCard = (cardId: string, question: string, answer: string) => {
-        dispatch(updateCardTC(cardsPack_id, cardId, question, answer))
-        closeUpdateModalForm()
-        setUpdateQuestion('')
-        setUpdateAnswer('')
-    }
 
 
     return (
@@ -136,67 +95,17 @@ export const TableContainerCards = () => {
                         </TableHead>
                         <TableBody>
                             {cards.length
-                                ? cards.map(({answer, question, updated, _id, grade}) =>
-                                    <TableRow key={_id}>
-                                        <TableCell component="th" scope="row">
-                                        <span style={{display: 'inline-block', flex: '1 1 auto'}}>
-                                             {shorter(question, 50)}
-                                        </span>
-                                        </TableCell>
-                                        <TableCell align="justify">{shorter(answer, 100)}</TableCell>
-                                        <TableCell align="justify">
-                                            {new Date(updated).toLocaleDateString()}
-                                        </TableCell>
-                                        <TableCell align="justify">
-                                            <Rating
-                                                value={Number(grade.toFixed(1))}
-                                                precision={0.1}
-                                                icon={<FavoriteIcon fontSize="inherit" color="error"/>}
-                                                emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
-                                                size="medium"
-                                                disabled={status === 'loading'}
-                                                readOnly
-                                            />
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <TableRow>
-                                                <IconButton onClick={() => setActiveModalDelete(true)}
-                                                            disabled={disabled}
-                                                            aria-label="delete"
-                                                >
-                                                    <DeleteForeverIcon/>
-                                                </IconButton>
-
-                                                {activeModalDelete &&
-                                                <ModalConfirmDelete
-                                                    confirmHandler={confirmRemoveCard}
-                                                    closeModal={closeDeleteModalForm}
-                                                    title='Are you sure you want to delete this card?'
-                                                    cardId={_id}
-                                                />}
-                                                <IconButton
-                                                    onClick={() => setActiveModalUpdate(true)}
-                                                    disabled={disabled}
-                                                    aria-label="delete"
-                                                >
-                                                    <CreateIcon/>
-                                                </IconButton>
-
-                                                {activeModalUpdate && <ModalCard
-                                                    onChangeQuestion={onChangeQuestionUpdateHandler}
-                                                    onChangeAnswer={onChangeAnswerUpdateHandler}
-                                                    closeModal={closeUpdateModalForm}
-                                                    question={updateQuestion}
-                                                    answer={updateAnswer}
-                                                    addTextHandler={updateCard}
-                                                    cardId={_id}
-                                                    title='You can update this card'/>}
-                                            </TableRow>
-                                        </TableCell>
-                                    </TableRow>
-                                ) : (
+                                ? cards.map(({answer, question, updated, _id, grade}) => (<TableCardRow
+                                    key={_id}
+                                    answer={answer}
+                                    question={question}
+                                    updated={updated}
+                                    _id={_id}
+                                    grade={grade}
+                                />))
+                                : (
                                     <TableRow>
-                                        <TableCell>Loading cards..</TableCell>
+                                        <TableCell><CircularProgress/></TableCell>
                                     </TableRow>)}
                         </TableBody>
                     </Table>

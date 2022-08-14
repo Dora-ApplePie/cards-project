@@ -62,13 +62,11 @@ export const TableRowItem = memo((props: TableRowPackType) => {
 
     const closeUpdateModal = () => {
         closeUpdateModalForm()
-        setValue('')
     }
 
     const updatePack = (packId: string, value: string) => {
         dispatch(updatePackTC(packId, value))
         closeUpdateModalForm()
-        setValue('')
     }
 
     return (
