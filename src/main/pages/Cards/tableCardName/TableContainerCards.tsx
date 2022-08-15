@@ -105,7 +105,7 @@ export const TableContainerCards = () => {
                                 />))
                                 : (
                                     <TableRow>
-                                        <TableCell><CircularProgress/></TableCell>
+                                        <TableCell>{<CircularProgress/>}</TableCell>
                                     </TableRow>)}
                         </TableBody>
                     </Table>

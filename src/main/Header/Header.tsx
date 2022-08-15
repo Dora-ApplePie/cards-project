@@ -11,6 +11,7 @@ function Header() {
 
     const islogin = useAppSelector(state => state.login.isLogin)
     const imgFromServer = useAppSelector(state => state.profile.profile.avatar)
+    const userName = useAppSelector(state => state.profile.profile.name)
     const ava = imgFromServer ? imgFromServer : defaultAvatar
 
     return (<>
@@ -48,7 +49,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <NavLink to={PATH.PROFILE}>Profile<Avatar alt="ava" src={ava} />
+                            <NavLink to={PATH.PROFILE}>{userName} <Avatar sx={{marginLeft:'5px'}} alt="ava" src={ava} />
                             </NavLink>
                         </li>
                     </ul>
