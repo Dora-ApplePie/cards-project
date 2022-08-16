@@ -10,6 +10,7 @@ import {forgotPassTC} from "./forgotPasswordReducer";
 import {SendEmail} from "./sendEmail/SendEmail";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
+import s from "../Registration/Registration.module.css";
 
 type RecoveryPasswordErrorType = {
     email?: string
@@ -56,7 +57,7 @@ const ForgotPassword = () => {
             <Grid item justifyContent={'center'} sm={3}>
                 <form onSubmit={formik.handleSubmit} title="Forgot your password?">
                     <FormControl>
-                        <FormGroup>
+                        <FormGroup className={s.form}>
                             <h2 style={{textAlign: "center"}}>Recovery password</h2>
                             <TextField
                                 label="Email"

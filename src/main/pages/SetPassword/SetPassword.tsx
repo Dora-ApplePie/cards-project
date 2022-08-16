@@ -10,6 +10,7 @@ import {updateNewPasswordTC} from "./setPasswordReducer";
 import {initializeAppTC} from "../../../app/app-reducer";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
+import s from "../Registration/Registration.module.css";
 
 type SetPasswordErrorType = {
     password?: string
@@ -61,7 +62,7 @@ const SetPassword = () => {
             <Grid item justifyContent={'center'} sm={3}>
                 <form onSubmit={formik.handleSubmit} title="Create new password">
                     <FormControl variant="standard" sx={{height: '71px', width: '100%'}}>
-                        <FormGroup>
+                        <FormGroup className={s.form}>
                             <h2 style={{textAlign: "center"}}>Set new password</h2>
                             <TextField
                                 label="Password"

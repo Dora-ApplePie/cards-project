@@ -5,14 +5,14 @@
     align-items: center;
 }
 
-.Addbtn {
+.addBtn {
     display: flex;
     justify-content: space-between;
     padding-bottom: 30px;
     align-items: center;
 }
 
-.Addcardbtn {
+.addCardBtn {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -4,7 +4,7 @@ import styles from './PacksList.module.css';
 import {Navigate} from 'react-router-dom';
 import {PATH} from "../../../Routes/Routes";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {addPackTC, deletePackTC, fetchCardPacks, updatePackTC} from "../packsListReducer";
+import {deletePackTC, fetchCardPacks} from "../packsListReducer";
 import {setProfileIdAC} from "../../Profile/profileReducer";
 import {Packs} from "../Packs";
 
@@ -43,30 +43,19 @@ export const PacksList = () => {
         dispatch(fetchCardPacks())
     }
 
-    const addPackHandler = () => {
-        dispatch(addPackTC('newPack'))
-    }
-
     const deletePack = (title: string) => {
         dispatch(deletePackTC(title))
 
     }
-    const changeName = (packId: string) => {
-        dispatch(updatePackTC(packId, '!newPackName!'))
-    }
-
-
-
 
     return (
-
         <div className={styles.packsContainer}>
+            <h2>Packs List</h2>
             <Packs status={status}
                    getAllPacks={getAllPacks}
                    getOnlyMyPacks={getOnlyMyPacks}
-                   addPackHandler={addPackHandler}
                    deletePack={deletePack}
-                   changeName={changeName}/>
+            />
 
         </div>
 

@@ -12,11 +12,9 @@ const Main = () => {
     return (
         <>
             <HashRouter>
-
                 <Header/>
                 {status === 'loading' && <LinearProgress color="secondary" />}
                 <Routes/>
-
             </HashRouter>
         </>
     )

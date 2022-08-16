@@ -5,12 +5,11 @@ import {addCardTC, setCardsPage, setCardsPageCount, setSearchQuestion} from '../
 import {useNavigate} from 'react-router-dom';
 import {TableContainerCards} from './TableContainerCards';
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {PaginationComponent} from "../../Packs/Pagination/PaginationComponent";
+import {PaginationComponent} from "../../Packs/PaginationComponent/PaginationComponent";
 import Button from '@mui/material/Button';
 import {ChangeEvent, useEffect, useState} from "react";
 import {ModalCard} from "../../../common/Modal/ModalCard";
 import st from './../../Packs/Packs.module.css'
-import {shorter} from "../../../utils/shorter";
 import {Search} from "../../../common/Search/Search";
 import useDebounce from "../../../utils/useDebounce";
 
@@ -75,14 +74,13 @@ export const TableCard = () => {
     return (
         <>
             <div>
-                <span className={st.Addcardbtn}>
+                <span className={st.addCardBtn}>
                     <>
                         <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
                              <ArrowBackIcon fontSize='large'/>
                         </IconButton>
                     </>
                 <h2>{packName}</h2>
-
                     <div>
                         <Button size='large' color='success' variant="contained" onClick={() => {
                             setActiveModal(true)
@@ -100,8 +98,6 @@ export const TableCard = () => {
                                            cardId={cardsPackId}
                                            packId={cardsPackId}
                 />}
-
-                {/*<h2>{shorter(packName, 50)}</h2>*/}
             </div>
             <Search value={value} callback={changeValueHandler}/>
             <TableContainerCards/>

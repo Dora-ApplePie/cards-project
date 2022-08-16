@@ -5,7 +5,7 @@ import {useFormik} from "formik";
 import React from "react";
 import Button from "@mui/material/Button";
 import {PATH} from "../../Routes/Routes";
-import {Navigate, NavLink} from "react-router-dom";
+import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {registrationTC} from "./registrationReducer";
 import s from "../Registration/Registration.module.css";
@@ -20,6 +20,7 @@ type FormikErrorType = {
 const Registration = () => {
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const status = useAppSelector(state => state.app.status);
     const isLoggedIn = useAppSelector(state => state.login.isLogin)
@@ -31,27 +32,13 @@ const Registration = () => {
             confirmPassword: ''
         },
         onSubmit: values => {
-            // dispatch(registrationTC(values))
-            // formik.resetForm();
             dispatch(registrationTC(values));
             formik.resetForm({values: {email: values.email, password: '', confirmPassword: ''}});
+            if (!isLoggedIn) {
+                navigate(`/login`);
+            }
+
         },
-        // validate: (values) => {
-        //     const errors: FormikErrorType = {};
-        //     if (!values.email) {
-        //         errors.email = 'required';
-        //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        //         errors.email = 'Invalid email address';
-        //     }
-        //     if (!values.password) {
-        //         errors.password = 'Password is required';
-        //     } else if (values.password.length <=8) {
-        //         errors.password = 'Password should be more than 8 symbols';
-        //     } else if (values.password !== values.confirmPassword ) {
-        //         errors.password = 'Password does not match'
-        //     }
-        //     return errors;
-        // },
         validate: (values) => {
             const errors: FormikErrorType = {};
             if (!values.email) {
@@ -82,14 +69,14 @@ const Registration = () => {
             <Grid item justifyContent={'center'}>
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
-                        <FormGroup>
+                        <FormGroup className={s.form}>
                             <h2 style={{textAlign: "center"}}>Registration</h2>
                             <TextField
                                 label='Email'
                                 margin='normal'
-                                color='primary'
                                 style={{minWidth: '305px'}}
                                 disabled={status === 'loading'}
+                                color={"secondary"}
                                 {...formik.getFieldProps('email')}
                             />
                             {formik.touched.email && formik.errors.email &&
@@ -99,6 +86,7 @@ const Registration = () => {
                                 label='Password'
                                 margin='normal'
                                 disabled={status === 'loading'}
+                                color={"secondary"}
                                 {...formik.getFieldProps('password')}
                             />
                             {formik.touched.email && formik.errors.password &&
@@ -108,12 +96,17 @@ const Registration = () => {
                                 label='Confirm password'
                                 margin='normal'
                                 disabled={status === 'loading'}
+                                color={"secondary"}
                                 {...formik.getFieldProps('confirmPassword')}
                             />
                             {formik.touched.confirmPassword &&
                             formik.errors.confirmPassword ?
                                 <div style={{color: 'red'}}>{formik.errors.confirmPassword}</div> : null}
-                            <Button className={s.forgotPassword} disabled={status === 'loading'}  color="secondary" type={'submit'} variant={'contained'}>
+                            <Button className={s.forgotPassword}
+                                    disabled={status === 'loading'}
+                                    color="secondary"
+                                    type={'submit'}
+                                    variant={'contained'}>
                                 Sign Up
                             </Button>
                             <div className={s.forgotPassword} style={{color: "grey"}}>Already have an account?</div>

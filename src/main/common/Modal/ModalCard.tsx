@@ -65,7 +65,7 @@ export const ModalCard: FC<PropsType> = ({
                 </div>
                 <div className={s.title}>{title}</div>
                 <div >
-                    <Input className={s.input}  onChange={onChangeCallbackForQuestion}  value={question}
+                    <Input className={s.input}  onChange={onChangeCallbackForQuestion}  value={question} autoFocus={true}
                                     placeholder='question'/>
                     <Input className={s.input}  onChange={onChangeCallbackForAnswer}
                                     value={answer}

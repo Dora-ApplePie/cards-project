@@ -32,7 +32,8 @@ export const CardSlider = () => {
                 <Stack direction='row' spacing={2}>
                 <span>{value[0]}</span>
                     <Slider
-                        sx={{  color: '#52af77',
+                        color={"secondary"}
+                        sx={{
                             height: 8,
                             '& .MuiSlider-track': {
                                 border: 'none',
@@ -40,7 +41,7 @@ export const CardSlider = () => {
                             '& .MuiSlider-thumb': {
                                 height: 24,
                                 width: 24,
-                                backgroundColor: '#fff',
+                                backgroundColor: '#eece00',
                                 border: '2px solid currentColor',
                                 '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
                                     boxShadow: 'inherit',
@@ -53,11 +54,12 @@ export const CardSlider = () => {
                                 lineHeight: 1.2,
                                 fontSize: 12,
                                 background: 'unset',
+                                color: "#000",
                                 padding: 0,
                                 width: 32,
                                 height: 32,
                                 borderRadius: '50% 50% 50% 0',
-                                backgroundColor: '#52af77',
+                                backgroundColor: '#eece00',
                                 transformOrigin: 'bottom left',
                                 transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
                                 '&:before': { display: 'none' },

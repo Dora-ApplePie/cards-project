@@ -76,7 +76,7 @@ export const authMeTC:any = (): AppThunk  => (dispatch) => {
         })
 }
 
-export const editProfileTC: any = (name:string): AppThunk => (dispatch, getState) => {
+export const editProfileTC: any = (name:string): AppThunk => (dispatch) => {
     dispatch(getStatusAC('loading'))
     return profileAPI.updateProfile(name)
         .then(() => {
@@ -94,7 +94,7 @@ export const editProfileTC: any = (name:string): AppThunk => (dispatch, getState
 }
 
 export const logOutTC: any = () => (dispatch: Dispatch) => {
-
+    dispatch(getStatusAC('loading'))
     profileAPI.logOut()
         .then(() => {
             dispatch(isLoginAC(false))
@@ -104,6 +104,7 @@ export const logOutTC: any = () => (dispatch: Dispatch) => {
             dispatch(setAppErrorAC(error));
         })
         .finally(() => {
+            dispatch(getStatusAC('succeeded'));
         })
 }
 

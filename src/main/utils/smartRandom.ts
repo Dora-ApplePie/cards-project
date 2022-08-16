@@ -1,4 +1,4 @@
-import {CardType} from "../pages/Packs/PacksTable/learnPack/learnPackApi";
+import {CardType} from "../pages/Packs/PacksTable/LearnPack/learnPackApi";
 
 
 export const getCard = (cards: CardType[]): CardType => {

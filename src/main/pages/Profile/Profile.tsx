@@ -1,5 +1,5 @@
 import s from './Profile.module.css'
-import avatar from './Sample_User_Icon.png'
+import avatar from '../../../assets/img/userIcon.png'
 import {ProfileType} from "./profileReducer";
 import React, {ChangeEvent, useState} from "react";
 import Button from "@mui/material/Button";

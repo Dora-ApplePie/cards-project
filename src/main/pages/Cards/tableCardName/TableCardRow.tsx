@@ -69,7 +69,7 @@ export const TableCardRow = ({question, answer, updated, grade, _id}: CardType) 
                     <Rating
                         value={Number(grade.toFixed(1))}
                         precision={0.1}
-                        icon={<FavoriteIcon fontSize="inherit" color="error"/>}
+                        icon={<FavoriteIcon fontSize="inherit" color="secondary"/>}
                         emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
                         size="medium"
                         disabled={status === 'loading'}

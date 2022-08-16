@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import TableCell from "@mui/material/TableCell";
 import {TableRowItem} from "./TableRowItem/TableRowItem";
 import {setCardsPageCount, setPage, setSearchPackName, setSortPackName} from "./packsTableReducer";
-import {PaginationComponent} from "../Pagination/PaginationComponent";
+import {PaginationComponent} from "../PaginationComponent/PaginationComponent";
 import { Search } from '../../../common/Search/Search';
 import useDebounce from "../../../utils/useDebounce";
 
@@ -31,14 +31,10 @@ const PacksTable = () => {
 
     const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value);
-
     }
 
-    const [name, setName] = useState<'0name' | '1name'>('0name');
     const [cardsCount, setCardsCount] = useState<'0cardsCount' | '1cardsCount'>('0cardsCount');
     const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
-    const [userName, setUserName] = useState<'0user_name' | '1user_name'>('0user_name');
-
     const dispatch = useAppDispatch();
     
     const totalCardsCount = useAppSelector(state => state.packList.cardPacksTotalCount);
@@ -54,11 +50,7 @@ const PacksTable = () => {
         dispatch(setCardsPageCount(value));
     }
 
-    const handleNameSort = () => {
-        setName(name === '0name' ? '1name' : '0name');
-        name && dispatch(setSortPackName(name));
-    }
-
+    //sort
     const handleCardsCount = () => {
         setCardsCount(cardsCount === '0cardsCount' ? '1cardsCount' : '0cardsCount');
         cardsCount && dispatch(setSortPackName(cardsCount));
@@ -69,10 +61,6 @@ const PacksTable = () => {
         updated && dispatch(setSortPackName(updated));
     }
 
-    const handleSortUserName = () => {
-        setUserName(userName === '0user_name' ? '1user_name' : '0user_name');
-        userName && dispatch(setSortPackName(userName));
-    }
     return (
         <Paper elevation={3} style={{background: 'rgba(255, 255, 255, 0.7)'}}>
             <div className={styles.search}>
@@ -83,20 +71,13 @@ const PacksTable = () => {
                     <TableHead>
                         <TableRow sx={{display: 'grid', gridTemplateColumns: '21% 15% 19% 17% 28%'}}>
                             <TableCell>
-                                <TableSortLabel
-                                    active={true}
-                                    disabled={status === 'loading'}
-                                    direction={name === '1name' ? 'asc' : 'desc'}
-                                    onClick={handleNameSort}
-                                >
-                                </TableSortLabel>
                                 <b>Name</b>
                             </TableCell>
                             <TableCell align="center">
                                 <TableSortLabel
                                     active={true}
                                     disabled={status === 'loading'}
-                                    direction={cardsCount === '1cardsCount' ? 'asc' : 'desc'}
+                                    direction={cardsCount === '0cardsCount' ? 'asc' : 'desc'}
                                     onClick={handleCardsCount}
                                 >
                                 </TableSortLabel>
@@ -113,13 +94,6 @@ const PacksTable = () => {
                                 <b>Last Updated</b>
                             </TableCell>
                             <TableCell align="center">
-                                <TableSortLabel
-                                    active={true}
-                                    disabled={status === 'loading'}
-                                    direction={userName === '1user_name' ? 'asc' : 'desc'}
-                                    onClick={handleSortUserName}
-                                >
-                                </TableSortLabel>
                                 <b>Created by</b>
                             </TableCell>
                             <TableCell align="center">

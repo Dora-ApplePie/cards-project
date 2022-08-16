@@ -49,7 +49,7 @@ export const ModalChangeData: FC<PropsType> = ({
                 </div>
                 <div className={s.title}>{title}</div>
                 <div>
-                    <Input  className={s.input} onChange={onChangeCallback} value={input}/>
+                    <Input  className={s.input} onChange={onChangeCallback} value={input} autoFocus={true}/>
                     <Button className={s.buttonAccept} onClick={isAddingForm ? successAddHandler : successHandler} disabled={!input}
                     >Ok</Button>
                 </div>

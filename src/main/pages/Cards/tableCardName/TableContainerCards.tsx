@@ -16,34 +16,14 @@ export const TableContainerCards = () => {
 
     const cards = useAppSelector(state => state.cardPack.cards)
     const status = useAppSelector(state => state.app.status)
-    const [question, setQuestion] = useState<'0question' | '1question'>('0question');
-    const [answer, setAnswer] = useState<'0answer' | '1answer'>('0answer');
-    const [updated, setUpdated] = useState<'0updated' | '1updated'>('1updated');
     const [grade, setGrade] = useState<'0grade' | '1grade'>('0grade');
     const dispatch = useAppDispatch();
 
-
-    const handleSortQuestion = () => {
-        setQuestion(question === '0question' ? '1question' : '0question');
-        question && dispatch(setSortCards(question));
-    }
-
-    const handleSortAnswer = () => {
-        setAnswer(answer === '0answer' ? '1answer' : '0answer');
-        answer && dispatch(setSortCards(answer));
-    }
-
-    const handleSortUpdated = () => {
-        setUpdated(updated === '0updated' ? '1updated' : '0updated');
-        updated && dispatch(setSortCards(updated));
-    }
 
     const handleSortGrade = () => {
         setGrade(grade === '0grade' ? '1grade' : '0grade');
         grade && dispatch(setSortCards(grade));
     }
-
-
 
     return (
         <Table>
@@ -53,30 +33,12 @@ export const TableContainerCards = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell align="justify">
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={question === '1question' ? 'asc' : 'desc'}
-                                        onClick={handleSortQuestion}>
-                                    </TableSortLabel>
                                     <b>Question</b>
                                 </TableCell>
                                 <TableCell align="justify">
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={answer === '1answer' ? 'asc' : 'desc'}
-                                        onClick={handleSortAnswer}>
-                                    </TableSortLabel>
                                     <b>Answer</b>
                                 </TableCell>
                                 <TableCell align="justify">
-                                    <TableSortLabel
-                                        active={true}
-                                        disabled={status === 'loading'}
-                                        direction={updated === '1updated' ? 'asc' : 'desc'}
-                                        onClick={handleSortUpdated}>
-                                    </TableSortLabel>
                                     <b>Updated</b>
                                 </TableCell>
                                 <TableCell align="justify">

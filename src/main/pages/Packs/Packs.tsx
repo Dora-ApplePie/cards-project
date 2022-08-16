@@ -14,9 +14,7 @@ type PacksPropsType = {
     status: RequestStatusType
     getAllPacks: () => void
     getOnlyMyPacks: () => void
-    addPackHandler: () => void
     deletePack: (id: string) => void
-    changeName: (id: string) => void
 }
 
 export const Packs = (props: PacksPropsType) => {
@@ -26,9 +24,7 @@ export const Packs = (props: PacksPropsType) => {
     const [packName, setPackName] = useState<string>('')
 
 
-
     const onClickAddPackHandler = () => {
-        debugger
         dispatch(addPackTC(packName))
         closeModal()
     }
@@ -41,21 +37,23 @@ export const Packs = (props: PacksPropsType) => {
 
     return (
         <div>
-            <span className={s.Addbtn}>
+            <span className={s.addBtn}>
                 <div>
                     <Stack direction='row' spacing={2}>
-                    <Button color='success' variant="contained" onClick={props.getAllPacks}>All packs</Button>
-                    <Button color='success' variant="contained" onClick={props.getOnlyMyPacks}>My packs</Button>
+                    <Button style={{color:"#eece00"}} color='secondary' variant="contained" onClick={props.getAllPacks}>All packs</Button>
+                    <Button style={{backgroundColor:"#eece00", color: "purple"}} variant="contained" onClick={props.getOnlyMyPacks}>My packs</Button>
                 </Stack>
                 </div>
                     <CardSlider/>
                 <div>
-                    <Button color='success'
+                    <Button style={{backgroundColor:"#eece00", color: "purple"}}
                             variant="contained"
                             startIcon={<LibraryAddIcon/>}
-                            onClick={() => {setActiveModal(true)}}
+                            onClick={() => {
+                                setActiveModal(true)
+                            }}
                             disabled={props.status === 'loading'}>
-                        Add pack
+                        Add new pack
                     </Button>
                 </div>
 
@@ -69,8 +67,8 @@ export const Packs = (props: PacksPropsType) => {
                     isAddingForm={true}
                     title='Please, enter the name of the pack'/>}
             </span>
-            <PacksTable/>
 
+            <PacksTable/>
 
         </div>
     )

@@ -21,7 +21,6 @@ export const TableCardName = () => {
 	const maxCards = useAppSelector(state => state.cardPack.max);
 
 	useEffect(() => {
-		console.log('cpid', cardsPack_id)
 		if (cardsPack_id) {
 			dispatch(fetchCardsTC());
 		}
