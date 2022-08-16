@@ -20,20 +20,22 @@ function Header() {
             {!islogin
                 ? <Box sx={{flexGrow: 1}}>
                     <AppBar position="static" color={"inherit"}>
-                        <Toolbar>
+                        <Toolbar style={{width: "85%", margin: "0 auto"}}>
                             <Avatar sx={{marginRight: '5px'}} src={appLogo} alt={'logo'}/>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            <Typography style={{fontWeight: "400"}} variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Learning App
                             </Typography>
-                            <Button variant="outlined" color="secondary"><NavLink style={{color: "inherit", textDecoration: "none"}} to={PATH.LOGIN}>Sign in</NavLink></Button>
+                            <Button variant="outlined" color="secondary"><NavLink
+                                style={{color: "inherit", textDecoration: "none"}} to={PATH.LOGIN}>Sign
+                                in</NavLink></Button>
                         </Toolbar>
                     </AppBar>
                 </Box>
                 : <Box sx={{flexGrow: 1}}>
                     <AppBar position="static" color={"inherit"}>
-                        <Toolbar>
+                        <Toolbar style={{width: "85%", margin: "0 auto"}}>
                             <Avatar sx={{marginRight: '5px'}} src={appLogo} alt={'logo'}/>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            <Typography style={{fontWeight: "400"}} variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Learning App
                             </Typography>
                             {userName}
