@@ -7,7 +7,6 @@ import Profile from './Profile';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {Typography} from "@mui/material";
 
 
 export const ProfileContainer = () => {
@@ -38,17 +37,12 @@ export const ProfileContainer = () => {
 
 
     return (
-        <div>
+        <div style={{width: "80%", margin: "0 auto"}}>
             <>
-                <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
+                <IconButton style={{margin: "10px 0"}} disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
                     <ArrowBackIcon fontSize='medium'/>
                 </IconButton>
-                <Typography
-                    noWrap
-                    component="a"
-                >
-                    Back to Packs list
-                </Typography>
+                    <span>Back to Packs list</span>
             </>
             <Profile profile={profile} logOutHandler={logOutHandler} EditMode={activateEditMode} status={status}/>
         </div>

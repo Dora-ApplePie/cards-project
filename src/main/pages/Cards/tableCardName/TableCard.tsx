@@ -9,7 +9,6 @@ import {PaginationComponent} from "../../Packs/PaginationComponent/PaginationCom
 import Button from '@mui/material/Button';
 import {ChangeEvent, useEffect, useState} from "react";
 import {ModalCard} from "../../../common/Modal/ModalCard";
-import st from './../../Packs/Packs.module.css'
 import {Search} from "../../../common/Search/Search";
 import useDebounce from "../../../utils/useDebounce";
 
@@ -65,8 +64,12 @@ export const TableCard = () => {
         }
     }
 
-    const onChangeTextAddHandlerFirst = (value: string) => {setQuestion(value)}
-    const onChangeTextAddHandlerSecond = (value: string) => {setAnswer(value)}
+    const onChangeTextAddHandlerFirst = (value: string) => {
+        setQuestion(value)
+    }
+    const onChangeTextAddHandlerSecond = (value: string) => {
+        setAnswer(value)
+    }
 
     const closeModal = () => setActiveModal(false)
 
@@ -74,20 +77,20 @@ export const TableCard = () => {
     return (
         <>
             <div>
-                <span className={st.addCardBtn}>
-                    <>
-                        <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
-                             <ArrowBackIcon fontSize='large'/>
-                        </IconButton>
-                    </>
-                <h2>{packName}</h2>
-                    <div>
-                        <Button size='large' color='success' variant="contained" onClick={() => {
-                            setActiveModal(true)
-                        }} disabled={myId !== packUserId || status === 'loading'}>Add card</Button>
+                <div>
+                    <IconButton disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
+                        <ArrowBackIcon fontSize='medium'/>
+                    </IconButton>
+                    <span>Back to Packs list</span>
+                </div>
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+                        <h2>{packName}</h2>
+                        <Button style={{backgroundColor: "#eece00", color: "purple"}} variant="contained"
+                                onClick={() => {
+                                    setActiveModal(true)
+                                }} disabled={myId !== packUserId || status === 'loading'}>Add new card</Button>
                     </div>
-                </span>
-
+                <Search value={value} callback={changeValueHandler}/>
                 {activeModal && <ModalCard onChangeQuestion={onChangeTextAddHandlerFirst}
                                            onChangeAnswer={onChangeTextAddHandlerSecond}
                                            closeModal={closeModal}
@@ -99,7 +102,6 @@ export const TableCard = () => {
                                            packId={cardsPackId}
                 />}
             </div>
-            <Search value={value} callback={changeValueHandler}/>
             <TableContainerCards/>
             <div>
                 <PaginationComponent

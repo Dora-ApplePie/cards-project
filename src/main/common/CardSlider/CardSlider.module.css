@@ -1,5 +1,14 @@
-/**/
+.slider {
+    width: 50%;
+}
 
-.slider{
-    width: 300px;
+.label {
+    /*border: 1px grey solid;*/
+    border-radius: 7px;
+    padding: 7px;
+    background: rgba(255, 222, 0, 0.93);
+    min-width: 25px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(140, 1, 253, 0.49);
 }

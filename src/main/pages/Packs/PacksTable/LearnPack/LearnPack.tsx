@@ -103,17 +103,17 @@ export const LearnPack = () => {
                                         </FormControl>
                                     </div>
                                     <div className={styles.buttons_answer}>
-                                        <Button color="secondary" type={'submit'} variant="outlined"
+                                        <Button style={{color:"#fcef02"}} color='secondary' variant="contained"
                                                 onClick={handleCancel}>Back to pack list</Button>
-                                        <Button color="secondary" type={'submit'} variant="outlined"
+                                        <Button style={{backgroundColor:"#eece00", color: "purple"}} variant="contained"
                                                 onClick={handleNext}>Next</Button>
                                     </div>
                                 </>
                             ) : (
                                 <div className={styles.buttons_question}>
-                                    <Button color="secondary" type={'submit'} variant="outlined"
+                                    <Button style={{color:"#fcef02"}} color='secondary' variant="contained"
                                             onClick={handleCancel}>Back to pack list</Button>
-                                    <Button color="secondary" type={'submit'} variant="outlined"
+                                    <Button style={{backgroundColor:"#eece00", color: "purple"}} variant="contained"
                                             onClick={handleToggleShowAnswer}>Show answer</Button>
                                 </div>
                             )}

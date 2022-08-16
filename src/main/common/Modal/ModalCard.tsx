@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FC, KeyboardEvent} from 'react'
-import {Button} from "@material-ui/core";
+import Button from '@mui/material/Button';
 import {Input} from "@mui/material";
 import s from './Modal.module.css'
 import CloseIcon from "@mui/icons-material/Close";
@@ -59,18 +59,18 @@ export const ModalCard: FC<PropsType> = ({
         <div className={s.wrapper} onClick={closeModal} onKeyUp={onKeyPressHandler}>
             <div className={s.modal} onClick={e => {e.stopPropagation()}}>
                 <div className={s.closeBtnWrapper}>
-                    <Button className={s.buttonClose} onClick={closeModal} size="large">
+                    <Button color="secondary"  className={s.buttonClose} onClick={closeModal} size="medium">
                         <CloseIcon fontSize="large"/>
                     </Button>
                 </div>
                 <div className={s.title}>{title}</div>
                 <div >
-                    <Input className={s.input}  onChange={onChangeCallbackForQuestion}  value={question} autoFocus={true}
+                    <Input color='secondary' className={s.input}  onChange={onChangeCallbackForQuestion}  value={question} autoFocus={true}
                                     placeholder='question'/>
-                    <Input className={s.input}  onChange={onChangeCallbackForAnswer}
+                    <Input color='secondary' className={s.input}  onChange={onChangeCallbackForAnswer}
                                     value={answer}
                                     placeholder='answer'/>
-                    <Button  className={s.buttonAccept} onClick={successHandler}
+                    <Button color="secondary" className={s.buttonAccept} onClick={successHandler}
                                  disabled={!(question && answer)}>Ok
                     </Button>
                 </div>

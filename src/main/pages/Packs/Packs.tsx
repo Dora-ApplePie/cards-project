@@ -34,30 +34,33 @@ export const Packs = (props: PacksPropsType) => {
     }
     const onChangeTextHandler = (value: string) => setPackName(value)
 
-
     return (
         <div>
+
+            <div style={{display: "flex", justifyContent: "space-between", alignItems: "baseline"}}>
+                <h2>Packs List</h2>
+                <Button style={{backgroundColor: "#eece00", color: "purple"}}
+                        variant="contained"
+                        startIcon={<LibraryAddIcon/>}
+                        onClick={() => {
+                            setActiveModal(true)
+                        }}
+                        disabled={props.status === 'loading'}>
+                    Add new pack
+                </Button>
+            </div>
+
             <span className={s.addBtn}>
+                 <CardSlider/>
                 <div>
+                     <div style={{textAlign: "center", margin: "10px 0"}}>Show packs cards</div>
                     <Stack direction='row' spacing={2}>
-                    <Button style={{color:"#eece00"}} color='secondary' variant="contained" onClick={props.getAllPacks}>All packs</Button>
-                    <Button style={{backgroundColor:"#eece00", color: "purple"}} variant="contained" onClick={props.getOnlyMyPacks}>My packs</Button>
+                    <Button style={{color: "#fcef02", margin: "0 20px"}} color='secondary' variant="contained"
+                            onClick={props.getAllPacks}>All packs</Button>
+                    <Button style={{backgroundColor: "#eece00", color: "purple", margin: "0 20px"}} variant="contained"
+                            onClick={props.getOnlyMyPacks}>My packs</Button>
                 </Stack>
                 </div>
-                    <CardSlider/>
-                <div>
-                    <Button style={{backgroundColor:"#eece00", color: "purple"}}
-                            variant="contained"
-                            startIcon={<LibraryAddIcon/>}
-                            onClick={() => {
-                                setActiveModal(true)
-                            }}
-                            disabled={props.status === 'loading'}>
-                        Add new pack
-                    </Button>
-                </div>
-
-
                 {activeModal && <ModalChangeData
                     packId={packId}
                     closeModal={closeModal}

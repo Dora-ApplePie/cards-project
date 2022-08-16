@@ -50,13 +50,11 @@ export const PacksList = () => {
 
     return (
         <div className={styles.packsContainer}>
-            <h2>Packs List</h2>
             <Packs status={status}
                    getAllPacks={getAllPacks}
                    getOnlyMyPacks={getOnlyMyPacks}
                    deletePack={deletePack}
             />
-
         </div>
 
     )

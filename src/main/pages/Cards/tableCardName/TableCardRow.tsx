@@ -61,7 +61,7 @@ export const TableCardRow = ({question, answer, updated, grade, _id}: CardType) 
                                              {shorter(question, 50)}
                                         </span>
                 </TableCell>
-                <TableCell align="justify">{shorter(answer, 100)}</TableCell>
+                <TableCell align="justify">{shorter(answer, 70)}</TableCell>
                 <TableCell align="justify">
                     {new Date(updated).toLocaleDateString()}
                 </TableCell>

@@ -27,10 +27,10 @@ export const CardSlider = () => {
     return (
         <div className={styles.slider}>
 
-            <div style={{textAlign: "center"}}>Number of cards</div>
+            <div style={{textAlign: "center",  margin: "10px 0"}}>Number of cards</div>
             <span>
                 <Stack direction='row' spacing={2}>
-                <span>{value[0]}</span>
+                <span className={styles.label}>{value[0]}</span>
                     <Slider
                         color={"secondary"}
                         sx={{
@@ -41,7 +41,7 @@ export const CardSlider = () => {
                             '& .MuiSlider-thumb': {
                                 height: 24,
                                 width: 24,
-                                backgroundColor: '#eece00',
+                                backgroundColor: '#f8d803',
                                 border: '2px solid currentColor',
                                 '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
                                     boxShadow: 'inherit',
@@ -59,7 +59,7 @@ export const CardSlider = () => {
                                 width: 32,
                                 height: 32,
                                 borderRadius: '50% 50% 50% 0',
-                                backgroundColor: '#eece00',
+                                backgroundColor: '#f8d603',
                                 transformOrigin: 'bottom left',
                                 transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
                                 '&:before': { display: 'none' },
@@ -78,7 +78,7 @@ export const CardSlider = () => {
                         disabled={status === 'loading'}
                         onChangeCommitted={handleClick}
                     />
-                <span>{value[1]}</span>
+                <span  className={styles.label}>{value[1]}</span>
                 </Stack>
             </span>
 

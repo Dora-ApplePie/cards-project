@@ -8,7 +8,7 @@ import SetPassword from "../pages/SetPassword/SetPassword";
 import {ProfileContainer} from "../pages/Profile/ProfileContainer";
 import {PacksList} from "../pages/Packs/PacksList/PacksList";
 import {TableCardName} from "../pages/Cards/tableCardName/TableCardName";
-import { LearnPack } from '../pages/Packs/PacksTable/LearnPack/LearnPack';
+import {LearnPack} from '../pages/Packs/PacksTable/LearnPack/LearnPack';
 
 export const PATH = {
     REGISTRATION: '/register',
@@ -26,23 +26,19 @@ export const PATH = {
 
 function Pages() {
     return (
-            <Routes>
-                <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
-
-                <Route path={PATH.REGISTRATION} element={<Registration/>}/>
-                <Route path={PATH.LOGIN} element={<Login/>}/>
-                <Route path={PATH.PROFILE} element={<ProfileContainer/>}/>
-                <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
-                <Route path={PATH.SET_PASSWORD} element={<SetPassword/>}/>
-                <Route path={PATH.PACKS} element={<PacksList/>}/>
-                <Route path={PATH.CARDS + `/:id`} element={<TableCardName/>}/>
-                <Route path={PATH.PAGE404} element={<Page404/>}/>
-                <Route path={'/*'} element={<Page404/>}/>
-                <Route path={PATH.LEARN_PACK} element={<LearnPack/>}/>
-
-
-
-            </Routes>
+        <Routes>
+            <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
+            <Route path={PATH.REGISTRATION} element={<Registration/>}/>
+            <Route path={PATH.LOGIN} element={<Login/>}/>
+            <Route path={PATH.PROFILE} element={<ProfileContainer/>}/>
+            <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
+            <Route path={PATH.SET_PASSWORD} element={<SetPassword/>}/>
+            <Route path={PATH.PACKS} element={<PacksList/>}/>
+            <Route path={PATH.CARDS + `/:id`} element={<TableCardName/>}/>
+            <Route path={PATH.PAGE404} element={<Page404/>}/>
+            <Route path={'/*'} element={<Page404/>}/>
+            <Route path={PATH.LEARN_PACK} element={<LearnPack/>}/>
+        </Routes>
     )
 }
 

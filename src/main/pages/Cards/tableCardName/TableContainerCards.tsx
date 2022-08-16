@@ -9,7 +9,6 @@ import TableBody from '@mui/material/TableBody';
 import Paper from '@mui/material/Paper';
 import TableCell from '@mui/material/TableCell/TableCell';
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {CircularProgress} from '@material-ui/core';
 import {TableCardRow} from './TableCardRow';
 
 export const TableContainerCards = () => {
@@ -67,7 +66,7 @@ export const TableContainerCards = () => {
                                 />))
                                 : (
                                     <TableRow>
-                                        <TableCell>{<CircularProgress/>}</TableCell>
+                                        <TableCell><h3>No cards yet</h3></TableCell>
                                     </TableRow>)}
                         </TableBody>
                     </Table>

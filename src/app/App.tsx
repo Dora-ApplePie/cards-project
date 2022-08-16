@@ -20,8 +20,7 @@ const App = () => {
 
     if (!isInitialized) {
         return <div>
-            <CircularProgress sx={{
-                color: 'seagreen',
+            <CircularProgress color={"secondary"} sx={{
                 position: 'absolute',
                 top: '45%',
                 left: '45%',

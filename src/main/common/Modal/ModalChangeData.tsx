@@ -45,12 +45,12 @@ export const ModalChangeData: FC<PropsType> = ({
         <div className={s.wrapper}>
             <div className={s.modal}>
                 <div className={s.closeBtnWrapper}>
-                    <Button className={s.buttonClose} onClick={closeModal} size="large"><CloseIcon fontSize="large"/></Button>
+                    <Button color="secondary" className={s.buttonClose} onClick={closeModal} size="medium"><CloseIcon fontSize="large"/></Button>
                 </div>
                 <div className={s.title}>{title}</div>
                 <div>
-                    <Input  className={s.input} onChange={onChangeCallback} value={input} autoFocus={true}/>
-                    <Button className={s.buttonAccept} onClick={isAddingForm ? successAddHandler : successHandler} disabled={!input}
+                    <Input color="secondary"  className={s.input} onChange={onChangeCallback} value={input} autoFocus={true}/>
+                    <Button color="secondary" className={s.buttonAccept} onClick={isAddingForm ? successAddHandler : successHandler} disabled={!input}
                     >Ok</Button>
                 </div>
             </div>
