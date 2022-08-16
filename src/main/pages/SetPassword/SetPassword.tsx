@@ -75,10 +75,10 @@ const SetPassword = () => {
                             {formik.touched.password && formik.errors.password &&
                                 <div style={{color: "red"}}>{formik.errors.password}</div>}
 
-                            <div style={{color: 'grey'}}>Create new password and we will send you further instructions
+                            <div style={{color: 'grey', margin: "5px"}}>Create new password and we will send you further instructions
                                 to email
                             </div>
-                            <Button variant={'contained'} color="secondary" type="submit"
+                            <Button style={{marginTop: "10px"}} variant={'contained'} color="secondary" type="submit"
                                     disabled={status === 'loading'}>
                                 Create new password</Button>
                         </FormGroup>

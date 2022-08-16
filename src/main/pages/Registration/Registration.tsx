@@ -102,7 +102,7 @@ const Registration = () => {
                             {formik.touched.confirmPassword &&
                             formik.errors.confirmPassword ?
                                 <div style={{color: 'red'}}>{formik.errors.confirmPassword}</div> : null}
-                            <Button className={s.forgotPassword}
+                            <Button style={{marginTop: "5px"}}
                                     disabled={status === 'loading'}
                                     color="secondary"
                                     type={'submit'}

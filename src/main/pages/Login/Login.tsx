@@ -95,7 +95,7 @@ const Login = () => {
                                     checked={formik.values.rememberMe}
                                     {...formik.getFieldProps('rememberMe')}/>
                             }/>
-                            <Button disabled={status === 'loading'} color="secondary" type={'submit'} variant={'contained'}>
+                            <Button style={{marginTop: "5px", marginBottom: "5px"}} disabled={status === 'loading'} color="secondary" type={'submit'} variant={'contained'}>
                                 Login
                             </Button>
                             <NavLink className={s.forgotPassword} to={PATH.FORGOT_PASSWORD} onClick={handleClick}>Forgot Password</NavLink>

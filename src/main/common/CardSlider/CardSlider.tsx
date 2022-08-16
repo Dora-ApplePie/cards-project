@@ -27,7 +27,7 @@ export const CardSlider = () => {
     return (
         <div className={styles.slider}>
 
-            <div style={{textAlign: "center",  margin: "10px 0"}}>Number of cards</div>
+            <div style={{textAlign: "center",  margin: "10px 0", fontWeight: "500"}}>Number of cards</div>
             <span>
                 <Stack direction='row' spacing={2}>
                 <span className={styles.label}>{value[0]}</span>

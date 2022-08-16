@@ -69,14 +69,14 @@ const ForgotPassword = () => {
                             {formik.touched.email && formik.errors.email &&
                                 <div style={{color: "red"}}>{formik.errors.email}</div>}
 
-                            <div style={{color: "grey"}}>Enter your email address and we will send you further
+                            <div style={{color: "grey", margin: "7px"}}>Enter your email address and we will send you further
                                 instructions
                             </div>
-                            <Button variant={'contained'} color="secondary" type="submit"
+                            <Button style={{margin: "7px"}} variant={'contained'} color="secondary" type="submit"
                                     disabled={status === 'loading'}>Send
                                 instructions</Button>
-                            <div style={{color: "grey"}}>Did you remember your password?</div>
-                            <NavLink to={PATH.LOGIN} onClick={handleDisableClick}>Try logging in</NavLink>
+                            <div style={{color: "grey", margin: "7px"}}>Did you remember your password?</div>
+                            <NavLink className={s.forgotPassword} to={PATH.LOGIN} onClick={handleDisableClick}>Try logging in</NavLink>
                         </FormGroup>
                     </FormControl>
                 </form>
