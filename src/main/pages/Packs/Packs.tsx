@@ -54,7 +54,7 @@ export const Packs = (props: PacksPropsType) => {
                  <CardSlider/>
 
                 <div>
-                     <div style={{textAlign: "center", margin: "10px 0", fontWeight: "500"}}>Show packs cards</div>
+                     <div style={{textAlign: "center", margin: "20px 0", fontWeight: "500"}}>Show packs cards</div>
                     <Stack direction='row' spacing={2}>
                     <Button style={{color: "#fcef02", margin: "0 20px"}} color='secondary' variant="contained"
                             onClick={props.getAllPacks}>All packs</Button>

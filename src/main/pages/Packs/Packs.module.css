@@ -9,5 +9,5 @@
     display: flex;
     justify-content: space-around;
     padding-bottom: 30px;
-    align-items: center;
+    align-items: flex-end;
 }

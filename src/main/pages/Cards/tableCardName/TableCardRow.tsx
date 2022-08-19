@@ -58,10 +58,10 @@ export const TableCardRow = ({question, answer, updated, grade, _id}: CardType) 
             <TableRow>
                 <TableCell component="th" scope="row">
                                         <span style={{display: 'inline-block', flex: '1 1 auto'}}>
-                                             {shorter(question, 50)}
+                                             {shorter(question, 40)}
                                         </span>
                 </TableCell>
-                <TableCell align="justify">{shorter(answer, 70)}</TableCell>
+                <TableCell align="justify">{shorter(answer, 40)}</TableCell>
                 <TableCell align="justify">
                     {new Date(updated).toLocaleDateString()}
                 </TableCell>
@@ -69,7 +69,7 @@ export const TableCardRow = ({question, answer, updated, grade, _id}: CardType) 
                     <Rating
                         value={Number(grade.toFixed(1))}
                         precision={0.1}
-                        icon={<FavoriteIcon fontSize="inherit" color="secondary"/>}
+                        icon={<FavoriteIcon fontSize="inherit" color="error"/>}
                         emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
                         size="medium"
                         disabled={status === 'loading'}
@@ -81,6 +81,7 @@ export const TableCardRow = ({question, answer, updated, grade, _id}: CardType) 
                         <IconButton onClick={() => setActiveModalDelete(true)}
                                     disabled={disabled}
                                     aria-label="delete"
+                                    color="secondary"
                         >
                             <DeleteForeverIcon/>
                         </IconButton>
@@ -96,6 +97,8 @@ export const TableCardRow = ({question, answer, updated, grade, _id}: CardType) 
                             onClick={() => setActiveModalUpdate(true)}
                             disabled={disabled}
                             aria-label="delete"
+                            color="secondary"
+
                         >
                             <CreateIcon/>
                         </IconButton>
