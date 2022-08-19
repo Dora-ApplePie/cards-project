@@ -4,7 +4,7 @@ import styles from './PaginationComponent.module.css';
 import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
-import {Pagination} from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 
 type PaginationComponentType = {
     totalCardsCount?: number

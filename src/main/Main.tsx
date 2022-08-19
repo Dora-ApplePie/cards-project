@@ -3,7 +3,7 @@ import Routes from "./Routes/Routes";
 import Header from "./Header/Header";
 import React from "react";
 import {useAppSelector} from "../app/hooks";
-import {LinearProgress} from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Main = () => {
 

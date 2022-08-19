@@ -31,11 +31,12 @@
 
 .avatarBox {
     position: relative;
+    margin: 20px;
 }
 
 .avatar {
     width: 160px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 

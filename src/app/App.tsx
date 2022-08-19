@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.module.css';
 import Main from "../main/Main";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {useAppDispatch, useAppSelector} from "./hooks";
 import {initializeAppTC} from "./app-reducer";
 import {ErrorSnackbar} from "../main/common/ErrorSnackbar/ErrorSnackbar";

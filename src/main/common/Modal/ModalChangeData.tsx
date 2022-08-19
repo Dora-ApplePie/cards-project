@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FC} from 'react'
 import {useParams} from 'react-router-dom';
-import {Button, Input} from "@mui/material";
+import Input from "@mui/material/Input";
+import Button from "@mui/material/Button";
 import s from './Modal.module.css'
 import CloseIcon from '@mui/icons-material/Close';
 type PropsType = {

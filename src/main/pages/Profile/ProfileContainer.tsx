@@ -37,9 +37,9 @@ export const ProfileContainer = () => {
 
 
     return (
-        <div style={{width: "80%", margin: "0 auto"}}>
+        <div style={{width: "85%", margin: "0 auto"}}>
             <>
-                <IconButton style={{margin: "10px 0"}} disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
+                <IconButton style={{margin: "20px 0"}} disabled={status === 'loading'} onClick={onChangeNavigateHandler}>
                     <ArrowBackIcon fontSize='medium'/>
                 </IconButton>
                     <span>Back to Packs list</span>

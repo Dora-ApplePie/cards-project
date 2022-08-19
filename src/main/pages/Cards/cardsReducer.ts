@@ -1,5 +1,5 @@
 import axios, {AxiosError} from 'axios';
-import {AppStoreType, AppThunk} from "../../../app/store";
+import {AppRootStateType, AppThunk} from "../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 import {cardsAPI, CardsTypeResponseType, CardType} from '../../../api/cards&packsAPI/CardsAPI';
 
@@ -82,7 +82,7 @@ export const setSearchQuestion = (searchCardQuestion: string) => ({
     searchCardQuestion,
 } as const);
 
-export const fetchCardsTC = (): AppThunk => async (dispatch, getState: () => AppStoreType) => {
+export const fetchCardsTC = (): AppThunk => async (dispatch, getState: () => AppRootStateType) => {
     const {
         cardsPack_id,
         page,

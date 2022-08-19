@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import {useNavigate, useParams} from 'react-router-dom';
 import {ChangeEvent, useEffect, useState} from 'react';
-import {Typography} from '@mui/material';
+import Typography from '@mui/material/Typography';
 import {getCardsPack, setCardPack, updateGradePack} from './learnPackReducer';
 import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
 import {getCard} from "../../../../utils/smartRandom";

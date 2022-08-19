@@ -3,7 +3,7 @@ import Slider from '@mui/material/Slider';
 import styles from './CardSlider.module.css';
 import {useAppDispatch, useAppSelector} from '../../../app/hooks';
 import {setMaxNumberCards, setMinNumberCards} from "../../pages/Packs/PacksTable/packsTableReducer";
-import {Stack} from '@mui/material';
+import Stack from "@mui/material/Stack";
 
 
 export const CardSlider = () => {

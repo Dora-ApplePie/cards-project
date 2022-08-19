@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, KeyboardEvent} from 'react'
 import Button from '@mui/material/Button';
-import {Input} from "@mui/material";
+import Input from "@mui/material/Input";
 import s from './Modal.module.css'
 import CloseIcon from "@mui/icons-material/Close";
 

@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
-import {Button, Stack} from "@mui/material"
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import s from './Modal.module.css'
 import CloseIcon from "@mui/icons-material/Close";
 

@@ -1,9 +1,14 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
 import {PATH} from "../Routes/Routes";
-import style from './Header.module.css'
 import {useAppSelector} from "../../app/hooks";
-import {AppBar, Avatar, Box, IconButton, Toolbar, Tooltip, Typography} from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import defaultAvatar from '../../assets/img/userIcon.png'
 import appLogo from '../../assets/img/logoIcon.png.png'
 import Button from "@mui/material/Button";

@@ -1,5 +1,5 @@
 import {AxiosError} from 'axios';
-import {AppStoreType, AppThunk} from "../../../app/store";
+import {AppRootStateType, AppThunk} from "../../../app/store";
 import {getStatusAC, setAppErrorAC} from "../../../app/app-reducer";
 import {Dispatch} from "redux";
 import {packsAPI, PacksParamsResponseType, PackType} from "../../../api/cards&packsAPI/PacksAPI";
@@ -37,7 +37,7 @@ export const setPackModalParams = (data: { packId: string, packName?: string }) 
 } as const);
 
 
-export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () => AppStoreType) => {
+export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const {pageCount, page, packName, sortPacks, min, max} = getState().tablePacks;
     const user_id = getState().profile.myId
 
@@ -68,7 +68,7 @@ export const fetchCardPacks = (): AppThunk => (dispatch: Dispatch, getState: () 
         })
 }
 
-export const addPackTC = (name: string): AppThunk => (dispatch, getState) => {
+export const addPackTC = (name: string): AppThunk => (dispatch) => {
     dispatch(getStatusAC('loading'))
     packsAPI.addPack({name})
         .then(response => {
@@ -97,7 +97,7 @@ export const deletePackTC = (packId: string | null): AppThunk => (dispatch) => {
         })
 }
 
-export const updatePackTC = (packId: string, name: string): AppThunk => (dispatch, getState) => {
+export const updatePackTC = (packId: string, name: string): AppThunk => (dispatch) => {
     dispatch(getStatusAC('loading'))
     const newPack = {
         _id: packId,

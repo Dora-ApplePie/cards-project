@@ -1,11 +1,12 @@
+import React, {ChangeEvent, useState} from "react";
 import s from './Profile.module.css'
 import avatar from '../../../assets/img/userIcon.png'
 import {ProfileType} from "./profileReducer";
-import React, {ChangeEvent, useState} from "react";
 import Button from "@mui/material/Button";
-import {TextField} from "@material-ui/core";
+import TextField from "@mui/material/TextField";
 import {RequestStatusType} from "../../../app/app-reducer";
-import {CircularProgress, Stack} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 import LogoutIcon from '@mui/icons-material/Logout';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 
@@ -19,7 +20,7 @@ type ProfilePropsType = {
     status: RequestStatusType
 }
 
-const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, status}, getAllPacks) => {
+const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, status}) => {
 
     let [editMode, setEditMode] = useState(false)
     let [name, setName] = useState(profile.name)
@@ -67,6 +68,7 @@ const Profile: React.FC<ProfilePropsType> = ({profile, logOutHandler, EditMode, 
                             <TextField variant={'standard'}
                                        error={name === ""}
                                        value={name}
+                                       color="secondary"
                                        onChange={onChangeNameHandler}
                                        onBlur={activateViewMode}
                                        autoFocus/>

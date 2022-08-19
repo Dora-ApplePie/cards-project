@@ -5,7 +5,7 @@ import {RequestStatusType} from "../../../../../app/app-reducer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
-import {IconButton} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import {setUserCardId, setUserCardName} from "../../../Cards/cardsReducer";
 import {useNavigate} from "react-router-dom";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
