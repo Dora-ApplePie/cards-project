@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    background: url('../assets/img/background.png');
+    background: url('../assets/img/background.jpg');
+    background-size: cover;
 }
 
 .app {
