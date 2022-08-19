@@ -70,7 +70,7 @@ const Registration = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
                         <FormGroup className={s.form}>
-                            <h2 style={{textAlign: "center"}}>Registration</h2>
+                            <h2 style={{textAlign: "center"}}>Sign Up</h2>
                             <TextField
                                 label='Email'
                                 margin='normal'
