@@ -16,13 +16,13 @@ import Button from "@mui/material/Button";
 
 function Header() {
 
-    const islogin = useAppSelector(state => state.login.isLogin)
+    const isLogin = useAppSelector(state => state.login.isLogin)
     const imgFromServer = useAppSelector(state => state.profile.profile.avatar)
     const userName = useAppSelector(state => state.profile.profile.name)
     const ava = imgFromServer ? imgFromServer : defaultAvatar
 
     return (<>
-            {!islogin
+            {!isLogin
                 ? <Box sx={{flexGrow: 1}}>
                     <AppBar position="static" color={"inherit"}>
                         <Toolbar style={{width: "85%", margin: "0 auto"}}>
