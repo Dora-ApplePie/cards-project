@@ -29,11 +29,9 @@ export const forgotPasswordReducer = (state: ForgotPasswordStateType = initialSt
     }
 };
 
-//actions
 export const setIsSendEmail = (isSend: boolean) => ({type: 'RECOVERY-PASSWORD/SET-IS-SEND-EMAIL', isSend,} as const);
 export const setEmail = (email: string) => ({type: 'RECOVERY-PASSWORD/SET-EMAIL', email,} as const);
 
-//thunks
 export const forgotPassTC = (email: string): AppThunk => dispatch => {
     dispatch(getStatusAC('loading'));
 
